@@ -15,7 +15,7 @@ $gs = GS::get()->first();
 
     <title>
         @if (@$gs->sitename)
-            {{ __(@$gs->sitename) . '-' }}
+            {{ __(@$gs->sitename) . ' -' }}
         @endif
         {{ __(@$pageTitle) }}
     </title>

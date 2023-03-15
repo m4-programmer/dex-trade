@@ -1,3 +1,23 @@
+<?php
+function template(){return 'theme2.';}
+use App\Models\GeneralSettings as GS;
+$gs = GS::get()->first();
+$withdraw = '50';
+$totalDeposit = '50';
+$currentInvest = '50';
+$totalInvest = '50';
+$pendingInvest = '50';
+$pendingWithdraw = '50';
+$commison = '50';
+$reference = [
+['name'],
+['age'],
+];
+function curren($value='')
+{
+    return $value;
+}
+?>
 @extends(template() . 'layout.master2')
 
 @section('content2')
@@ -14,7 +34,7 @@
                     <div class="content">
                         <span class="caption-title">{{ __('Account Balance') }}</span>
                         <h3 class="d-box-one-amount">
-                            {{ number_format(auth()->user()->balance, 2) . ' ' . $general->site_currency }}</h3>
+                            {{ number_format(auth()->user()->balance, 2) . ' ' . $gs->site_currency }}</h3>
                     </div>
                 </div>
             </div>
@@ -29,7 +49,7 @@
                             <div class="content">
                                 <span class="caption-title">{{ __('Total Withdraw') }}</span>
                                 <h3 class="d-box-three-amount">
-                                    {{ number_format($withdraw, 2) . ' ' . $general->site_currency }}</h3>
+                                    {{ number_format($withdraw, 2) . ' ' . $gs->site_currency }}</h3>
                             </div>
                         </div>
                     </div>
@@ -41,7 +61,7 @@
                             <div class="content">
                                 <span class="caption-title">{{ __('Total Deposit') }}</span>
                                 <h3 class="d-box-three-amount">
-                                    {{ number_format($totalDeposit, 2) . ' ' . $general->site_currency }}</h3>
+                                    {{ number_format($totalDeposit, 2) . ' ' . $gs->site_currency }}</h3>
                             </div>
                         </div>
                     </div>
@@ -54,7 +74,7 @@
                                 <span class="caption-title">{{ __('Current Invest') }}</span>
                                 <h3 class="d-box-three-amount">
                                     {{ isset($currentInvest->amount) ? number_format($currentInvest->amount, 2) : 0 }}
-                                    {{ @$general->site_currency }}</h3>
+                                    {{ @$gs->site_currency }}</h3>
                             </div>
                         </div>
                     </div>
@@ -78,33 +98,33 @@
         <div class="row gy-4 mt-2 d-box-four-wrapper">
             <div class="col-xxl-3 col-sm-6">
                 <div class="d-box-four">
-                    <a href="{{ route('user.invest.all') }}" class="link-btn"><i class="bi bi-arrow-up-right"></i></a>
+                    <a href="{{ url('user.invest.all') }}" class="link-btn"><i class="bi bi-arrow-up-right"></i></a>
                     <div class="icon">
                         <i class="fas fa-wallet"></i>
                     </div>
                     <div class="content">
                         <span class="caption-title">{{ __('Total Invest') }}</span>
                         <h3 class="d-box-four-amount">
-                            {{ number_format($totalInvest, 2) . ' ' . $general->site_currency }}</h3>
+                            {{ number_format($totalInvest, 2) . ' ' . $gs->site_currency }}</h3>
                     </div>
                 </div>
             </div>
             <div class="col-xxl-3 col-sm-6">
                 <div class="d-box-four">
-                    <a href="{{ route('user.invest.pending') }}" class="link-btn"><i class="bi bi-arrow-up-right"></i></a>
+                    <a href="{{ url('user.invest.pending') }}" class="link-btn"><i class="bi bi-arrow-up-right"></i></a>
                     <div class="icon">
                         <i class="fas fa-hourglass-start"></i>
                     </div>
                     <div class="content">
                         <span class="caption-title">{{ __('Pending Invest') }}</span>
                         <h3 class="d-box-four-amount">
-                            {{ number_format($pendingInvest, 2) . ' ' . $general->site_currency }}</h3>
+                            {{ number_format($pendingInvest, 2) . ' ' . $gs->site_currency }}</h3>
                     </div>
                 </div>
             </div>
             <div class="col-xxl-3 col-sm-6">
                 <div class="d-box-four">
-                    <a href="{{ route('user.withdraw.pending') }}" class="link-btn"><i
+                    <a href="{{ url('user.withdraw.pending') }}" class="link-btn"><i
                             class="bi bi-arrow-up-right"></i></a>
                     <div class="icon">
                         <i class="fas fa-hourglass-end"></i>
@@ -112,20 +132,20 @@
                     <div class="content">
                         <span class="caption-title">{{ __('Pending Withdraw') }}</span>
                         <h3 class="d-box-four-amount">
-                            {{ number_format($pendingWithdraw, 2) . ' ' . $general->site_currency }}</h3>
+                            {{ number_format($pendingWithdraw, 2) . ' ' . $gs->site_currency }}</h3>
                     </div>
                 </div>
             </div>
             <div class="col-xxl-3 col-sm-6">
                 <div class="d-box-four">
-                    <a href="{{ route('user.commision') }}" class="link-btn"><i class="bi bi-arrow-up-right"></i></a>
+                    <a href="{{ url('user.commision') }}" class="link-btn"><i class="bi bi-arrow-up-right"></i></a>
                     <div class="icon">
                         <i class="fas fa-network-wired"></i>
                     </div>
                     <div class="content">
                         <span class="caption-title">{{ __('Refferal Earn') }}</span>
                         <h3 class="d-box-four-amount">{{ number_format($commison, 2) }}
-                            {{ @$general->site_currency }}</h3>
+                            {{ @$gs->site_currency }}</h3>
                     </div>
                 </div>
             </div>
@@ -135,16 +155,19 @@
             <label>{{ __('Your refferal link') }}</label>
             <div class="input-group mb-3">
                 <input type="text" id="refer-link" class="form-control copy-text"
-                    value="{{ route('user.register', @Auth::user()->username) }}" placeholder="referallink.com/refer"
+                    value="{{ route('register','ref='. @Auth::user()->referral_id) }}" placeholder="referallink.com/refer"
                     aria-label="Recipient's username" aria-describedby="basic-addon2" readonly>
                 <button type="button" class="input-group-text copy cmn-btn" id="basic-addon2">{{ __('Copy') }}</button>
             </div>
         </div>
 
 
-        @php
-            $reference = auth()->user()->refferals;
-        @endphp
+        <?php 
+          $references = [
+                ['full_name' => 'Miracle', 'referrals'=> 3,'image' => ''],
+            ];
+            $reference = json_decode(json_encode($references));
+         ?>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -152,40 +175,41 @@
                         <h5 class="mb-0">{{ __('Reference Tree') }}</h5>
                     </div>
                     <div class="card-body">
-                        @if ($reference->count() > 0)
+                        {{-- @if ($reference->count() > 0) --}}
+                            @if (true)
                             <ul class="sp-referral">
                                 <li class="single-child root-child">
                                     <p>
-                                        <img src="{{ getFile('user', auth()->user()->image) }}">
-                                        <span class="mb-0">{{ auth()->user()->full_name .' - '. currentPlan(auth()->user())}}</span>
+                                        <img src="{{ asset('asset/theme2/user/'. auth()->user()->image) }}">
+                                        <span class="mb-0">{{ auth()->user()->full_name .' - '. curren(auth()->user())}}</span>
                                     </p>
                                     <ul class="sub-child-list step-2">
                                         @foreach ($reference as $user)
                                             <li class="single-child">
                                                 <p>
-                                                    <img src="{{ getFile('user', $user->image) }}">
-                                                    <span class="mb-0">{{ $user->full_name.' - '. currentPlan($user) }}</span>
+                                                    <img src="{{ asset('asset/theme2/user'. auth()->user()->image) }}">
+                                                    <span class="mb-0">{{ $user->full_name.' - '. curren("Aso") }}</span>
                                                 </p>
 
                                                 <ul class="sub-child-list step-3">
-                                                    @foreach ($user->refferals as $ref)
+                                                    @foreach ($reference as $ref)
                                                         <li class="single-child">
                                                             <p>
-                                                                <img src="{{ getFile('user', $ref->image) }}">
-                                                                <span class="mb-0">{{ $ref->full_name.' - '. currentPlan($ref) }}</span>
+                                                                <img src="{{ asset('asset/theme2/user'. $ref->image) }}">
+                                                                <span class="mb-0">{{ $ref->full_name.' - Tester' }}</span>
                                                             </p>
 
-                                                            <ul class="sub-child-list step-4">
+                                                            {{-- <ul class="sub-child-list step-4">
                                                                 @foreach ($ref->refferals as $ref2)
                                                                     <li class="single-child">
                                                                         <p>
-                                                                            <img src="{{ getFile('user', $ref2->image) }}">
+                                                                            <img src="{{ asset('asset/theme2/user'. $ref2->image) }}">
                                                                             <span
-                                                                                class="mb-0">{{ $ref2->full_name.' - '. currentPlan($ref2) }}</span>
+                                                                                class="mb-0">{{ $ref2->full_name.' - ' }}</span>
                                                                         </p>
                                                                     </li>
                                                                 @endforeach
-                                                            </ul>
+                                                            </ul> --}}
 
                                                         </li>
                                                     @endforeach

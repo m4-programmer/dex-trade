@@ -1,3 +1,6 @@
+<?php 
+function template(){return 'theme2.';}
+ ?>
 @extends(template().'layout.master2')
 
 
@@ -25,30 +28,52 @@
                 </thead>
 
                 <tbody>
+                    <?php
+                        $id = 1;
+                     ?>
                     @forelse($transactions as $key => $transaction)
                         <tr>
-                            <td data-caption="{{ __('Trx') }}">{{ $transaction->transaction_id }}</td>
-                            <td data-caption="{{ __('User') }}">{{ @$transaction->user->fname . ' ' . @$transaction->user->lname }}</td>
-                            <td data-caption="{{ __('Gateway') }}">{{ @$transaction->gateway->gateway_name ?? 'Account Transfer' }}</td>
-                            <td data-caption="{{ __('Amount') }}">{{ $transaction->amount }}</td>
-                            <td data-caption="{{ __('Currency') }}">{{ $transaction->gateway->gateway_parameters->gateway_currency }}</td>
-                            <td data-caption="{{ __('Charge') }}">{{ $transaction->charge . ' ' . $transaction->currency }}</td>
+                            <td data-caption="{{ __('Trx') }}"><?php echo $id;$id++; ?></td>
+                            <td data-caption="{{ __('User') }}">{{ @$transaction->user->name }}</td>
+                            <td data-caption="{{ __('Gateway') }}">
+                               
+                                    {{ @$transaction->gateway }}
+                                
+                            </td>
+                            <td data-caption="{{ __('Amount') }}">{{ $transaction->amount }} {{ $gs->site_currency }}</td>
+                            
+                            <!-- Date Paid -->
 
-                            <td data-caption="{{ __('Payment Date') }}">{{ $transaction->created_at->format('Y-m-d') }}</td>
+                            <td data-caption="{{ __('Payment Date') }}">{{ $transaction->created_at }}</td>
+                            <td data-caption="{{ __('Payment Date') }}">
+                                 @if($transaction->status != 'active')
+                                    <button class="btn btn-sm btn-danger">Pending</button>
+                                @else
+                                    <button class="btn btn-sm btn-success">Success</button>
+                                @endif
+                            </td>
+                            <td data-caption="{{ __('Upcoming Payment') }}">
+                                @if($transaction->status != 'active')
+                                    -
+                                @else
+                                <p id="count_{{ $loop->iteration }}" class="mb-2"></p>
+                                <script>
+                                    getCountDown("count_{{ $loop->iteration }}", "{{ now()->diffInSeconds($transaction->updated_at) }}")
+                                </script>
+                                @endif
+                            </td>
                         </tr>
                     @empty
                         <tr>
                             <td class="text-center" colspan="100%">
-                                {{ __('No users Found') }}
+                                {{ __('No Deposit Found') }}
                             </td>
                         </tr>
                     @endforelse
                 </tbody>
             </table>
 
-            @if ($transactions->hasPages())
-                {{ $transactions->links() }}
-            @endif
+         
         </div>
     </div>
 @endsection

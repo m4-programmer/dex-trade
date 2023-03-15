@@ -23,6 +23,10 @@ class CreateGeneralSettingsTable extends Migration
             $table->string('site_address')->nullable();
             $table->string('copyright')->nullable();
 
+            $table->integer('minimum_withdrawable')->default(100);
+            $table->integer('maximum_withdrawable')->default(1000000);
+            $table->integer('referral_bonus')->default(0);
+
             $table->string('email_method')->default('php')->nullable();
             $table->text('email_config')->nullable();
 

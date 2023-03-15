@@ -23,6 +23,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        
+        $pageTitle = "Dashboard";
+        return view('theme2.user.dashboard',compact('pageTitle'));
     }
 }

@@ -16,9 +16,21 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('username');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('image')->nullable();
+            $table->string('referral_id')->nullable();
+
+            $table->string('phone')->nullable();
+            $table->string('country')->nullable();
+            $table->string('city')->nullable();
+            $table->string('state')->nullable();
+            $table->string('zip')->nullable();
+
+            $table->enum('role_as',['admin','user'])->default('user');
+            $table->string('balance')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });
@@ -27,11 +39,11 @@ return new class extends Migration
         DB::table('users')->insert([
             [
                 'id' => 1,
-                'firstname' => 'Super',
-                'lastname' => "Admin",
+                'name' => 'Super',
+                // 'lastname' => "Admin",
                 'email' => 'admin@admin.com',
                 'username' => 'admin',
-                'profile_pics' => 'uploads/profile_image/avatar.jpg',
+                'image' => 'asset/theme2/frontend/img/user.png',
                 'password' => Hash::make('12345'),
                 'role_as'=> 'admin',
                 'created_at' => Carbon::now(),

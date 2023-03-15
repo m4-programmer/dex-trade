@@ -15,6 +15,8 @@ class GeneralSettings extends Model
     'site_phone',
     'site_address',
     'copyright',
+    'minimum_withdrawable',
+    'maximum_withdrawable',
     'logo',
     'favicon',
     'login_image',

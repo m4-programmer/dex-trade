@@ -30,13 +30,13 @@
                             </div>
                             <div class="col-lg-3 col-4">
                             <div class="overview-box">
-                                    <div class="overview-box-amount">100M</div>
+                                    <div class="overview-box-amount">$100M</div>
                                     <p>Total Deposit</p>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-4">
                                 <div class="overview-box">
-                                    <div class="overview-box-amount">55M</div>
+                                    <div class="overview-box-amount">$55M</div>
                                     <p>Total Withdraw</p>
                                 </div>
                             </div>

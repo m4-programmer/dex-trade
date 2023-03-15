@@ -17,10 +17,10 @@
                 <!-- To loop through the available plans later -->
                 <select class="form-select" name="selectplan" id="plan">
                     <option selected disabled class="text-secondary">{{ __('Select a plan') }}</option>
-                    {{-- @forelse ($plan as $item) --}}
-                        <option value="{{-- $item->id --}}">{{-- $item->plan_name --}} Mega Plan</option>
-                    {{-- @empty
-                                                            @endforelse --}}
+                     @forelse ($plans as $item) 
+                        <option value="{{-- $item->id --}}">{{$item->name }}</option>
+                     @empty
+                    @endforelse 
                 </select>
             </div>
             <div class="col-lg-3">

@@ -1,3 +1,5 @@
+<?php function template(){return 'theme2.';}?>
+
 @extends(template().'layout.master2')
 
 @section('content2')
@@ -19,8 +21,8 @@
                                     <option value="" selected>{{ __('Select Method') }}</option>
                                     @foreach ($withdraws as $withdraw)
                                         <option value="{{ $withdraw->id }}"
-                                            data-url="{{ route('user.withdraw.fetch', $withdraw->id) }}">
-                                            {{ $withdraw->name }}</option>
+                                            data-url="{{ route('fetch_withdraw', $withdraw->id) }}">
+                                            {{ $withdraw->cryptocurrency }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -93,30 +95,17 @@
                     url: url,
                     method: "GET",
                     success: function(response) {
-
+                        console.log(response)
                         $('.instruction').html(response.withdraw_instruction)
                         let html = `
 
                                 <div class="col-md-12 mb-3 mt-3">
                                     <label for="">{{ __('Withdraw Amount') }} <span class="text-danger">*</span></label>
                                     <input type="text" name="amount" class="form-control amount" required>
-                                    <p class="text-small color-change mb-0 mt-1"><span>{{ __('Min Amount & ') }}  ${Number.parseFloat(response.min_amount).toFixed(2)}</span> <span>{{ __('Max Amount') }} ${Number.parseFloat(response.max_amount).toFixed(2)}</span></p>
+                                    <p class="text-small color-change mb-0 mt-1"><span>{{ __('Min Amount $ ') }}  ${Number.parseFloat(response.min_amount).toFixed(2)}</span> <span>{{ __('Max Amount $') }} ${Number.parseFloat(response.max_amount).toFixed(2)}</span></p>
                                 </div>
 
-                                <div class="col-md-12 mb-3">
-                                    <label>{{ __('Withdraw Charge') }}</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control charge" value="${Number.parseFloat(response.charge).toFixed(2)}" required disabled>
-                                        <div class="input-group-text bg-main text-white border-0">
-                                            <span class="withdraw_charge_type">${response.charge_type}<span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-12 mb-3">
-                                    <label for="">{{ __('Final Withdraw Amount') }} <span class="text-danger">*</span></label>
-                                    <input type="text" name="final_amo" class="form-control final_amo" required readonly>
-                                </div>
+                               
 
                                 <div class="col-md-12 mb-3">
                                     <label for="">{{ __('Account Email / Wallet Address') }} <span class="text-danger">*</span></label>

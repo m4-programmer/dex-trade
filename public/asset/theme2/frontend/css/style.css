@@ -3468,7 +3468,7 @@ ul {
 .text-small {
     font-size: 14px;
 }
-.d-sidebar-menu li a {
+.d-sidebar-menu li a, .d-sidebar-menu li button {
     display: block;
     padding: 10px 0;
     border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
@@ -3479,7 +3479,7 @@ ul {
     padding-bottom: 0;
 }
 
-.d-sidebar-menu li a i {
+.d-sidebar-menu li a i,.d-sidebar-menu li button i {
     width: 32px;
 }
 

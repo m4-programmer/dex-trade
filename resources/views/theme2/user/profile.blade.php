@@ -1,24 +1,31 @@
+<?php 
+function getFile($a , $b){ return null;}
+function template(){return 'theme2.';}
+ ?>
 @extends(template().'layout.master2')
+
+
 
 
 @section('content2')
     <div class="dashboard-body-part">
         <div class="d-flex justify-content-end mb-3">
-            <a href="{{ route('user.change.password') }}" class="cmn-btn mb-2">{{ __('Change Password') }}</a>
+            <a href="{{ url('settings.change.password') }}" class="cmn-btn mb-2">{{ __('Change Password') }}</a>
         </div>
         <div class="card">
             <div class="card-body">
-                <form action="{{ route('user.profileupdate') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ url('user/settings/'.auth()->user()->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    @method('put')
                     <div class="row gy-4 justify-content-center">
                         <div class="col-md-4 pe-lg-5 pe-md-4 justify-content-center">
                             <div class="img-choose-div">
                                 <p>{{ __('Profile Picture') }}</p>
 
                                     <img class=" rounded file-id-preview w-100" id="file-id-preview"
-                                        src="{{ getFile('user', @Auth::user()->image) }}" alt="pp">
+                                        src="{{ asset(auth()->user()->image) }}" alt="pp">
 
-                                <input type="file" name="image" id="imageUpload" class="upload"
+                                <input type="file" name="profile_pics" id="imageUpload" class="upload"
                                     accept=".png, .jpg, .jpeg" hidden>
 
                                 <label for="imageUpload"
@@ -30,17 +37,12 @@
                         <div class="col-md-8">
                             <div class="update">
                                 <div class="mb-3">
-                                    <label>{{ __('First Name') }}</label>
+                                    <label>{{ __('Full Name') }}</label>
                                     <input type="text" class="form-control" name="fname"
-                                        value="{{ @Auth::user()->fname }}"
-                                        placeholder="{{ __('Enter First Name') }}">
+                                        value="{{ @Auth::user()->name }}"
+                                        placeholder="{{ __('Update Full Name') }}">
                                 </div>
-                                <div class="mb-3">
-                                    <label>{{ __('Last Name') }}</label>
-                                    <input type="text" class="form-control" name="lname"
-                                        value="{{ @Auth::user()->lname }}"
-                                        placeholder="{{ __('Enter Last Name') }}">
-                                </div>
+                                
                                 <div class="mb-3">
                                     <label>{{ __('Username') }}</label>
                                     <input type="text" class="form-control text-white" name="username"
@@ -66,14 +68,14 @@
                                 <div class="form-group col-md-6 mb-3 ">
                                     <label>{{ __('Country') }}</label>
                                     <input type="text" name="country" class="form-control"
-                                        value="{{ @Auth::user()->address->country }}">
+                                        value="{{ @Auth::user()->country }}">
                                 </div>
 
                                 <div class="col-md-6 mb-3">
 
                                     <label>{{ __('city') }}</label>
                                     <input type="text" name="city" class="form-control form_control"
-                                        value="{{ @Auth::user()->address->city }}">
+                                        value="{{ @Auth::user()->city }}">
 
                                 </div>
 
@@ -81,7 +83,7 @@
 
                                     <label>{{ __('zip') }}</label>
                                     <input type="text" name="zip" class="form-control form_control"
-                                        value="{{ @Auth::user()->address->zip }}">
+                                        value="{{ @Auth::user()->zip }}">
 
                                 </div>
 
@@ -89,7 +91,7 @@
 
                                     <label>{{ __('state') }}</label>
                                     <input type="text" name="state" class="form-control form_control"
-                                        value="{{ @Auth::user()->address->state }}">
+                                        value="{{ @Auth::user()->state }}">
 
                                 </div>
 
@@ -97,7 +99,7 @@
 
                             <button class="cmn-btn mt-3 w-100">{{ __('Update') }}</button>
                         </div>
-
+                    </div>
 
 
 

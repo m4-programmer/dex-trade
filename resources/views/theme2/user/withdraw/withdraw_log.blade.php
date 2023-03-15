@@ -1,3 +1,4 @@
+<?php function template(){return 'theme2.';}?>
 @extends(template().'layout.master2')
 
 @push('style')
@@ -16,14 +17,14 @@
         
         <div class="text-center">
             <div class="tab-btn-group">
-                <a class="tab-btn {{ Request::routeIs('user.withdraw.all') ? 'active' : '' }}"
-                    href="{{ route('user.withdraw.all') }}">{{ __('All Withdraw') }}</a>
+                <a class="tab-btn {{ Request::routeIs('withdraw_all') ? 'active' : '' }}"
+                    href="{{ route('withdraw_all') }}">{{ __('All Withdraw') }}</a>
 
-                <a class="tab-btn {{ Request::routeIs('user.withdraw.pending') ? 'active' : '' }}"
-                    href="{{ route('user.withdraw.pending') }}">{{ __('Pending Withdraw') }}</a>
+                <a class="tab-btn {{ Request::routeIs('withdraw_pending') ? 'active' : '' }}"
+                    href="{{ route('withdraw_pending') }}">{{ __('Pending Withdraw') }}</a>
 
-                <a class="tab-btn {{ Request::routeIs('user.withdraw.complete') ? 'active' : '' }}"
-                    href="{{ route('user.withdraw.complete') }}">{{ __('Complete Withdraw') }}</a>
+                <a class="tab-btn {{ Request::routeIs('withdraw_complete') ? 'active' : '' }}"
+                    href="{{ route('withdraw_complete') }}">{{ __('Complete Withdraw') }}</a>
             </div>
             <div class="card-body text-end mt-4">
                 <form action="" method="get" class="d-inline-flex">
@@ -52,8 +53,8 @@
                     @forelse ($withdrawlogs as $key => $withdrawlog)
                         <tr>
                             <td data-caption="{{ __('Sl') }}">{{ $key + $withdrawlogs->firstItem() }}</td>
-                            <td data-caption="{{ __('Date') }}">{{ __($withdrawlog->created_at->format('d F Y')) }}</td>
-                            <td data-caption="{{ __('Method Name') }}">{{ __($withdrawlog->withdrawMethod->name) }}</td>
+                            <td data-caption="{{ __('Date') }}">{{ __($withdrawlog->created_at) }}</td>
+                            <td data-caption="{{ __('Method Name') }}">{{ __($withdrawlog->withdrawMethodname) }}</td>
                             <td data-caption="{{__('Getable Amount')}}">{{ $general->currency_icon .
                                 '  ' .
                                 $withdrawlog->withdraw_amount +

@@ -1,3 +1,4 @@
+<!-- Dextrade Db pword: AdLVSXJKzRn5xZy! -->
 <?php
 function template(){return 'theme2.';}
 
@@ -28,7 +29,7 @@ $gs = GS::get()->first();
 
   
 
-  @include(template().'sections.contact')
+  
 
   {{-- @include(template().'sections.faq') --}}
 

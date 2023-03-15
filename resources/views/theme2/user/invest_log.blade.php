@@ -1,3 +1,9 @@
+<?php 
+function template()
+{
+    return 'theme2.';
+}
+ ?>
 @extends(template().'layout.master2')
 
 
@@ -42,42 +48,46 @@
                         <th>{{ __('User') }}</th>
                         <th>{{ __('Gateway') }}</th>
                         <th>{{ __('Amount') }}</th>
-                        <th>{{ __('Currency') }}</th>
-                        <th>{{ __('Charge') }}</th>
                         <th>{{ __('Payment Date') }}</th>
+                        <th>{{ __('Payment Status') }}</th>
                         <th>{{ __('Upcoming Payment') }}</th>
                     </tr>
                 </thead>
 
                 <tbody>
+                    <?php
+                        $id = 1;
+                     ?>
                     @forelse($transactions as $key => $transaction)
                         <tr>
-                            <td data-caption="{{ __('Trx') }}">{{ $transaction->transaction_id }}</td>
-                            <td data-caption="{{ __('User') }}">{{ @$transaction->user->fname . ' ' . @$transaction->user->lname }}</td>
+                            <td data-caption="{{ __('Trx') }}"><?php echo $id;$id++; ?></td>
+                            <td data-caption="{{ __('User') }}">{{ @$transaction->user->name }}</td>
                             <td data-caption="{{ __('Gateway') }}">
-                                @if ($transaction->gateway_id == 0)
-                                    {{ __('Invest Using Balance') }}
+                               
+                                    {{ @$transaction->gateway }}
+                                
+                            </td>
+                            <td data-caption="{{ __('Amount') }}">{{ $transaction->amount }} {{ $gs->site_currency }}</td>
+                            
+                            <!-- Date Paid -->
+
+                            <td data-caption="{{ __('Payment Date') }}">{{ $transaction->created_at }}</td>
+                            <td data-caption="{{ __('Payment Date') }}">
+                                 @if($transaction->status != 'active')
+                                    <button class="btn btn-sm btn-danger">Pending</button>
                                 @else
-                                    {{ @$transaction->gateway->gateway_name ?? 'Account Transfer' }}
+                                    <button class="btn btn-sm btn-success">Success</button>
                                 @endif
                             </td>
-                            <td data-caption="{{ __('Amount') }}">{{ $transaction->amount }}</td>
-                            <td data-caption="{{ __('Currency') }}">
-                                @if ($transaction->gateway_id == 0)
-                                    {{ $general->site_currency }}
-                                @else
-                                    {{ $transaction->gateway->gateway_parameters->gateway_currency }}
-                                @endif
-
-                            </td>
-                            <td data-caption="{{ __('Charge') }}">{{ $transaction->charge . ' ' . $transaction->currency }}</td>
-
-                            <td data-caption="{{ __('Payment Date') }}">{{ $transaction->created_at->format('Y-m-d') }}</td>
                             <td data-caption="{{ __('Upcoming Payment') }}">
+                                @if($transaction->status != 'active')
+                                    -
+                                @else
                                 <p id="count_{{ $loop->iteration }}" class="mb-2"></p>
                                 <script>
-                                    getCountDown("count_{{ $loop->iteration }}", "{{ now()->diffInSeconds($transaction->next_payment_date) }}")
+                                    getCountDown("count_{{ $loop->iteration }}", "{{ now()->diffInSeconds($transaction->updated_at) }}")
                                 </script>
+                                @endif
                             </td>
                         </tr>
                     @empty
@@ -90,9 +100,9 @@
                 </tbody>
             </table>
 
-            @if ($transactions->hasPages())
-                {{ $transactions->links() }}
-            @endif
+{{--            @if ($transactions->hasPages())--}}
+{{--                {{ $transactions->links() }}--}}
+{{--            @endif--}}
 
         </div>
     </div>

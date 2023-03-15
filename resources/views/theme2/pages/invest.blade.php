@@ -4,87 +4,71 @@ function template(){return 'theme2.';}
 ?>
 @extends(template().'layout.master2')
 <?php 
-    $plans = items();
+    
  ?>
 @section('content2')
 
     <div class="dashboard-body-part">
         <div class="row gy-4">
             @forelse ($plans as $plan)
-                {{-- @php
-                    $plan_exist = App\Models\Payment::where('plan_id', $plan->id)
-                        ->where('user_id', Auth::id())
-                        ->where('next_payment_date', '!=', null)
-                        ->where('payment_status', 1)
-                        ->count();
-
-                @endphp --}}
+             
                 <?php $plan_exist = 3; ?>
-                <div class="col-xxl-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s" data-wow-duration="0.5s">
+               <div class="col-lg-4 col-md-4 wow fadeInUp" data-wow-delay="0.3s" data-wow-duration="0.5s">
                     <div class="pricing-item">
                         <div class="top-part">
                             <div class="icon">
                                 <i class="las la-gem"></i>
                             </div>
                             <div class="plan-name">
-                                <span>{{ $plan->plan_name }}</span>
+                                <span>{{ $plan->name }}</span>
                             </div>
-                            @if ($plan->amount_type == 0)
+                           
                                 <h4 class="plan-price">
                                     {{ __('Min') }}
                                     {{ number_format($plan->minimum_amount, 2)}} <sub>/ {{ @$gs->site_currency }}</sub>
                                 </h4>
                                 <h4 class="plan-price">
                                     {{ __('Max') }}
-                                    {{ number_format($plan->maximum_amount, 2) }} <sub>/ {{ @$gs->site_currency }}</sub>
-                                </h4>
-                            @else
-                                <h4 class="plan-price">
-                                    {{ number_format($plan->amount, 2) }} <sub>/ {{ @$gs->site_currency }}</sub>
-                                </h4>
-                            @endif
-
-                            <ul class="check-list">
-                                <li>{{ __('Every') }} {{ $plan->time->name }}</li>
-                                <li>{{ __('Return Amount ') }}{{ number_format($plan->return_interest, 2) }}
-                                    @if ($plan->interest_status == 'percentage')
-                                        {{ '%' }}
+                                    @if($plan->maximum_amount != 'Unlimited')
+                                        {{ number_format($plan->maximum_amount, 2) }} <sub>/ {{ @$gs->site_currency }}</sub>
                                     @else
-                                        {{ @$gs->site_currency }}
+                                        {{$plan->maximum_amount}}
                                     @endif
+                                </h4>
+                            
+                            
+                            <ul class="check-list">
+                                
+                                <li>{{ __('Return Amount: ') }}{{ $plan->roi }}
+                                    
+                                        {{ '%' }}
+                                   
                                 </li>
                                 <li>
-                                    @if ($plan->return_for == 1)
-                                        {{ __('For') }} {{ $plan->how_many_time }}
-                                        {{ __('Times') }}
-                                    @else
-                                        {{ __('Lifetime') }}
-                                    @endif
+                                  {{$plan->duration}}
                                 </li>
-                                @if ($plan->capital_back == 1)
-                                    <li>{{ __('Capital Back') }} {{ __('YES') }}</li>
-                                @else
-                                    <li>{{ __('Capital Back') }} {{ __('NO') }}</li>
-                                @endif
+                               
+                                <li>{{ __('Capital Back:') }} {{$plan->capital_back}}</li>
+                               
 
 
                             </ul>
                         </div>
                         <div class="bottom-part">
-
-                            @if ($plan_exist >= $plan->invest_limit)
-                            <a class="cmn-btn w-100" href="#">{{ __('Max Invest Limit exceeded') }}</a>
-                            @else
-                                <a class="cmn-btn w-100 mb-3"
-                                    href="{{ route('user.gateways', $plan->id) }}">{{ __('Invest Now') }}</a>
-
-
-                                <button class="cmn-btn w-100 balance" data-plan="{{ $plan }}"
-                                    data-url="">{{ __('Invest Using Balance') }}</button>
-                            @endif
-
+                            
+                            
+                                <a class="cmn-btn w-100 "
+                                    href="{{ url('user.gateways', $plan->id) }}">{{ __('Choose Plan') }}</a>
+                                    
+                                  @auth
+                                        
+                                    <button class="cmn-btn w-100 balance mt-3" data-plan="{{ $plan }}"
+                                        data-url="">{{ __('Invest Using Balance') }}</button>
+                                    @endauth 
+                            
+                            
                         </div>
-                    </div>
+                    </div><!-- pricing-item end -->
                 </div>
 
             @empty

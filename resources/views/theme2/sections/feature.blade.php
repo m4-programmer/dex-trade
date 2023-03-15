@@ -5,27 +5,27 @@
 $items = [
     [
         'card_title' => 'REGISTERED COMPANY',
-        'card_description' => 'We have been registered since 2014',
+        'card_description' => 'Registered and Certified',
     ],
       [
         'card_title' => 'Verified Security',
-        'card_description' => 'We have been registered since 2014',
+        'card_description' => 'All investment are secured, we have all it take since 2017 and still more.',
     ],
       [
         'card_title' => 'Secured Investment',
-        'card_description' => 'We have been registered since 2014',
+        'card_description' => 'All investment are secured, we have all it take.',
     ],
     [
         'card_title' => 'Instant Withdrawal',
-        'card_description' => 'We have been registered since 2014',
+        'card_description' => 'We are active 24 hours, your withdrawal is process immediately as requested. ',
     ],
     [
         'card_title' => '24/7 LIVE SUPPORT',
-        'card_description' => 'We have been registered since 2014',
+        'card_description' => 'We are at your service all time, you are welcome.',
     ],
     [
         'card_title' => 'EXPERIENCED Management Team',
-        'card_description' => 'We have been registered since 2014',
+        'card_description' => 'Well trained and certified team with experience in cryptocurrency field, we keep to date on a daily.',
     ],
 ];
 

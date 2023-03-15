@@ -1,17 +1,23 @@
+<?php function getFile($value){return null;} 
+    function template()
+    {
+        return 'theme2.';
+    }
+?>
 @extends(template() . 'layout.master2')
 
 @section('content2')
     <div class="dashboard-body-part">
-        <div class="row gy-4 justify-content-center">
+        <div class="row gy-4 ">
             @forelse ($gateways as $gateway)
                 <div class="col-xxl-3 col-lg-4 col-sm-6">
                     <div class="payment-box text-center">
                         <div class="payment-box-thumb">
-                            <img src="{{ getFile('gateways', $gateway->gateway_image) }}" alt="Lights" class="trans-img">
+                            <img src="{{ asset($gateway->image) }}" alt="{{$gateway->short_name}}" style="width: 100%;" class="trans-img">
                         </div>
                         <div class="payment-box-content">
-                            <h4 class="title">{{ ucwords(str_replace('_', ' ', $gateway->gateway_name)) }}</h4>
-                            <button data-href="{{ route('user.paynow', $gateway->id) }}" data-id="{{ $gateway->id }}"
+                            <h4 class="title">{{ ucwords(str_replace('_', ' ', $gateway->cryptocurrency)) }}</h4>
+                            <button data-href="{{ route('deposit.create', $gateway->id) }}" data-id="{{ $gateway->id }}"
                                 class="cmn-btn w-100 paynow mt-3">{{ __('Pay Now') }}</button>
                         </div>
                     </div>

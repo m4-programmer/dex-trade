@@ -7,8 +7,10 @@ use App\HTTP\Controllers\DashboardController;
 use App\HTTP\Controllers\User\ProfileController;
 use App\HTTP\Controllers\User\InvestmentPlanController;
 use App\HTTP\Controllers\User\MyInvestmentController;
+use App\HTTP\Controllers\User\DepositController;
 use App\HTTP\Controllers\User\MyDepositController;
 use App\HTTP\Controllers\User\WithdrawController;
+
 
 use App\HTTP\Controllers\User\TransactionController;
 use App\HTTP\Controllers\User\ReferralController;
@@ -48,7 +50,12 @@ Route::prefix('user')->middleware('auth')->group(function ()
 {
    Route::resource('settings', ProfileController::class);
    Route::resource('investment', InvestmentPlanController::class);
-   Route::resource('deposit', Controllers\User\DepositController::class);
+   
+
+   /*Deposit Routes*/
+   Route::get('deposit', [DepositController::class, 'index'])->name('deposit.index');
+   Route::post('deposit/gateway/{id}/details', [DepositController::class, 'paynow'])->name('deposit.paynow');
+
 
    Route::get('myinvestment', [MyInvestmentController::class, 'showInvestLog'])->name('myinvestment');
    Route::get('deposit_log', [MyDepositController::class, 'showDepositLog'])->name('deposit_log');

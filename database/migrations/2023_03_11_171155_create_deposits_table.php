@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('deposits', function (Blueprint $table) {
             $table->id();
+            $table->string('transaction_id')->unique();
             $table->unsignedBigInteger('user_id');
             $table->string('amount');
             $table->string('gateway');

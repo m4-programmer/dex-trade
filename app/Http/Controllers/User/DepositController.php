@@ -5,13 +5,13 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Deposit;
 use App\Models\Crypto_methods;
+use App\Models\GeneralSettings;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class DepositController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+   
     public function index()
     {
         $gateways = Crypto_methods::where('status', 1)->get();
@@ -22,52 +22,50 @@ class DepositController extends Controller
 
         return view("theme2.user.gateway.gateways", compact('gateways', 'pageTitle', 'type'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function paynow(Request $request, $id)
     {
-        dd($request);
+        
+        $request->validate([
+            'amount' => 'required|gte:0',
+        ]);
+        $pageTitle = "Payment Methods";
+        $general = GeneralSettings::first();
+
+        $gateway = Crypto_methods::where('status', 1)->findOrFail($request->id);
+        $trx = $this->generateTransactionId(6);
+        $amount = $request->amount;
+        if (isset($request->type) && $request->type == 'deposit') {
+
+            // $deposit = Deposit::create([
+            //     'gateway' => $gateway->id,
+
+            //     'user_id' => auth()->id(),
+            //     'transaction_id' => $trx,
+            //     'amount' => $request->amount,
+
+            //     'payment_status' => 0,
+            //     'payment_type' => 1,
+            // ]);
+
+            // session()->put('trx', $trx);
+            // session()->put('type', 'deposit');
+
+            return view("theme2.user.gateway.gateway_manual", compact('gateways', 'pageTitle', 'general', 'amount'));
+
+            // return redirect()->route('user.gateway.details', $gateway->id);
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public static function generateTransactionId(int $length = 10)
     {
-        dd($request);
+        $trans_id = Str::random($length); //Generates random id
+        $exist = Deposit::where('transaction_id', '=', $trans_id)->get(['transaction_id']);
+        if (isset($exist[0]->transaction_id)) {
+            return self::generateTransactionId();
+        }
+        return $trans_id;
+
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Deposit $deposit)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Deposit $deposit)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Deposit $deposit)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Deposit $deposit)
-    {
-        //
-    }
+   
 }

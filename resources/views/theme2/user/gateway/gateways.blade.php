@@ -17,7 +17,7 @@
                         </div>
                         <div class="payment-box-content">
                             <h4 class="title">{{ ucwords(str_replace('_', ' ', $gateway->cryptocurrency)) }}</h4>
-                            <button data-href="{{ route('deposit.create', $gateway->id) }}" data-id="{{ $gateway->id }}"
+                            <button data-href="{{ route('deposit.paynow', $gateway->id) }}" data-id="{{ $gateway->id }}"
                                 class="cmn-btn w-100 paynow mt-3">{{ __('Pay Now') }}</button>
                         </div>
                     </div>

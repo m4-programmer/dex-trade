@@ -2,17 +2,8 @@
 function template(){return 'theme2.';}
 use App\Models\GeneralSettings as GS;
 $gs = GS::get()->first();
-$withdraw = '50';
-$totalDeposit = '50';
-$currentInvest = '50';
-$totalInvest = '50';
-$pendingInvest = '50';
-$pendingWithdraw = '50';
-$commison = '50';
-$reference = [
-['name'],
-['age'],
-];
+
+
 function curren($value='')
 {
     return $value;
@@ -86,7 +77,7 @@ function curren($value='')
                             <div class="content">
                                 <span class="caption-title">{{ __('Current Plan') }}</span>
                                 <h3 class="d-box-three-amount">
-                                    {{ isset($currentPlan->plan->plan_name) ? $currentPlan->plan->plan_name : 'N/A' }}
+                                    {{ isset(auth()->user()->current_plan) ? auth()->user()->current_plan : 'N/A' }}
                                 </h3>
                             </div>
                         </div>
@@ -162,77 +153,72 @@ function curren($value='')
         </div>
 
 
-        <?php 
-          $references = [
-                ['full_name' => 'Miracle', 'referrals'=> 3,'image' => ''],
-            ];
-            $reference = json_decode(json_encode($references));
-         ?>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="mb-0">{{ __('Reference Tree') }}</h5>
-                    </div>
-                    <div class="card-body">
-                        {{-- @if ($reference->count() > 0) --}}
-                            @if (true)
-                            <ul class="sp-referral">
-                                <li class="single-child root-child">
-                                    <p>
-                                        <img src="{{ asset('asset/theme2/user/'. auth()->user()->image) }}">
-                                        <span class="mb-0">{{ auth()->user()->full_name .' - '. curren(auth()->user())}}</span>
-                                    </p>
-                                    <ul class="sub-child-list step-2">
-                                        @foreach ($reference as $user)
-                                            <li class="single-child">
-                                                <p>
-                                                    <img src="{{ asset('asset/theme2/user'. auth()->user()->image) }}">
-                                                    <span class="mb-0">{{ $user->full_name.' - '. curren("Aso") }}</span>
-                                                </p>
+        
+{{--        <div class="row">--}}
+{{--            <div class="col-md-12">--}}
+{{--                <div class="card">--}}
+{{--                    <div class="card-header">--}}
+{{--                        <h5 class="mb-0">{{ __('Reference Tree') }}</h5>--}}
+{{--                    </div>--}}
+{{--                    <div class="card-body">--}}
+{{--                        --}}{{-- @if ($reference->count() > 0) --}}
+{{--                            @if (true)--}}
+{{--                            <ul class="sp-referral">--}}
+{{--                                <li class="single-child root-child">--}}
+{{--                                    <p>--}}
+{{--                                        <img src="{{ asset('asset/theme2/user/'. auth()->user()->image) }}">--}}
+{{--                                        <span class="mb-0">{{ auth()->user()->full_name .' - '. curren(auth()->user())}}</span>--}}
+{{--                                    </p>--}}
+{{--                                    <ul class="sub-child-list step-2">--}}
+{{--                                        @foreach ($reference as $user)--}}
+{{--                                            <li class="single-child">--}}
+{{--                                                <p>--}}
+{{--                                                    <img src="{{ asset('asset/theme2/user'. auth()->user()->image) }}">--}}
+{{--                                                    <span class="mb-0">{{ $user->full_name.' - '. curren("Aso") }}</span>--}}
+{{--                                                </p>--}}
 
-                                                <ul class="sub-child-list step-3">
-                                                    @foreach ($reference as $ref)
-                                                        <li class="single-child">
-                                                            <p>
-                                                                <img src="{{ asset('asset/theme2/user'. $ref->image) }}">
-                                                                <span class="mb-0">{{ $ref->full_name.' - Tester' }}</span>
-                                                            </p>
+{{--                                                <ul class="sub-child-list step-3">--}}
+{{--                                                    @foreach ($reference as $ref)--}}
+{{--                                                        <li class="single-child">--}}
+{{--                                                            <p>--}}
+{{--                                                                <img src="{{ asset('asset/theme2/user'. $ref->image) }}">--}}
+{{--                                                                <span class="mb-0">{{ $ref->full_name.' - Tester' }}</span>--}}
+{{--                                                            </p>--}}
 
-                                                            {{-- <ul class="sub-child-list step-4">
-                                                                @foreach ($ref->refferals as $ref2)
-                                                                    <li class="single-child">
-                                                                        <p>
-                                                                            <img src="{{ asset('asset/theme2/user'. $ref2->image) }}">
-                                                                            <span
-                                                                                class="mb-0">{{ $ref2->full_name.' - ' }}</span>
-                                                                        </p>
-                                                                    </li>
-                                                                @endforeach
-                                                            </ul> --}}
+{{--                                                            --}}{{-- <ul class="sub-child-list step-4">--}}
+{{--                                                                @foreach ($ref->refferals as $ref2)--}}
+{{--                                                                    <li class="single-child">--}}
+{{--                                                                        <p>--}}
+{{--                                                                            <img src="{{ asset('asset/theme2/user'. $ref2->image) }}">--}}
+{{--                                                                            <span--}}
+{{--                                                                                class="mb-0">{{ $ref2->full_name.' - ' }}</span>--}}
+{{--                                                                        </p>--}}
+{{--                                                                    </li>--}}
+{{--                                                                @endforeach--}}
+{{--                                                            </ul> --}}
 
-                                                        </li>
-                                                    @endforeach
-                                                </ul>
-                                            </li>
-                                        @endforeach
+{{--                                                        </li>--}}
+{{--                                                    @endforeach--}}
+{{--                                                </ul>--}}
+{{--                                            </li>--}}
+{{--                                        @endforeach--}}
 
-                                    </ul>
-                                </li>
-                            </ul>
-                        @else
-                            <div class="col-md-12 text-center mt-5">
-                                <i class="far fa-sad-tear display-1"></i>
-                                <p class="mt-2">
-                                    {{ __('No Reference User Found') }}
-                                </p>
+{{--                                    </ul>--}}
+{{--                                </li>--}}
+{{--                            </ul>--}}
+{{--                        @else--}}
+{{--                            <div class="col-md-12 text-center mt-5">--}}
+{{--                                <i class="far fa-sad-tear display-1"></i>--}}
+{{--                                <p class="mt-2">--}}
+{{--                                    {{ __('No Reference User Found') }}--}}
+{{--                                </p>--}}
 
-                            </div>
-                        @endif
-                    </div>
-                </div>
-            </div>
-        </div>
+{{--                            </div>--}}
+{{--                        @endif--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
 
 
     </div>
@@ -264,7 +250,7 @@ function curren($value='')
             -o-object-fit: cover;
         }
 
-        
+
 
         .sp-referral .single-child p span {
             width: calc(100% - 35px);

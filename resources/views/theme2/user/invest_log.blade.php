@@ -31,24 +31,29 @@ function template()
     </script>
 
     <div class="dashboard-body-part">
-
-        <div class="card-body text-end">
+        <h2 class="p-2">
+            My Investment
+        </h2>
+        <!-- <div class="card-body text-end">
             <form action="" method="get" class="d-inline-flex">
                 <input type="text" name="trx" class="form-control me-2" placeholder="transaction id">
                 <input type="date" class="form-control me-3" placeholder="Search User" name="date">
                 <button type="submit" class="cmn-btn">{{__('Search')}}</button>
             </form>
-        </div>
+        </div> -->
 
         <div class="table-responsive">
             <table class="table cmn-table">
                 <thead>
                     <tr>
+                        <th>{{ __('S/N') }}</th>
                         <th>{{ __('Trx') }}</th>
-                        <th>{{ __('User') }}</th>
                         <th>{{ __('Gateway') }}</th>
                         <th>{{ __('Amount') }}</th>
+                        <th>{{ __('Plan') }}</th>
                         <th>{{ __('Payment Date') }}</th>
+                        <th>{{ __('Investment Duration') }}</th>
+                        <th>{{__('Potential Cashout')}}</th>
                         <th>{{ __('Payment Status') }}</th>
                         <th>{{ __('Upcoming Payment') }}</th>
                     </tr>
@@ -61,32 +66,43 @@ function template()
                     @forelse($transactions as $key => $transaction)
                         <tr>
                             <td data-caption="{{ __('Trx') }}"><?php echo $id;$id++; ?></td>
-                            <td data-caption="{{ __('User') }}">{{ @$transaction->user->name }}</td>
+                            <td data-caption="{{ __('User') }}">{{ @$transaction->transaction_id }}</td>
                             <td data-caption="{{ __('Gateway') }}">
                                
                                     {{ @$transaction->gateway }}
                                 
                             </td>
                             <td data-caption="{{ __('Amount') }}">{{ $transaction->amount }} {{ $gs->site_currency }}</td>
+
+                            <td data-caption="{{ __('Plan') }}">{{ $transaction->plan->name }}</td>
                             
                             <!-- Date Paid -->
 
-                            <td data-caption="{{ __('Payment Date') }}">{{ $transaction->created_at }}</td>
+                            <td data-caption="{{ __('Date Paid') }}">{{ $transaction->created_at }}</td>
+
+                            <td data-caption="{{ __('Investment Duration') }}">{{ $transaction->plan->duration }}</td>
+
+                            <td data-caption="{{ __('Potential Cashout') }}">{{ $transaction->amount + ($transaction->plan->amount * ($transaction->roi/100))}}</td>
+
                             <td data-caption="{{ __('Payment Date') }}">
-                                 @if($transaction->status != 'active')
-                                    <button class="btn btn-sm btn-danger">Pending</button>
+                                 @if($transaction->status == 'active')
+                                    <button class="btn btn-sm btn-success" style="padding: 10px;">Active</button>
+                                    
+                                @elseif($transaction->status == 'ended')
+                                    <button class="btn btn-sm btn-danger" style="padding: 10px;">Ended</button>
+
                                 @else
-                                    <button class="btn btn-sm btn-success">Success</button>
+                                    <button class="btn btn-sm btn-info" style="padding: 10px;">Pending</button>
                                 @endif
                             </td>
                             <td data-caption="{{ __('Upcoming Payment') }}">
-                                @if($transaction->status != 'active')
-                                    -
-                                @else
+                                @if($transaction->status == 'active')
                                 <p id="count_{{ $loop->iteration }}" class="mb-2"></p>
                                 <script>
                                     getCountDown("count_{{ $loop->iteration }}", "{{ now()->diffInSeconds($transaction->updated_at) }}")
                                 </script>
+                                @else
+                                 -
                                 @endif
                             </td>
                         </tr>

@@ -5,22 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Deposit extends Model
+class Withdraw extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'transaction_id',
         'user_id',
         'amount',
-        'gateway',
-        'proof',
+        'withdraw_method',
+        'wallet_address',
+        'account_info',
+        'additional_info',
+        'network',
         'status',
-        'payment_type',
-        
+        'transaction_id',
     ];
-
-    public function plan()
-    {
-        return $this->belongsTo(InvestmentPlan::class);
-    }
 }

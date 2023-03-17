@@ -5,15 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Network extends Model
+class Ticket extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'referral_id',
-        'user_id',
-        'ref_id',
-        'amount_earned'
-    ];
+
+    protected $guarded =[];
+
+    public function ticketReplies()
+    {
+        return $this->hasMany(TicketReply::class);
+    }
 
     public function user()
     {

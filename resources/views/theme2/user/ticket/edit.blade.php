@@ -1,3 +1,6 @@
+<?php 
+function template(){return 'theme2.';}
+ ?>
 @extends(template().'layout.master2')
 @push('style')
 
@@ -48,7 +51,7 @@
             <div class="d-flex justify-content-between align-items-center text-capitalize">
                 <h2>{{ __($pageTitle) }}</h2>
                 <ol>
-                    <li><a href="{{ route('user.dashboard') }}">{{ __('Dashboard') }}</a></li>
+                    <li><a href="{{ route('home') }}">{{ __('Dashboard') }}</a></li>
                     <li>{{ __($pageTitle) }}</li>
                 </ol>
             </div>
@@ -59,7 +62,7 @@
         <div class="container">
             <div class="project-status-top d-flex justify-content-end">
                 <h4 class="project-status-heading">
-                    <a href="{{ route('user.ticket.index') }}"><button class="btn btn-main mt-2">
+                    <a href="{{ route('ticket.index') }}"><button class="btn btn-main mt-2">
                             <i class="fas fa-arrow-left"> {{ __('Back to List') }}</i>
                         </button>
                     </a>
@@ -68,7 +71,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="card card-wrapper">
-                    <form action="{{ route('user.ticket.update', $ticket->id) }}" class="p-3" enctype="multipart/form-data" method="post">
+                    <form action="{{ route('ticket.update', $ticket->id) }}" class="p-3" enctype="multipart/form-data" method="post">
                         @csrf
                         {{ method_field('PUT') }}
                         <div class="row">

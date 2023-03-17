@@ -28,8 +28,18 @@ return new class extends Migration
                 'wallet_address' => '232nsbduiuwiagaisdbaisdhiabir',
                 'blockchain_network' => 'Binance',
                 'short_name' => 'btc',
-                'qr_code' => 'asset/theme2/images/gateways/btc.png',
+                'qr_code' => 'asset/theme2/images/gateways/63cfb1631c4ae1674555747.jpg',
                 'image' => 'asset/theme2/images/gateways/btc.png',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'cryptocurrency' => 'USDT Tether! Bep20',
+                'wallet_address' => '232nsbduiuwiagaisdbaisdhiabir',
+                'blockchain_network' => 'USDT',
+                'short_name' => 'usdt',
+                'qr_code' => 'asset/theme2/images/gateways/63cfb1631c4ae1674555747.jpg',
+                'image' => 'asset/theme2/images/gateways/usdt_tether.jpg',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
@@ -38,35 +48,35 @@ return new class extends Migration
                 'wallet_address' => '0xD678c1C47C53c6A5d79E827F54cb70b0CbFCec8f',
                 'blockchain_network' => 'Binance',
                 'short_name' => 'eth',
-                'qr_code' => 'asset/theme2/images/gateways/ETH.jpg',
+                'qr_code' => 'asset/theme2/images/gateways/63cfb1631c4ae1674555747.jpg',
                 'image' => 'asset/theme2/images/gateways/Eth.jpg',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
-            ], 
+            ],
               [
                 'cryptocurrency' => 'Binance',
                 'wallet_address' => '0xD678c1C47C53c6A5d79E827F54cb70b0CbFCec8f',
                 'blockchain_network' => 'Binance',
                 'short_name' => 'bnb',
-                'qr_code' => 'asset/theme2/images/gateways/BNB.jpg',
+                'qr_code' => 'asset/theme2/images/gateways/63cfb1631c4ae1674555747.jpg',
                 'image' => 'asset/theme2/images/gateways/BNB.jpg',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
-            ], 
+            ],
             [
                 'cryptocurrency' => 'Solana',
                 'wallet_address' => '0xD678c1C47C53c6A5d79E827F54cb70b0CbFCec8f',
                 'blockchain_network' => 'Binance',
                 'short_name' => 'sol',
-                'qr_code' => 'asset/theme2/images/gateways/SOL.jpg',
+                'qr_code' => 'asset/theme2/images/gateways/63cfb1631c4ae1674555747.jpg',
                 'image' => 'asset/theme2/images/gateways/SOL.jpg',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
         ]);
-       
-           
-           
+
+
+
     }
 
     /**

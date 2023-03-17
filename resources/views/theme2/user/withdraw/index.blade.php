@@ -17,10 +17,10 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="">{{ __('Withdraw Method') }}</label>
-                                <select name="method" id="" class="form-select">
+                                <select name="withdraw_method" id="" class="form-select">
                                     <option value="" selected>{{ __('Select Method') }}</option>
                                     @foreach ($withdraws as $withdraw)
-                                        <option value="{{ $withdraw->id }}"
+                                        <option value="{{ $withdraw->cryptocurrency }}"
                                             data-url="{{ route('fetch_withdraw', $withdraw->id) }}">
                                             {{ $withdraw->cryptocurrency }}</option>
                                     @endforeach
@@ -52,14 +52,14 @@
         $(function() {
             'use strict'
 
-            $('select[name=method]').on('change', function() {
+            $('select[name=withdraw_method]').on('change', function() {
                 if ($(this).val() == '') {
                     $('.appendData').addClass('d-none');
                     $('.instruction').text('');
                     return;
                 }
                 $('.appendData').removeClass('d-none');
-                getData($('select[name=method] option:selected').data('url'))
+                getData($('select[name=withdraw_method] option:selected').data('url'))
             })
 
             $(document).on('keyup', '.amount', function() {
@@ -108,13 +108,13 @@
                                
 
                                 <div class="col-md-12 mb-3">
-                                    <label for="">{{ __('Account Email / Wallet Address') }} <span class="text-danger">*</span></label>
-                                    <input type="text" name="email" class="form-control" required>
+                                    <label for="">{{ __('Wallet Address') }} <span class="text-danger">*</span></label>
+                                    <input type="text" name="wallet_address" class="form-control" required>
                                 </div>
 
                                 <div class="col-md-12 mb-3">
                                     <label for="">{{ __('Account Information') }}</label>
-                                   <textarea class="form-control" name="account_information" row="5"></textarea>
+                                   <textarea class="form-control" name="account_info" row="5"></textarea>
                                 </div>
 
                                 <div class="col-md-12 mb-3">

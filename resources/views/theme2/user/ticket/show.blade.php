@@ -1,3 +1,6 @@
+<?php 
+function template(){return 'theme2.';}
+ ?>
 @extends(template().'layout.master2')
 
 @section('content2')
@@ -10,12 +13,12 @@
                 </div>
             </div>
             <div class="col-md-4  text-md-end text-center">
-                <a href="{{ route('user.ticket.index') }}" class="color-change"><i class="fas fa-arrow-left"></i> {{ __('Back to Ticket List') }}</a>
+                <a href="{{ route('ticket.index') }}" class="color-change"><i class="fas fa-arrow-left"></i> {{ __('Back to Ticket List') }}</a>
             </div>
         </div>
 
         <div class="mt-4">
-            <form action="{{ route('user.ticket.reply', $ticket->id) }}" enctype="multipart/form-data"
+            <form action="{{ route('ticket.reply', $ticket->id) }}" enctype="multipart/form-data"
                 method="post">
                 @csrf
                 <div class="row justify-content-md-between">
@@ -52,7 +55,7 @@
                         </p>
                         @if ($ticket->file)
                             <p class="mb-0 mt-2">
-                                <a class="color-change" href="{{ route('user.ticket.download', $ticket->id) }}"> <i class="fas fa-cloud-download-alt"></i> {{ __('View Attachement') }}</a>
+                                <a class="color-change" href="{{ route('ticket.download', $ticket->id) }}"> <i class="fas fa-cloud-download-alt"></i> {{ __('View Attachement') }}</a>
                             </p>
                         @endif
                     </div>

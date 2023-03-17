@@ -24,6 +24,7 @@ class User extends Authenticatable
         'username',
         'role',
         'referral_id',
+        'current_plan',
     ];
 
     /**

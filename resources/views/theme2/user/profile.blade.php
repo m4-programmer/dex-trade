@@ -10,7 +10,7 @@ function template(){return 'theme2.';}
 @section('content2')
     <div class="dashboard-body-part">
         <div class="d-flex justify-content-end mb-3">
-            <a href="{{ url('settings.change.password') }}" class="cmn-btn mb-2">{{ __('Change Password') }}</a>
+            <a href="{{ route('change.password') }}" class="cmn-btn mb-2">{{ __('Change Password') }}</a>
         </div>
         <div class="card">
             <div class="card-body">

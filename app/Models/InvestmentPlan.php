@@ -16,6 +16,6 @@ class InvestmentPlan extends Model
         'duration',
         'capital_back',
         'status',
-
+        'updated_at'
     ];
 }

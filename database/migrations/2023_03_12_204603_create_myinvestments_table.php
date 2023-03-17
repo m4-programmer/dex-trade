@@ -15,11 +15,15 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->string('transaction_id')->unique();
+            $table->unsignedBigInteger('plan_id');
+            $table->foreign('plan_id')->references('id')->on('investment_plans');
             $table->string('plan_name');
+            $table->string('roi');
             $table->string('amount');
             $table->string('duration');
             $table->string('gateway');
-            $table->enum('status', ['active','pending', 'failed'])->default('pending');
+            $table->enum('status', ['active','pending', 'ended'])->default('pending');
             $table->timestamps();
         });
     }

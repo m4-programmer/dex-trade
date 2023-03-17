@@ -1,3 +1,4 @@
+<?php function template() {return 'theme2.';} ?>
 @extends(template() . 'layout.master2')
 
 @section('content2')
@@ -15,18 +16,15 @@
                                 <span>{{ $general->site_currency}}</span>
                             </li>
                             <li class="list-group-item text-light">
-                                <span class="w-100"><?= clean($gateway->wallet_address) ?>
-                                    
-
-
-
-
-                                COPY and make PAYMENT to the wallet address above or scan the barcode below ⬆
-
-                                WARNING: Make the payment before you click on "Deposit Now"
-
-                                Your deposit will take 30 minutes or more kindly excise some patience
+                                <span class="w-100">
+                                    <p><b>{{ ($gateway->wallet_address) }}</b><br></p>
+                                    <p><br></p>
+                                    <p>COPY and make PAYMENT to the wallet address above or scan the barcode below ⬆</p>
+                                    <p>WARNING: Make the payment before you click on "Deposit Now"<br></p>
+                                    <p>Your deposit will take 30 minutes or more kindly excise some patience<br></p>
                                 </span>
+
+
                                 <span class="w-100">
                                     <img src="{{ asset($gateway->qr_code) }}"
                                         alt="">
@@ -82,20 +80,24 @@
                     </div>
 
                     <div class="card-body">
-                        <form action="" method="post" enctype="multipart/form-data">
+                        <form action="{{route('deposit.complete')}}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
-          
+
                                 <div class="form-group col-md-12">
                                     <label for=""
-                                        class="mb-2 mt-2">{{ __($proof['field_name']) }}</label>
+                                        class="mb-2 mt-2">Upload Payment Proof (Screenshot)</label>
                                     <input type="file"
                                         name="proof"
                                         class="form-control" required>
-                                        
+
                                 </div>
-                                        
-                                   
+                                <input type="text" name="amount" hidden value="{{$amount}}">
+                                <input type="text" name="payment_method" hidden value="{{$gateway->cryptocurrency}}">
+                                @if(isset($type) and $type == 'Investment')
+                                <input type="text" name="type" value="Investment" hidden>
+                                <input type="text" name="plan_id" value="{{$plan_id->id}}" hidden>
+                                @endif
 
 
                                 <div class="form-group">

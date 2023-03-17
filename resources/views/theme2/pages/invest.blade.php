@@ -58,7 +58,7 @@ function template(){return 'theme2.';}
                             
                             
                                 <a class="cmn-btn w-100 "
-                                    href="{{ url('user.gateways', $plan->id) }}">{{ __('Choose Plan') }}</a>
+                                    href="{{ route('investment.create','id='. $plan->id) }}">{{ __('Choose Plan') }}</a>
                                     
                                   @auth
                                         
@@ -79,7 +79,7 @@ function template(){return 'theme2.';}
 
     <div class="modal fade" id="invest" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <form action="{{url('user.investmentplan.submit')}}" method="post">
+            <form action="{{route('investmentUsingBalannce')}}" method="post">
                 @csrf
                 <div class="modal-content">
                     <div class="modal-header">
@@ -120,60 +120,4 @@ function template(){return 'theme2.';}
         })
     </script>
 @endpush
-<?php 
- function items()
-{
-    $items = [
-    [
-        'id' => 1,
-        'plan_name' => 'Basic Plan',
-        'amount_type' => 0,
-        'minimum_amount' => 3000,
-        'maximum_amount' => 6000,
-        'amount' => 4500,
-        'time' => ['name' => 'test'],
-        'return_interest' => 3400,
-        'interest_status' => 'percentage',
-        'return_for' => 0,
-        'capital_back' => 1,
-        'invest_limit' => 2,
-        'plan_exist' => 1,
 
-
-    ],
-    [
-        'id' => 2,
-        'plan_name' => 'Business Plan',
-        'amount_type' => 0,
-        'minimum_amount' => 3000,
-        'maximum_amount' => 6000,
-        'amount' => 4500,
-        'time' => ['name' => 'test'],
-        'return_interest' => 3400,
-        'interest_status' => 'percentage',
-        'return_for' => 0,
-        'capital_back' => 1,
-        'invest_limit' => 2,
-        'plan_exist' => 1,
-
-    ],
-    [
-        'id' => 3,
-        'plan_name' => 'Premium Plan',
-        'amount_type' => 0,
-        'minimum_amount' => 3000,
-        'maximum_amount' => 6000,
-        'amount' => 4500,
-        'time' => ['name' => 'test'],
-        'return_interest' => 3400,
-        'interest_status' => 'percentage',
-        'return_for' => 0,
-        'capital_back' => 1,
-        'invest_limit' => 2,
-        'plan_exist' => 1,
-
-    ],
-];
-return $plans = json_decode(json_encode($items));
-}
- ?>

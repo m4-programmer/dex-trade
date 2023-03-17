@@ -1,3 +1,6 @@
+<?php 
+function template(){return 'theme2.';}
+ ?>
 @extends(template().'layout.master2')
 
 @section('content2')
@@ -5,16 +8,16 @@
         <div class="row gy-4">
             <div class="col-md-8 text-md-start text-center">
                 <div class="tab-btn-group">
-                    <a href="{{ route('user.ticket.index') }}"
+                    <a href="{{ route('ticket.index') }}"
                         class="tab-btn {{ request()->status == '' ? 'active' : '' }}"><i class="fa fa-inbox fa-lg"
                             aria-hidden="true"></i>
                         {{ __('All Ticket') }} <span class="num">{{ $tickets_all }}</span>
                     </a>
-                    <a href="{{ route('user.ticket.status', 'answered') }}"
+                    <a href="{{ route('ticket.status', 'answered') }}"
                         class="tab-btn {{ request()->status == 'answered' ? 'active' : '' }}">{{ __('Answered') }}
                         <span class="num">{{ $tickets_answered }}</span>
                     </a>
-                    <a href="{{ route('user.ticket.status', 'pending') }}"
+                    <a href="{{ route('ticket.status', 'pending') }}"
                         class="tab-btn {{ request()->status == 'pending' ? 'active' : '' }}">
                         {{ __('Pending') }} <span class="num">{{ $tickets_pending }}</span>
                     </a>
@@ -48,14 +51,14 @@
                             <td data-caption="{{ __('Total Reply') }}">({{ $ticket->ticketReplies->count() }})
                             </td>
                             <td data-caption="{{ __('Action') }}">
-                                <button data-route="{{ route('user.ticket.update', $ticket->id) }}"
+                                <button data-route="{{ route('ticket.update', $ticket->id) }}"
                                     data-ticket="{{ $ticket }}" data-message="{{$ticket->ticketReplies()->where('ticket_id',$ticket->id)->first()}}" class="view-btn view-btn-primary edit-modal"><i
                                         class="fas fa-pen"></i></button>
 
-                                <a href="{{ route('user.ticket.show', $ticket->id) }}"
+                                <a href="{{ route('ticket.show', $ticket->id) }}"
                                     class="view-btn view-btn-info"><i class="fas fa-eye"></i></a>
 
-                                <a data-route="{{ route('user.ticket.destroy', $ticket->id) }}"
+                                <a data-route="{{ route('ticket.destroy', $ticket->id) }}"
                                     class="view-btn view-btn-danger delete"><i class="fas fa-trash"></i></a>
                             </td>
                         </tr>
@@ -73,7 +76,7 @@
 
     <div class="modal fade " id="add" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
-            <form action="{{ route('user.ticket.store') }}" enctype="multipart/form-data" method="post">
+            <form action="{{ route('ticket.store') }}" enctype="multipart/form-data" method="post">
                 @csrf
                 <div class="modal-content bg-body">
                     <div class="modal-header">

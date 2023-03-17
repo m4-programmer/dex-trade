@@ -29,6 +29,8 @@ return new class extends Migration
             $table->string('state')->nullable();
             $table->string('zip')->nullable();
 
+            $table->string('current_plan')->nullable();
+
             $table->enum('role_as',['admin','user'])->default('user');
             $table->string('balance')->default(0);
             $table->rememberToken();

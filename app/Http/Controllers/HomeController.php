@@ -1,7 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Deposit;
+use App\Models\Withdraw;
+use App\Models\Myinvestment;
+use App\Models\Network;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -25,6 +28,20 @@ class HomeController extends Controller
     {
         
         $pageTitle = "Dashboard";
-        return view('theme2.user.dashboard',compact('pageTitle'));
+
+        $totalInvest = Myinvestment::where('user_id', auth()->user()->id)->where('status', 'active')->orWhere('status', 'ended')->sum('amount');
+        $currentInvest = Myinvestment::where('user_id', auth()->user()->id)->where('status', 1)->latest()->first('amount');
+        // $currentPlan = Payment::with('plan')->where('user_id', auth()->user()->id)->where('payment_status', 1)->latest()->first();
+        // $allPlan = Payment::with('plan')->where('user_id', auth()->user()->id)->latest()->paginate(10, ['*'], 'plan');
+        $withdraw = Withdraw::where('user_id', auth()->user()->id)->where('status', 'success')->sum('amount');
+        // $interestLogs = UserInterest::with('payment')->where('user_id', auth()->user()->id)->latest()->paginate(10, ['*'], 'log');
+
+        $commison = Network::where('ref_id', auth()->user()->id)->sum('amount_earned');
+
+        $pendingInvest = Myinvestment::where('user_id', auth()->user()->id)->where('status', 'pending')->sum('amount');
+        $pendingWithdraw = Withdraw::where('user_id', auth()->user()->id)->where('status', 'pending')->sum('amount');
+        $totalDeposit = Deposit::where('user_id', auth()->user()->id)->where('status', 'success')->orWhere('status', 'pending')->sum('amount');
+
+        return view('theme2.user.dashboard',compact('pageTitle','pendingInvest','totalInvest','pendingWithdraw','totalDeposit','commison','currentInvest','withdraw'));
     }
 }

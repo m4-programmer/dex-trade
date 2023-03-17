@@ -14,7 +14,7 @@ function template(){return 'theme2.';}
                         <h4 class="mb-0">{{ __('Change Password') }}</h4>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('user.update.password') }}" method="POST">
+                        <form action="{{ route('update.password') }}" method="POST">
                             @csrf
                             <div class="mb-3">
                                 <label for="exampleInputEmail1"

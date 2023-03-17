@@ -70,9 +70,9 @@
      <!--  <li class="{{singleMenu('user.interest.log')}}">
         <a href="('user.interest.log') }}"><i class="far fa-file-alt"></i> {{ __('Interest Log') }}</a>
       </li> -->
-      <li class="{{singleMenu('user.transaction.log')}}">
+    <!--   <li class="{{singleMenu('user.transaction.log')}}">
         <a href="{{route('transaction_log')}}"><i class="fas fa-file-invoice-dollar"></i> {{ __('Transaction Log') }}</a>
-      </li>
+      </li> -->
 
       <li class="{{singleMenu('user.commision')}}">
         <a href="{{route('referral_log')}}"><i class="fas fa-file-invoice-dollar"></i> {{ __('Refferal Log') }}</a>
@@ -83,7 +83,7 @@
         <a href="('user.2fa') }}"><i class="fas fa-user-shield"></i> {{ __('2FA') }}</a>
       </li> -->
       <li class="{{singleMenu('user.ticket.index')}}">
-        <a href="{{url('user/support')}}"><i class="fas fa-headset"></i> {{ __('Support') }}</a>
+        <a href="{{route('ticket.index')}}"><i class="fas fa-headset"></i> {{ __('Support') }}</a>
       </li>
       <li>
          <form method="post" action="{{route('logout')}}" style="margin-left: 15px;">
@@ -95,9 +95,9 @@
       </li>
     </ul>
     <div class="d-plan-notice mt-4 mx-3">
-        <p class="mb-0">{{ __('Your Current Plan') }}
-            -{{ isset($currentPlan->plan->plan_name) ? $currentPlan->plan->plan_name : 'N/A' }}</p>
-        <a href="('user.investmentplan') }}">{{ __('Update Plan') }} <i
+        <p class="mb-0">{{ __('Current Plan') }}
+            </p>
+        <a href="{{ route('myinvestment') }}">{{ isset(auth()->user()->current_plan) ? auth()->user()->current_plan : 'N/A' }} <i
                 class="fas fa-arrow-up"></i></a>
     </div>
 </div>

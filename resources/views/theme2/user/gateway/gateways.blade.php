@@ -17,8 +17,13 @@
                         </div>
                         <div class="payment-box-content">
                             <h4 class="title">{{ ucwords(str_replace('_', ' ', $gateway->cryptocurrency)) }}</h4>
+                            @if(isset($type) && $type == 'deposit')
                             <button data-href="{{ route('deposit.paynow', $gateway->id) }}" data-id="{{ $gateway->id }}"
                                 class="cmn-btn w-100 paynow mt-3">{{ __('Pay Now') }}</button>
+                            @else
+                            <button data-href="{{ route('investDetails', $gateway->id) }}" data-id="{{ $gateway->id }}"
+                                class="cmn-btn w-100 paynow mt-3">{{ __('Invest Now') }}</button>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -81,9 +86,9 @@
                                 <div class="form-group">
                                     <label for="">{{ __('Amount') }}</label>
                                     <input type="text" name="amount" class="form-control"
-                                        placeholder="{{ __('Enter Amount') }}">
+                                        placeholder="{{ __($message) }}">
 
-                                    <input type="text" name="plan_id" class="form-control" value="{{ $plan->id }}"
+                                    <input type="text" name="plan_id" class="form-control" value="{{ $plan_id }}"
                                         hidden>
                                 </div>
                             </div>

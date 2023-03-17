@@ -10,7 +10,7 @@ use App\HTTP\Controllers\User\MyInvestmentController;
 use App\HTTP\Controllers\User\DepositController;
 use App\HTTP\Controllers\User\MyDepositController;
 use App\HTTP\Controllers\User\WithdrawController;
-
+use App\Http\Controllers\TicketController;
 
 use App\HTTP\Controllers\User\TransactionController;
 use App\HTTP\Controllers\User\ReferralController;
@@ -49,22 +49,30 @@ Route::post('contact', [SiteController::class, 'contactSend']);
 Route::prefix('user')->middleware('auth')->group(function ()
 {
    Route::resource('settings', ProfileController::class);
-   Route::resource('investment', InvestmentPlanController::class);
-   
 
+   Route::get('profile/change/password', [SiteController::class, 'changePassword'])->name('change.password');
+   Route::post('profile/change/password', [SiteController::class, 'updatePassword'])->name('update.password');
+
+   Route::resource('investment', InvestmentPlanController::class);
+    Route::post('investmentplan/invest', [MyInvestmentController::class, 'investmentUsingBalannce'])->name('investmentUsingBalannce');
+    Route::post('investmentplan/invest/{id}/details', [MyInvestmentController::class, 'paynow'])->name('investDetails');
+    Route::get('myinvestment', [MyInvestmentController::class, 'showInvestLog'])->name('myinvestment');
+    
    /*Deposit Routes*/
    Route::get('deposit', [DepositController::class, 'index'])->name('deposit.index');
    Route::post('deposit/gateway/{id}/details', [DepositController::class, 'paynow'])->name('deposit.paynow');
-
-
-   Route::get('myinvestment', [MyInvestmentController::class, 'showInvestLog'])->name('myinvestment');
+   Route::post('deposit/completePayment', [DepositController::class, 'completePayment'])->name('deposit.complete');
    Route::get('deposit_log', [MyDepositController::class, 'showDepositLog'])->name('deposit_log');
+
+   
+   
 
    Route::get('/withdraw', [WithdrawController::class, 'index'])->name('withdraw');
    Route::get('/withdraw/fetch/{id}', [WithdrawController::class, 'fetch'])->name('fetch_withdraw');
-   Route::get('/withdraw/log', [WithdrawController::class, 'log'])->name('withdraw_log');
-   Route::get('/withdraw/log', [WithdrawController::class, 'log'])->name('withdraw_log');
-   Route::get('/withdraw/all', [WithdrawController::class, 'all'])->name('withdraw_all');
+   Route::post('/withdraw', [WithdrawController::class, 'withdraw']);
+   Route::get('/withdraw/all', [WithdrawController::class, 'all'])->name('withdraw_log');
+   
+   // Route::get('/withdraw/', [WithdrawController::class, ''])->name('withdraw_all');
    Route::get('/withdraw/pending', [WithdrawController::class, 'pending'])->name('withdraw_pending');
    Route::get('/withdraw/complete', [WithdrawController::class, 'complete'])->name('withdraw_complete');
 
@@ -72,20 +80,14 @@ Route::prefix('user')->middleware('auth')->group(function ()
 
    Route::get('/referral/log', [ReferralController::class, 'index'])->name('referral_log');
 
-   // Route::get('/support', [SupportController::class, 'index'])->name('support');
+   Route::resource('ticket', TicketController::class);
+   Route::post('ticket/reply', [TicketController::class, 'reply'])->name('ticket.reply');
+   Route::get('ticket/reply/status/change/{id}', [TicketController::class, 'statusChange'])->name('ticket.status-change');
+
+   Route::get('ticket/status/{status}', [TicketController::class, 'ticketStatus'])->name('ticket.status');
+
+   Route::get('ticket/attachement/{id}', [TicketController::class, 'ticketDownload'])->name('ticket.download');
 
 });
 
-//Route::get('/', [SiteController::class, 'index'])->name('home');
-//Route::get('changeLang', [SiteController::class, 'changeLang'])->name('user.changeLang');
-//Route::get('blogs', [SiteController::class, 'allblog'])->name('allblog');
-//Route::get('blog/{id}/{slug}', [SiteController::class, 'blog'])->name('blog');
-//Route::post('blog/comment/{id}', [SiteController::class, 'blogComment'])->name('blogcomment');
-//Route::get('investment/calculate/{id}', [DashboardController::class, 'investmentCalculate'])->name('user.investmentcalculate');
-//Route::post('subscribe', [DashboardController::class, 'subscribe'])->name('subscribe');
 
-//Route::get('{pages}', [SiteController::class, 'page'])->name('pages');
-//Route::get('service/{slug}', [SiteController::class, 'service'])->name('service');
-//Route::get('return/interest', [UserController::class, 'returnInterest'])->name('returninterest');
-
-//Route::get('privacy/policy', [SiteController::class, 'privacyPolicy'])->name('privacy');

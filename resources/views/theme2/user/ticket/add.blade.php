@@ -1,3 +1,6 @@
+<?php 
+function template(){return 'theme2.';}
+ ?>
 @extends(template().'layout.master2')
 @push('style')
     <style>
@@ -45,7 +48,7 @@
             <div class="d-flex justify-content-between align-items-center text-capitalize">
                 <h2>{{ __($pageTitle) }}</h2>
                 <ol>
-                    <li><a href="{{ route('user.dashboard') }}">{{ __('Dashboard') }}</a></li>
+                    <li><a href="{{ route('home') }}">{{ __('Dashboard') }}</a></li>
                     <li>{{ __($pageTitle) }}</li>
                 </ol>
             </div>
@@ -60,14 +63,14 @@
                         <div class="col-lg-12">
                             <div class="project-status-top d-flex justify-content-end">
                                 <h4 class="project-status-heading">
-                                    <a href="{{ route('user.ticket.index') }}"><button class="btn btn-main mt-2">
+                                    <a href="{{ route('ticket.index') }}"><button class="btn btn-main mt-2">
                                             <i class="fas fa-arrow-left"> {{ __('Back to List') }}</i>
                                         </button>
                                     </a>
                                 </h4>
                             </div>
                             <div class="card card-wrapper">
-                                <form action="{{ route('user.ticket.store') }}" enctype="multipart/form-data" class="p-3"
+                                <form action="{{ route('ticket.store') }}" enctype="multipart/form-data" class="p-3"
                                     method="post">
                                     @csrf
                                     <div class="row">

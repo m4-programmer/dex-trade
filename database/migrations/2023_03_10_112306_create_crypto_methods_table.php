@@ -29,7 +29,7 @@ return new class extends Migration
                 'blockchain_network' => 'Binance',
                 'short_name' => 'btc',
                 'qr_code' => 'asset/theme2/images/gateways/63cfb1631c4ae1674555747.jpg',
-                'image' => 'asset/theme2/images/gateways/btc.png',
+                'image' => 'asset/theme2/images/gateways/BTC.png',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
@@ -49,7 +49,7 @@ return new class extends Migration
                 'blockchain_network' => 'Binance',
                 'short_name' => 'eth',
                 'qr_code' => 'asset/theme2/images/gateways/63cfb1631c4ae1674555747.jpg',
-                'image' => 'asset/theme2/images/gateways/Eth.jpg',
+                'image' => 'asset/theme2/images/gateways/ETH.jpg',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],

@@ -59,7 +59,7 @@
                             
                             
                                 <a class="cmn-btn w-100 "
-                                    href="{{ url('user.gateways', $plan->id) }}">{{ __('Choose Plan') }}</a>
+                                    href="{{ route('investment.create','id='. $plan->id) }}">{{ __('Choose Plan') }}</a>
                                     
                                   @auth
                                         
@@ -80,7 +80,7 @@
 <!-- Profit Calculator -->
 <div class="modal fade" id="invest" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form action="{{url('user.investmentplan.submit')}}" method="post">
+        <form action="{{route('investmentUsingBalannce')}}" method="post">
             @csrf
             <div class="modal-content">
                 <div class="modal-header">

@@ -1,88 +1,74 @@
-<?php 
-  
-  function singleMenu($value='')
-  {
-    return htmlspecialchars($value);
-  }
-  function arrayMenu($value='')
-  {
-    return $value[0];
-  }
-  function activeMenu($value='')
-  {
-    return true;
-  }
- ?>
+
 <div class="d-sidebar">
     <ul class="d-sidebar-menu">
-      <li class="{{singleMenu('user.dashboard')}}"> 
+      <li class="{{singleMenu('home')}}"> 
         <a href="{{ route('home') }}"><i class="fas fa-layer-group"></i> {{ __('Dashboard') }}</a>
       </li>
 
-      <li class="has_submenu {{arrayMenu(['user.investmentplan','user.invest.log'])}}"> 
+      <li class="has_submenu {{arrayMenu(['investment.index','myinvestment'])}}"> 
         <a href="#0"><i class="fas fa-funnel-dollar"></i> {{ __('Investment') }}</a>
         <ul class="submenu">
-          <li class="{{singleMenu('user.investmentplan')}}">
+          <li class="{{singleMenu('investment.index')}}">
             <a href="{{ route('investment.index') }}"><i class="fas fa-minus"></i> {{ __('Investment Plans') }}</a>
           </li>
-          <li class="{{singleMenu('user.invest.log')}}">
+          <li class="{{singleMenu('myinvestment')}}">
             <a href="{{route('myinvestment')}}"><i class="fas fa-minus"></i> {{ __('Invest Log') }}</a>
           </li>
         </ul>
       </li>
 
-      <li class="has_submenu {{arrayMenu(['user.deposit','user.deposit.log'])}}">
+      <li class="has_submenu {{arrayMenu(['deposit.index','deposit_log'])}}">
         <a href="#0"><i class="fas fa-coins"></i> {{ __('Deposit') }}</a>
         <ul class="submenu">
-          <li class="{{singleMenu('user.deposit')}}">
+          <li class="{{singleMenu('deposit.index')}}">
             <a href="{{route('deposit.index')}}"><i class="fas fa-minus"></i> {{ __('Deposit') }}</a>
           </li>
-          <li class="{{singleMenu('user.deposit.log')}}">
+          <li class="{{singleMenu('deposit_log')}}">
             <a href="{{route('deposit_log')}}"><i class="fas fa-minus"></i> {{ __('Deposit Log') }}</a>
           </li>
         </ul>
       </li>
 
-      <li class="has_submenu {{arrayMenu(['user.withdraw','user.withdraw.*'])}}">
+      <li class="has_submenu {{arrayMenu(['withdraw','withdraw_log'])}}">
         <a href="#0"><i class="fas fa-hand-holding-usd"></i> {{ __('Withdraw') }}</a>
         <ul class="submenu">
-          <li class="{{singleMenu('user.withdraw')}}">
+          <li class="{{singleMenu('withdraw')}}">
             <a href="{{route('withdraw')}}"><i class="fas fa-minus"></i> {{ __('Withdraw') }}</a>
           </li>
-          <li class="{{singleMenu('user.withdraw.*')}}">
+          <li class="{{singleMenu('withdraw_log')}}">
             <a href="{{route('withdraw_log')}}"><i class="fas fa-minus"></i> {{ __('Withdraw Log') }}</a>
           </li>
         </ul>
       </li>
 
-     <!--  <li class="{{singleMenu('user.transfer_money')}}">
-        <a href="('user.transfer_money') }}"><i class="fas fa-exchange-alt"></i> {{ __('Transfer Money') }}</a>
+     <!--  <li class="{{singleMenu('transfer_money')}}">
+        <a href="('transfer_money') }}"><i class="fas fa-exchange-alt"></i> {{ __('Transfer Money') }}</a>
       </li> -->
 
-       <!-- <li class="{{activeMenu(url('user.money.log'))}}">
-            <a href="('user.money.log') }}">
+       <!-- <li class="{{activeMenu(url('money.log'))}}">
+            <a href="('money.log') }}">
                 <i class="las la-exchange-alt me-3"></i> 
                 {{ __('Money Transfer Log') }}
             </a>
         </li> -->
 
         
-     <!--  <li class="{{singleMenu('user.interest.log')}}">
-        <a href="('user.interest.log') }}"><i class="far fa-file-alt"></i> {{ __('Interest Log') }}</a>
+     <!--  <li class="{{singleMenu('interest.log')}}">
+        <a href="('interest.log') }}"><i class="far fa-file-alt"></i> {{ __('Interest Log') }}</a>
       </li> -->
-    <!--   <li class="{{singleMenu('user.transaction.log')}}">
+    {{--   <li class="{{singleMenu('transaction.log')}}">
         <a href="{{route('transaction_log')}}"><i class="fas fa-file-invoice-dollar"></i> {{ __('Transaction Log') }}</a>
-      </li> -->
+      </li> --}}
 
-      <li class="{{singleMenu('user.commision')}}">
+      <li class="{{singleMenu('referral_log')}}">
         <a href="{{route('referral_log')}}"><i class="fas fa-file-invoice-dollar"></i> {{ __('Refferal Log') }}</a>
       </li>
 
 
-      <!-- <li class="{{singleMenu('user.2fa')}}">
-        <a href="('user.2fa') }}"><i class="fas fa-user-shield"></i> {{ __('2FA') }}</a>
+      <!-- <li class="{{singleMenu('2fa')}}">
+        <a href="('2fa') }}"><i class="fas fa-user-shield"></i> {{ __('2FA') }}</a>
       </li> -->
-      <li class="{{singleMenu('user.ticket.index')}}">
+      <li class="{{singleMenu('ticket.index')}}">
         <a href="{{route('ticket.index')}}"><i class="fas fa-headset"></i> {{ __('Support') }}</a>
       </li>
       <li>

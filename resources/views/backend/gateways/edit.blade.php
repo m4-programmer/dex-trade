@@ -25,7 +25,7 @@
                                 <label class="col-form-label">{{__('Gateway Image')}}</label>
 
                                 <div id="image-preview" class="image-preview"
-                                    style="background-image:url({{ getFile('gateways' ,$gateway->gateway_image) }});">
+                                    style="background-image:url({{ asset($gateway->image) }});">
                                     <label for="image-upload" id="image-label">{{__('Choose File')}}</label>
                                     <input type="file" name="image" id="image-upload" />
                                 </div>
@@ -40,7 +40,8 @@
                                         <label class="col-form-label">{{__('QR Code')}}</label>
         
                                         <div id="image-preview-1" class="image-preview"
-                                            style="background-image:url({{ getFile('gateways' ,$gateway->gateway_parameters->qr_code) }});">
+                                            style="background-image:url({{ asset($gateway->qr_code) }});">
+
                                             <label for="image-upload-1" id="image-label-1">{{__('Choose File')}}</label>
                                             <input type="file" name="qr_code" id="image-upload-1" />
                                         </div>
@@ -50,7 +51,7 @@
                                     <div class="form-group col-md-6">
 
                                         <label for="">{{__('Name')}}</label>
-                                        <input type="text" name="name"  class="form-control" value="{{str_replace('_btc','',$gateway->gateway_name)}}">
+                                        <input type="text" name="name"  class="form-control" value="{{str_replace('_btc','',$gateway->cryptocurrency)}}">
 
                                     </div>
 
@@ -58,43 +59,40 @@
 
                                     <div class="form-group col-md-6">
 
-                                        <label for="">{{__('Gateway Currency')}}</label>
-                                        <input type="text" name="gateway_currency" class="form-control site-currency"
+                                        <label for="">{{__('Wallet Address')}}</label>
+                                        <input type="text" name="wallet_address" class="form-control site-currency"
                                             
-                                            value="{{ @$gateway->gateway_parameters->gateway_currency ?? '' }}">
+                                            value="{{$gateway->wallet_address}}">
                                     </div>
 
+                                
                                     <div class="form-group col-md-4">
-                                        <label>{{__('Conversion Rate')}}</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                    {{"1 ".@$general->site_currency.' = '}}
-                                                </div>
-                                            </div>
-                                            <input type="text" class="form-control currency" name="rate" value="{{$gateway->rate}}">
-
-                                            <div class="input-group-append">
-                                                <div class="input-group-text append_currency">
-                                                    
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> 
-                                    
-                                    <div class="form-group col-md-4">
-                                        <label>{{__('Charge')}}</label>
+                                        <label>Short Name</label>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">
                                                     {{@$general->site_currency}}
                                                 </div>
                                             </div>
-                                            <input type="text" class="form-control currency" name="charge"  value="{{$gateway->charge}}">
+                                            <input type="text" class="form-control currency" name="short_name" value="{{$gateway->short_name}}" placeholder="E.g Btc">
 
                                             
                                         </div>
                                     </div>
+                                    <div class="form-group col-md-4">
+                                        <label>{{__('Network')}}</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    {{@$general->site_currency}}
+                                                </div>
+                                            </div>
+                                            <input type="text" class="form-control currency" value="{{$gateway->blockchain_network}}" name="network">
+
+                                            
+                                        </div>
+                                    </div>
+
 
                                     <div class="form-group col-md-4">
 
@@ -112,17 +110,17 @@
 
                                     </div>
 
-                                    <div class="form-group col-md-12">
+                                    <!-- <div class="form-group col-md-12">
                                         <label for="">{{__('Payment Instruction')}}</label>
                                         <textarea name="instruction" id="" cols="30" rows="10" class="form-control summernote">
-                                            {{clean($gateway->gateway_parameters->instruction)}}
+                                            {{(@$gateway->instruction)}}
                                         </textarea>
-                                    </div>
+                                    </div> -->
                                 </div>
 
                             </div>
 
-                            <div class="col-md-12">
+                            <!-- <div class="col-md-12">
                                 <div class="card">
 
                                     <div class="card-header bg-primary">
@@ -221,7 +219,7 @@
                                     </div>
 
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="col-md-12">
                                 <button type="submit" class="btn btn-primary w-100">
                                 {{__('Update Gateway')}}</button>

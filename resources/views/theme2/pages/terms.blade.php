@@ -1,6 +1,6 @@
 
 <?php
-function template(){return 'theme2.';}
+
 use App\Models\GeneralSettings as GS;
 $gs = GS::get()->first();
 ?>

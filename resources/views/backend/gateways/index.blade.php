@@ -15,23 +15,31 @@
                             <a href="{{route('admin.gateway.create')}}" class="btn btn-primary"> <i class="fa fa-plus"></i> {{__('Create Gateway')}}</a>
                         </div>
                         <div class="card-body p-0 table-responsive">
-                            <table class="table">
+                            <table class="table table-bordered" >
                                 <thead>
                                     <tr>
-                                        <th>{{__('Name')}}</th>
-                                        <th>{{__('Currency')}}</th>
-                                        <th>{{__('Rate')}}</th>
+                                        <th>{{__('Cryptocurrency')}}</th>
+                                        <th>{{__('Wallet Address')}}</th>
+                                        <th>{{__('Network')}}</th>
+                                        <th>Image</th>
+                                        <th>Short Name</th>
                                         <th>{{__('status')}}</th>
                                     </tr>
                                 </thead>
                                 
-                                <tbody>
+                                <tbody >
 
                                     @forelse ($gateways as $gateway)
-                                        <tr>
-                                            <td>{{$gateway->gateway_name}}</td>
-                                            <td>{{$gateway->gateway_parameters->gateway_currency}}</td>
-                                            <td>{{$gateway->rate}}</td>
+                                        <tr >
+                                            <td style="padding: 10px">{{$gateway->cryptocurrency}}</td>
+                                            <td style="text-align: left;word-wrap: break-word;padding: 5px">{{$gateway->wallet_address}} </td>
+                                            <td>{{$gateway->blockchain_network}}</td>
+                                            <td>
+                                                <img src="{{asset($gateway->image)}}" style="height:50px;border-radius: 50px;" class="img img-responsive">
+                                            </td>
+                                            <td>
+                                                {{{$gateway->short_name}}}
+                                            </td>
                                             <td>
                                                 <a href="{{route('admin.gateway.edit', $gateway)}}" class="btn btn-primary btn-sm">{{__('Edit')}}</a>
                                             </td>

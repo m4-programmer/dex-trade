@@ -83,7 +83,7 @@ $gs = gs::get()->first();
                 </h1>
             </div>
             <div class="header-right d-flex">
-                <select class="changeLang" aria-label="Default select example">
+                <!-- <select class="changeLang" aria-label="Default select example">
                    {{-- @foreach ($language_top as $top)
                         <option value="{{ $top->short_code }}"
                             {{ session('locale') == $top->short_code ? 'selected' : '' }}>
@@ -91,7 +91,7 @@ $gs = gs::get()->first();
                             English
                         </option>
                     @endforeach --}}
-                </select>
+                </select> -->
                 <div class="dropdown ms-3">
                     <button class="dropdown-toggle user-toggle-menu" type="button" id="dropdownMenuButton1"
                         data-bs-toggle="dropdown" aria-expanded="false">

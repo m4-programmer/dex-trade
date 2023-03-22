@@ -14,10 +14,15 @@
                         <div class="card-header">
 
                             <div class="project-status-top">
-                                <h6 class="project-status-heading"> {{ __('Customer') }}: {{ @$ticket->user->fullname }}
+                                <h6 class="project-status-heading"> {{ __('Customer') }}: {{ @$ticket->user->name }}
                                 </h6>
                                 <h6 class="project-status-heading"> {{ __('Ticket') }}{{ @$ticket->support_id }}</h6>
                                 <h6 class="project-status-heading"> {{ __('Subject') }}: {{ @$ticket->subject }}</h6>
+
+
+                                @if(isset($ticket->ticketReplies[0]->file))
+                                    <img src="{{asset($ticket->ticketReplies[0]->file)}}" class="img img-responsive" style="width: 100px;height: 100px;">
+                                @endif
                             </div>
                         </div>
                         <div class="card-body">

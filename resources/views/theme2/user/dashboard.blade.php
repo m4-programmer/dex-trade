@@ -1,5 +1,5 @@
 <?php
-function template(){return 'theme2.';}
+
 use App\Models\GeneralSettings as GS;
 $gs = GS::get()->first();
 
@@ -32,31 +32,47 @@ function curren($value='')
 
             <div class="col-xxl-7">
                 <div class="row gy-4">
-                    <div class="col-sm-6">
+                    <div class="col-sm-6 col-md-4">
                         <div class="d-box-three">
                             <div class="icon">
-                                <i class="fas fa-hand-holding-usd"></i>
+                                <i class="far fa-calendar-check"></i>
                             </div>
                             <div class="content">
-                                <span class="caption-title">{{ __('Total Withdraw') }}</span>
+                                <span class="caption-title">{{ __('Pending Deposit') }}</span>
                                 <h3 class="d-box-three-amount">
-                                    {{ number_format($withdraw, 2) . ' ' . $gs->site_currency }}</h3>
+                                    {{ auth()->user()->deposits()->where('payment_type','deposits')->where('status', 'pending')->sum('amount') }} {{ @$gs->site_currency }}
+                                </h3>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-6 col-md-4">
                         <div class="d-box-three">
                             <div class="icon">
                                 <i class="fas fa-funnel-dollar"></i>
                             </div>
                             <div class="content">
-                                <span class="caption-title">{{ __('Total Deposit') }}</span>
+                                <span class="caption-title">{{ __('Pending Investment') }}</span>
                                 <h3 class="d-box-three-amount">
-                                    {{ number_format($totalDeposit, 2) . ' ' . $gs->site_currency }}</h3>
+                                    {{ auth()->user()->payments()->where('status', 'pending')->sum('amount') }} {{ @$gs->site_currency }}
+                                </h3>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-6 col-md-4">
+                        <div class="d-box-three">
+                            <div class="icon">
+                                <i class="fas fa-hand-holding-usd"></i>
+                            </div>
+                            <div class="content">
+                                <span class="caption-title">{{ __('Pending Withdraw') }}</span>
+                                <h3 class="d-box-three-amount">
+                                    {{ auth()->user()->withdrawal()->where('status', 'pending')->sum('amount') }} {{ @$gs->site_currency }}
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                  
+                    <div class="col-sm-6 col-md-4">
                         <div class="d-box-three">
                             <div class="icon">
                                 <i class="fas fa-bolt"></i>
@@ -69,7 +85,7 @@ function curren($value='')
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-6 col-md-4">
                         <div class="d-box-three">
                             <div class="icon">
                                 <i class="far fa-calendar-check"></i>
@@ -82,6 +98,7 @@ function curren($value='')
                             </div>
                         </div>
                     </div>
+                    
                 </div>
             </div>
         </div>
@@ -89,25 +106,25 @@ function curren($value='')
         <div class="row gy-4 mt-2 d-box-four-wrapper">
             <div class="col-xxl-3 col-sm-6">
                 <div class="d-box-four">
-                    <a href="{{ url('user.invest.all') }}" class="link-btn"><i class="bi bi-arrow-up-right"></i></a>
+                    <a href="{{ route('deposit_log') }}" class="link-btn"><i class="bi bi-arrow-up-right"></i></a>
                     <div class="icon">
                         <i class="fas fa-wallet"></i>
                     </div>
                     <div class="content">
-                        <span class="caption-title">{{ __('Total Invest') }}</span>
+                        <span class="caption-title">{{ __('Total Deposit') }}</span>
                         <h3 class="d-box-four-amount">
-                            {{ number_format($totalInvest, 2) . ' ' . $gs->site_currency }}</h3>
+                            {{ number_format(auth()->user()->deposits()->where('status','success')->sum('amount'), 2) . ' ' . $gs->site_currency }}</h3>
                     </div>
                 </div>
             </div>
             <div class="col-xxl-3 col-sm-6">
                 <div class="d-box-four">
-                    <a href="{{ url('user.invest.pending') }}" class="link-btn"><i class="bi bi-arrow-up-right"></i></a>
+                    <a href="{{ route('myinvestment') }}" class="link-btn"><i class="bi bi-arrow-up-right"></i></a>
                     <div class="icon">
                         <i class="fas fa-hourglass-start"></i>
                     </div>
                     <div class="content">
-                        <span class="caption-title">{{ __('Pending Invest') }}</span>
+                        <span class="caption-title">{{ __('Total Invest') }}</span>
                         <h3 class="d-box-four-amount">
                             {{ number_format($pendingInvest, 2) . ' ' . $gs->site_currency }}</h3>
                     </div>
@@ -115,21 +132,21 @@ function curren($value='')
             </div>
             <div class="col-xxl-3 col-sm-6">
                 <div class="d-box-four">
-                    <a href="{{ url('user.withdraw.pending') }}" class="link-btn"><i
+                    <a href="{{ route('withdraw_log') }}" class="link-btn"><i
                             class="bi bi-arrow-up-right"></i></a>
                     <div class="icon">
                         <i class="fas fa-hourglass-end"></i>
                     </div>
                     <div class="content">
-                        <span class="caption-title">{{ __('Pending Withdraw') }}</span>
+                        <span class="caption-title">{{ __('Total Withdraw') }}</span>
                         <h3 class="d-box-four-amount">
-                            {{ number_format($pendingWithdraw, 2) . ' ' . $gs->site_currency }}</h3>
+                            {{ number_format(auth()->user()->withdrawal->where('status', 'success')->sum('amount'), 2) . ' ' . $gs->site_currency }}</h3>
                     </div>
                 </div>
             </div>
             <div class="col-xxl-3 col-sm-6">
                 <div class="d-box-four">
-                    <a href="{{ url('user.commision') }}" class="link-btn"><i class="bi bi-arrow-up-right"></i></a>
+                    <a href="{{ route('referral_log') }}" class="link-btn"><i class="bi bi-arrow-up-right"></i></a>
                     <div class="icon">
                         <i class="fas fa-network-wired"></i>
                     </div>

@@ -23,4 +23,10 @@ class Deposit extends Model
     {
         return $this->belongsTo(InvestmentPlan::class);
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    
+
 }

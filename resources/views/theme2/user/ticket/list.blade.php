@@ -1,6 +1,4 @@
-<?php 
-function template(){return 'theme2.';}
- ?>
+
 @extends(template().'layout.master2')
 
 @section('content2')
@@ -47,8 +45,12 @@ function template(){return 'theme2.';}
                         <tr>
                             <td data-caption="{{ __('Ticket ID') }}">{{ $ticket->support_id }}</td>
                             <td data-caption="{{ __('Subject') }}">{{ $ticket->subject }}</td>
-
-                            <td data-caption="{{ __('Total Reply') }}">({{ $ticket->ticketReplies->count() }})
+                            <?php $count = $ticket->ticketReplies->count() ?>
+                            <td data-caption="{{ __('Total Reply') }}"> <?php if ($count < 2): ?>
+                                {{$count - 1}}
+                            <?php else: ?>
+                                {{$count - 1}}
+                            <?php endif ?>
                             </td>
                             <td data-caption="{{ __('Action') }}">
                                 <button data-route="{{ route('ticket.update', $ticket->id) }}"

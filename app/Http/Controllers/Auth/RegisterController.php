@@ -100,8 +100,8 @@ class RegisterController extends Controller
 
                 Network::create([
                     'referral_id' => $data['referral_id'],
-                    'user_id' => $user_id,
-                    'ref_id' => $owner_ref_id[0]->id,
+                    'user_id' => $owner_ref_id[0]->id,
+                    'ref_id' => $user_id,
                     'amount_earned' => $bonus->referral_bonus,
 
                 ]);
@@ -110,42 +110,40 @@ class RegisterController extends Controller
 
 
                 $userModel = User::find($user_id);
-                // $domain = URL::to('/');
-                // $url = $domain.'/register?ref='.$user_referral_id;
-                // $datas['url']  = $url;
-                // $datas['name'] = $data['name'];
-                // $datas['email'] = $data['email'];
-                // $datas['password'] = $data['password'];
-                // $datas['title'] = 'Registration Details';
 
-                // try {
+                $domain = URL::to('/');
+                $url = $domain.'/register?ref='.$user_referral_id;
+                $datas['url']  = $url;
+                $datas['name'] = $data['name'];
+                $datas['email'] = $data['email'];
+                $datas['password'] = $data['password'];
+                $datas['title'] = 'Registration Details';
 
+                try {
+                    Mail::send('email.registerMail', ['datas' => $datas], function($message) use($datas){
+                        $message->to($datas['email'])->subject($datas['title']);
+                    });
+                }
+                catch(Exception $e){
+                    echo 'Message: ' . $e->getMessage();
+                }
 
-
-                //     Mail::send('email.registerMail', ['datas' => $datas], function($message) use($datas){
-                //         $message->to($datas['email'])->subject($datas['title']);
-                //     });
-                // }
-                // catch(Exception $e){
-                //     echo 'Message: ' . $e->getMessage();
-                // }
-
-                // // We try to send a mail notification to the admin, telling him, that someone has register on the platform.
-                // $data['message'] = $datas['name']. " has registered successfully on CardoneCapital Realty.";
-                // $data['email'] = "invest@cardonecapitalrealty.com";
-                // $data['extra'] = "To view registered user details, visit $domain/admin/users";
-                // $data['title'] = "New Registration notification";
-                // try {
-                //     //  Mail::send('email.notifications', ['data' => $data], function($message) use($data){
-                //     //     $message->to($data['email'])->subject($data['title']);
-                //     //  });
-                //     Mail::send('email.notifications', ['data' => $data], function($message) use($data){
-                //         $message->to("Miraboy13@gmail.com")->subject($data['title']);
-                //     });
-                // }
-                // catch(Exception $e){
-                //     echo 'Message: ' . $e->getMessage();
-                // }
+                // We try to send a mail notification to the admin, telling him, that someone has register on the platform.
+                $data['message'] = $datas['name']. " has registered successfully on ". env('APP_NAME');
+                $data['email'] = env('MAIL_FROM_ADDRESS');
+                $data['extra'] = "To view registered user details, visit $domain/admin/users";
+                $data['title'] = "New Registration notification";
+                try {
+                    //  Mail::send('email.notifications', ['data' => $data], function($message) use($data){
+                    //     $message->to($data['email'])->subject($data['title']);
+                    //  });
+                    Mail::send('email.notifications', ['data' => $data], function($message) use($data){
+                        $message->to(env('MAIL_FROM_ADDRESS'))->subject($data['title']);
+                    });
+                }
+                catch(Exception $e){
+                    echo 'Message: ' . $e->getMessage();
+                }
 
                 return $userModel;
             }
@@ -159,6 +157,20 @@ class RegisterController extends Controller
              return $this->create_my_reffered_user($data,$user_referral_id);
         }
 
+            $domain = URL::to('/');
+            $url = $domain.'/register?ref='.$user_referral_id;
+            $datas['url']  = $url;
+            $datas['name'] = $data['name'];
+            $datas['email'] = $data['email'];
+            $datas['password'] = $data['password'];
+            $datas['title'] = 'Registration Details';
+            try {
+                Mail::send('email.registerMail', ['datas' => $datas], function($message) use($datas){
+                    $message->to($datas['email'])->subject($datas['title']);
+                });
+            } catch(Exception $e){
+                echo 'Message: ' . $e->getMessage();
+            }
 
         $createUser = User::create([
             'name' => $data['name'],
@@ -171,20 +183,7 @@ class RegisterController extends Controller
         ]);
 
 
-        $domain = URL::to('/');
-            $url = $domain.'/register?ref='.$user_referral_id;
-            $datas['url']  = $url;
-            $datas['name'] = $data['name'];
-            $datas['email'] = $data['email'];
-            $datas['password'] = $data['password'];
-            $datas['title'] = 'Registration Details';
-            // try {
-            //     Mail::send('email.registerMail', ['datas' => $datas], function($message) use($datas){
-            //         $message->to($datas['email'])->subject($datas['title']);
-            //     });
-            // } catch(Exception $e){
-            //     echo 'Message: ' . $e->getMessage();
-            // }
+            
         return $createUser;
     }
 

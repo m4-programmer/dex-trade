@@ -20,7 +20,7 @@ class MyInvestmentController extends Controller
         $gs = GeneralSettings::first();
 
         
-        $transactions = Myinvestment::where('user_id', auth()->user()->id)->get();
+        $transactions = Myinvestment::where('user_id', auth()->user()->id)->latest()->get();
         // dd($transactions);
         return view('theme2.user.invest_log', compact('pageTitle','gs', 'transactions'));
     }

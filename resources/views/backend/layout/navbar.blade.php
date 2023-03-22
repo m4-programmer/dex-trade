@@ -9,7 +9,7 @@
             </li>
         </ul>
         <div class="search-element">
-            <a href="{{ route('home') }}" target="_blank" class="gr-bg-1 text-white text-decoration-none p-2 rounded"><i
+            <a href="{{ url('/') }}" target="_blank" class="gr-bg-1 text-white text-decoration-none p-2 rounded"><i
                     class="fas fa-globe-africa  mr-2"></i><span
                     class="font-weight-bold">{{ __('Visit Site') }}</span></a>
         </div>
@@ -19,8 +19,9 @@
     <ul class="navbar-nav navbar-right">
 
 
-        <li class="dropdown dropdown-list-toggle">
-            <a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg {{$pendingTicket->count() > 0 ? 'beep' : ''}}">
+        <!-- <li class="dropdown dropdown-list-toggle">
+            {{-- <a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg {{$pendingTicket->count() > 0 ? 'beep' : ''}}"> --}}
+             <a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg {{1 > 0 ? 'beep' : ''}}">
                 <i data-feather="inbox"></i>
             </a>
             <div class="dropdown-menu dropdown-list dropdown-menu-right">
@@ -28,8 +29,8 @@
 
                 </div>
                 <div class="dropdown-list-content dropdown-list-icons">
-                    @forelse($pendingTicket as $pendingTicket)
-                        <a href="{{ route('admin.ticket.pendingList') }}" class="dropdown-item dropdown-item-unread">
+                    {{--@forelse($pendingTicket as $pendingTicket)
+                        <a href="{{ url('admin.ticket.pendingList') }}" class="dropdown-item dropdown-item-unread">
                             <div class="dropdown-item-icon bg-primary text-white">
                                 <i class="fas fa-ticket-alt"></i>
                             </div>
@@ -41,16 +42,19 @@
                         </a>
                     @empty
                         <p class="text-center">{{ __('There are no new notifications') }}</p>
-                    @endforelse
+                    @endforelse--}}
                 </div>
             </div>
-        </li>
+        </li> -->
 
 
 
-
+<!-- 
         <li class="dropdown dropdown-list-toggle">
-            <a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg {{$pendingWithdraw->count() > 0 ? 'beep' : ''}}">
+            
+                 {{-- <a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg {{$pendingWithdraw->count() > 0 ? 'beep' : ''}}"> --}}
+             <a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg {{1 > 0 ? 'beep' : ''}}">
+                <i data-feather="inbox"></i>
                 <i data-feather="package"></i>
             </a>
             <div class="dropdown-menu dropdown-list dropdown-menu-right">
@@ -58,8 +62,8 @@
 
                 </div>
                 <div class="dropdown-list-content dropdown-list-icons">
-                    @forelse($pendingWithdraw as $pendingWithdraw)
-                        <a href="{{ route('admin.withdraw.pending') }}" class="dropdown-item dropdown-item-unread">
+                    {{--@forelse($pendingWithdraw as $pendingWithdraw)
+                        <a href="{{ url('admin.withdraw.pending') }}" class="dropdown-item dropdown-item-unread">
                             <div class="dropdown-item-icon bg-primary text-white">
                                 <i class="fas fa-money-bill-alt"></i>
                             </div>
@@ -71,15 +75,18 @@
                         </a>
                     @empty
                         <p class="text-center">{{ __('There are no new notifications') }}</p>
-                    @endforelse
+                    @endforelse--}}
 
                 </div>
 
             </div>
-        </li>
+        </li> -->
 
-        <li class="dropdown dropdown-list-toggle">
-            <a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg {{$pendingpayment->count() > 0 ? 'beep' : ''}}">
+      <!--   <li class="dropdown dropdown-list-toggle">
+            
+            {{--<a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg {{$pendingpayment->count() > 0 ? 'beep' : ''}}"> --}}
+             <a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg {{1 > 0 ? 'beep' : ''}}">
+
                 <i data-feather="file-text"></i>
             </a>
             <div class="dropdown-menu dropdown-list dropdown-menu-right">
@@ -87,8 +94,8 @@
 
                 </div>
                 <div class="dropdown-list-content dropdown-list-icons">
-                    @forelse($pendingpayment as $pendingpayment)
-                        <a href="{{ route('admin.manual.status', 'pending') }}"
+                    {{--@forelse($pendingpayment as $pendingpayment)
+                        <a href="{{ url('admin.manual.status', 'pending') }}"
                             class="dropdown-item dropdown-item-unread">
                             <div class="dropdown-item-icon bg-primary text-white">
                                 <i class="far fa-credit-card"></i>
@@ -101,29 +108,31 @@
                         </a>
                     @empty
                         <p class="text-center">{{ __('There are no new notifications') }}</p>
-                    @endforelse
+                    @endforelse--}}
 
                 </div>
 
             </div>
-        </li>
+        </li> -->
 
-        <li class="dropdown dropdown-list-toggle">
-            <a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg {{$depositNotifications->count() > 0 ? 'beep' : ''}}">
+       <!--  <li class="dropdown dropdown-list-toggle">
+            
+             {{-- <a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg {{$depositNotifications->count() > 0 ? 'beep' : ''}}"> --}}
+             <a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg {{1 > 0 ? 'beep' : ''}}">
                 <i data-feather="table"></i>
             </a>
             <div class="dropdown-menu dropdown-list dropdown-menu-right">
                 <div class="dropdown-header">{{ __('Notifications') }}
 
                     <div class="float-right">
-                        <a href="{{ route('admin.deposit.markNotification') }}">{{ __('Mark All As Read') }}</a>
+                        <a href="{{ url('admin.deposit.markNotification') }}">{{ __('Mark All As Read') }}</a>
                     </div>
                 </div>
                 <div class="dropdown-list-content dropdown-list-icons">
 
 
-                    @forelse($depositNotifications as $notification)
-                        <a href="{{ route('admin.user') }}" class="dropdown-item dropdown-item-unread">
+                    {{--@forelse($depositNotifications as $notification)
+                        <a href="{{ url('admin.user') }}" class="dropdown-item dropdown-item-unread">
                             <div class="dropdown-item-icon bg-primary text-white">
                                 <i class="fas fa-user"></i>
                             </div>
@@ -134,27 +143,29 @@
                         </a>
                     @empty
                         <p class="text-center">{{ __('There are no new notifications') }}</p>
-                    @endforelse
+                    @endforelse--}}
 
                 </div>
 
             </div>
-        </li>
+        </li> -->
 
 
-        <li class="dropdown dropdown-list-toggle">
-            <a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg {{$notifications->count() > 0 ? 'beep' : ''}}">
+     <!--    <li class="dropdown dropdown-list-toggle">
+            
+              {{-- <a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg {{$notifications->count() > 0 ? 'beep' : ''}}"> --}}
+             <a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg {{1 > 0 ? 'beep' : ''}}">
                 <i data-feather="bell"></i>
             </a>
             <div class="dropdown-menu dropdown-list dropdown-menu-right">
                 <div class="dropdown-header">{{ __('Notifications') }}
                     <div class="float-right">
-                        <a href="{{ route('admin.markNotification') }}">{{ __('Mark All As Read') }}</a>
+                        <a href="{{ url('admin.markNotification') }}">{{ __('Mark All As Read') }}</a>
                     </div>
                 </div>
                 <div class="dropdown-list-content dropdown-list-icons">
-                    @forelse($notifications as $notification)
-                        <a href="{{ route('admin.user') }}" class="dropdown-item dropdown-item-unread">
+                    {{--@forelse($notifications as $notification)
+                        <a href="{{ url('admin.user') }}" class="dropdown-item dropdown-item-unread">
                             <div class="dropdown-item-icon bg-primary text-white">
                                 <i class="fas fa-user"></i>
                             </div>
@@ -165,15 +176,15 @@
                         </a>
                     @empty
                         <p class="text-center">{{ __('There are no new notifications') }}</p>
-                    @endforelse
+                    @endforelse--}}
 
                 </div>
 
             </div>
-        </li>
+        </li> -->
 
 
-        <li class="mx-1 my-auto nav-item dropdown no-arrow">
+        {{-- <li class="mx-1 my-auto nav-item dropdown no-arrow">
             <select name="" id="" class="form-control selectric changeLang">
                 @foreach ($language_top as $top)
                     <option value="{{ $top->short_code }}"
@@ -182,7 +193,7 @@
                     </option>
                 @endforeach
             </select>
-        </li>
+        </li> --}}
 
 
 
@@ -190,7 +201,7 @@
                 class="nav-link dropdown-toggle nav-link-lg nav-link-user">
 
                 <div class="d-lg-inline-block text-capitalize">{{ __('Hi') }},
-                    {{ auth()->guard('admin')->user()->username }}</div>
+                    {{ auth()->user()->username }}</div>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
 

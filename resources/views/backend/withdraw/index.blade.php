@@ -1,3 +1,7 @@
+<?php
+use App\Models\GeneralSettings as GS;
+$general = GS::get()->first();
+?>
 @extends('backend.layout.master')
 
 
@@ -8,8 +12,8 @@
                 <div class="card">
                     <div class="card-header">
                         <h4>
-                            <button class="btn btn-primary add"><i class="fa fa-plus"></i>
-                                {{ __('Add Withdraw Method') }}</button>
+                            <a class="btn btn-primary " href="{{route('admin.gateway.create')}}"><i class="fa fa-plus"></i>
+                                {{ __('Add Gateway Method') }}</a>
                         </h4>
                         <div class="card-header-form">
                             <form method="GET" action="{{ route('admin.withdraw.search') }}">
@@ -23,17 +27,19 @@
                         </div>
                     </div>
                     <div class="card-body p-0">
-                        <div class="table-responsive">
-                            <table class="table">
+                        <div class="table-responsive ">
+                            <table class="table table-bordered">
                                 <thead>
                                     <tr>
                                         <th>{{ __('Sl') }}</th>
-                                        <th>{{ __('Name') }}</th>
-                                        <th>{{ __('Charge') }}</th>
-                                        <th>{{ __('Charge Type') }}</th>
-                                        <th>{{ __('Min Withdraw') }}</th>
-                                        <th>{{ __('Max Withdraw') }}</th>
-                                        <th>{{ __('status') }}</th>
+                                        <th style="padding:2px!important;">{{ __('Name') }}</th>
+                                        <th >{{ __('Wallet Address') }}</th>
+                                        <th style="padding:0!important;">Network</th>                                            
+                                        <th>{{ __('Image') }}</th>
+                                        <th style="padding:0!important;">QR COde</th>
+                                        
+                                        <th style="padding:0!important;">{{ __('Short Name') }}</th>
+                                        <th style="padding:0!important;">{{ __('status') }}</th>
                                         <th>{{ __('Action') }}</th>
                                     </tr>
                                 </thead>
@@ -41,14 +47,20 @@
                                     @forelse ($withdraws as $key => $withdraw)
                                         <tr>
                                             <td>{{ $key + $withdraws->firstItem() }}</td>
-                                            <td>{{ $withdraw->name }}</td>
-                                            <td>{{ number_format($withdraw->charge, 2) . ' ' . @$general->site_currency }}</td>
-                                            <td>{{ ucwords($withdraw->charge_type) }}</td>
-                                            <td>{{ number_format($withdraw->min_amount, 2) . ' ' . @$general->site_currency }}
-                                            </td>
-                                            <td>{{ number_format($withdraw->max_amount, 2) . ' ' . @$general->site_currency }}
+                                            <td style="padding:2px!important;">{{ $withdraw->cryptocurrency }}</td>
+                                            <td style="padding: 5px!important; text-align: left;" >{{ ($withdraw->wallet_address)  }}</td>
+                                            
+                                            <td style="padding:0!important;">{{ $withdraw->blockchain_network  }}
                                             </td>
                                             <td>
+                                                <img src="{{asset($withdraw->image)}}" style="height: 50px;">
+                                            </td>
+                                            <td style="padding:0!important;">
+                                                <img src="{{asset($withdraw->qr_code)}}" style="height: 50px;">
+                                            </td>
+                                            <td style="padding:0!important;">{{  $withdraw->short_name }}
+                                            </td>
+                                            <td style="padding:0!important;">
                                                 @if ($withdraw->status)
                                                     <div class="badge badge-success">{{ __('Active') }}</div>
                                                 @else
@@ -56,12 +68,12 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <button data-href="{{ route('admin.withdraw.update', $withdraw) }}"
-                                                    data-withdraw="{{ $withdraw }}"
-                                                    class="btn btn-md btn-primary update"><i class="fa fa-pen"></i></button>
-                                                <button data-url="{{ route('admin.withdraw.delete', $withdraw) }}"
-                                                    class="btn btn-md btn-danger delete"><i
-                                                        class="fa fa-trash"></i></button>
+                                                <a href="{{ route('admin.gateway.edit', $withdraw) }}"
+                                                    withdraw="{{ $withdraw }}"
+                                                    class="btn btn-md btn-primary update"><i class="fa fa-pen"></i></a>
+                                                <a href="{{ route('admin.gateway.deleteGateway', $withdraw) }}"
+                                                    class="btn btn-md btn-danger "><i
+                                                        class="fa fa-trash"></i></a>
                                             </td>
                                         </tr>
                                     @empty

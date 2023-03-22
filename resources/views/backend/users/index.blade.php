@@ -1,3 +1,7 @@
+<?php
+use App\Models\GeneralSettings as GS;
+$general = GS::get()->first();
+?>
 @extends('backend.layout.master')
 
 
@@ -15,28 +19,7 @@
                     <div class="card">
 
                         <div class="card-header">
-                            <div class="d-inline-flex">
-                                <?= filterByVariousType([
-                                        'model' => 'User',
-                                        'text' => [
-                                            'placeholder' => 'Search emails',
-                                            'name' => 'search',
-                                            'id' => 'search_text',
-                                            'filter_colum' => 'email'
-                                        ],
-                                        
-                                        'select' => [
-                                            'options' => [
-                                                '1' => 'Active',
-                                                '0' => 'Inactive',
-                                            ],
-                                            'name' => 'filter',
-                                            'id' => 'optionFilter',
-                                            'filter_colum' => 'status'
-                                        ],
-                                    ]) ?>
 
-                            </div>
                         </div>
 
                         <div class="card-body p-0">
@@ -47,8 +30,10 @@
 
                                             <th>{{ __('Sl') }}</th>
                                             <th>{{ __('Full Name') }}</th>
-                                            <th>{{ __('Phone') }}</th>
                                             <th>{{ __('Email') }}</th>
+                                            <th>Username</th>
+                                            <th>{{ __('Phone') }}</th>
+                                            
                                             <th>{{ __('Country') }}</th>
                                             <th>{{ __('Status') }}</th>
                                             <th>{{ __('Action') }}</th>
@@ -62,18 +47,17 @@
                                         @forelse($users as $key => $user)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $user->fullname }}</td>
-
-                                                <td>{{ $user->phone }}</td>
+                                                <td>{{ $user->name }}</td>
                                                 <td>{{ $user->email }}</td>
-                                                <td>{{ @$user->address->country ?? 'N/A' }}</td>
+                                                <td>{{$user->username}}</td>
+                                                <td>{{ $user->phone }}</td>
+                                                
+                                                <td>{{ @$user->country ?? 'N/A' }}</td>
                                                 <td>
 
-                                                    @if ($user->status)
+                                                   
                                                         <span class='badge badge-success'>{{ __('Active') }}</span>
-                                                    @else
-                                                        <span class='badge badge-danger'>{{ __('Inactive') }}</span>
-                                                    @endif
+                                                   
 
                                                 </td>
 

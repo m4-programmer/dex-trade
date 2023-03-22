@@ -49,7 +49,7 @@
                                                 <th>{{ __('Trx') }}</th>
                                                 <th>{{ __('Amount') }}</th>
                                                 <th>{{ __('Rate') }}</th>
-                                                <th>{{ __('Charge') }}</th>
+                                                
                                                 <th>{{ __('Final Amount') }}</th>
                                                 <th>{{ __('Payment Type') }}</th>
                                             </tr>
@@ -58,18 +58,18 @@
 
                                             @forelse(@$transactions as $transaction)
                                                 <tr>
-                                                    <td>{{ @$transaction->user->fullname }}</td>
-                                                    <td>{{ @$transaction->gateway->gateway_name ?? 'Using Balance' }}</td>
+                                                    <td>{{ @$transaction->user->name }}</td>
+                                                    <td>{{ @$transaction->gateway ?? 'Using Balance' }}</td>
                                                     <td>{{ @$transaction->transaction_id }}</td>
                                                     <td>{{ @number_format($transaction->amount, 2) }}</td>
                                                     <td>{{ @number_format($transaction->rate, 2) }}</td>
-                                                    <td>{{ @number_format($transaction->charge, 2) }}</td>
-                                                    <td>{{ @number_format($transaction->final_amount, 2) }}</td>
+                                                    
+                                                    <td>{{ @number_format($transaction->amount, 2) }}</td>
                                                     <td>
-                                                        @if ($transaction->payment_type == 1)
-                                                            <span class="badge badge-success">{{ __('Autometic') }}</span>
+                                                        @if ($transaction->payment_type == 'deposits')
+                                                            <span class="badge badge-success">{{ __('Deposit') }}</span>
                                                         @else
-                                                            <span class="badge badge-info">{{ __('Manual') }}</span>
+                                                            <span class="badge badge-info">{{ __('Investment') }}</span>
                                                         @endif
                                                     </td>
 

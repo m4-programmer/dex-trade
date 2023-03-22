@@ -16,4 +16,5 @@ class MyDeposit extends Model
         'proof',
         'status',
     ];
+  
 }

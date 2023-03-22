@@ -72,10 +72,10 @@ class TicketController extends Controller
 
         $isTrue = $ticket->save();
 
-        if (!$isTrue) {
-              $reply = new TicketReply();
-            $reply->ticket_id = $ticket->id;
-            $reply->message = $request->message;
+        
+        $reply = new TicketReply();
+        $reply->ticket_id = $ticket->id;
+        $reply->message = $request->message;
 
         if ($request->has('file')) {
             // $image = uploadImage($request->file, filePath('Ticket'));
@@ -87,7 +87,7 @@ class TicketController extends Controller
 
 
             $reply->file = $image;
-        }
+        
 
         $reply->save();
         }

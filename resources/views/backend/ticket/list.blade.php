@@ -40,7 +40,7 @@
                                         @forelse(@$tickets as $ticket)
                                             <tr>
                                                 <td scope="row"><b>{{ $ticket->support_id }}</b></td>
-                                                <td>{{ @$ticket->user->fullname }}</td>
+                                                <td>{{ @$ticket->user->name }}</td>
                                                 <td>{{ $ticket->subject }}</td>
                                                 <td>
                                                     @if ($ticket->status == 1)<span class="badge badge-danger"> {{ __('Closed') }} </span> @endif

@@ -14,9 +14,9 @@
                 <div class="banner-content text-lg-start text-center">
                     <h2 class="banner-title"> Get To The Next Level Investing</h2>
                     <div class="banner-btn-group justify-content-lg-start justify-content-center mt-4">
-                        <a href="{{ __(@$content->data->button_text_link) }}"
+                        <a href="{{route('register') }}"
                             class="cmn-btn">Get Started</a>
-                        <a href="{{ __(@$content->data->button_text_2_link) }}"
+                        <a href="{{route('about') }}"
                             class="border-btn">Know More</a>
                     </div>
                     <h5 class="mt-5">Trusted by more than 30,000+ users</h5>

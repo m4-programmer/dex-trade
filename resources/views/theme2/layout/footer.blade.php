@@ -17,7 +17,10 @@
                         <p>Dextrade  is a real investment platform. Dextrade leading team has over 7 years of experience in trading, cryptocurrencies and software development for Networkers.</p>
                         <div class="footer-payment">
                             <h5>{{ __('Payment Methods') }}</h5>
-                            <img src="{{ asset('asset/theme2/images/footer/payment-method.png')}}" alt="Payment Image">
+                            <img src="{{ asset('asset/theme2/images/gateways/BTC.png')}}" style="height: 50px;border-radius: 50%" alt="Payment Image">
+                            <img src="{{ asset('asset/theme2/images/gateways/ETH.jpg')}}" style="height: 50px;border-radius: 50%" alt="Payment Image">
+                            <img src="{{ asset('asset/theme2/images/gateways/BNB.jpg')}}" style="height: 50px;border-radius: 50%" alt="Payment Image">
+                            <img src="{{ asset('asset/theme2/images/gateways/SOL.jpg')}}" style="height: 50px;border-radius: 50%" alt="Payment Image">
                         </div>
                     </div>
                 </div>
@@ -50,7 +53,7 @@
                     <div class="footer-box">
                         <h4 class="title">{{ __('Location') }}</h4>
                         <p>
-                            {{ @$gs->site_address }}<br>
+                            {!! @$gs->site_address !!}<br>
                             <strong>{{ __('Phone') }}:</strong> {{ $gs->site_phone }}<br>
                             <strong>{{ __('Email') }}:</strong> {{ $gs->site_email }}<br>
                         </p>

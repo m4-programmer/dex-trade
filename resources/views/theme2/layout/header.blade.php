@@ -35,6 +35,30 @@
                           >
                           {{ 'English' }}
                       </option>
+                      <option value="test"
+                          >
+                          {{ 'Spanish' }}
+                      </option>
+                      <option value="test"
+                          >
+                          {{ 'Chinese' }}
+                      </option>
+                      <option value="test"
+                          >
+                          {{ 'Hindi' }}
+                      </option>
+                      <option value="test"
+                          >
+                          {{ 'Croatian' }}
+                      </option>
+                      <option value="test"
+                          >
+                          {{ 'French' }}
+                      </option>
+                      <option value="test"
+                          >
+                          {{ 'Saudi Arabia' }}
+                      </option>
 {{--                  @endforeach--}}
               </select>
           </div>

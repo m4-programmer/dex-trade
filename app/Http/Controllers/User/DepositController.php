@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\File;
 use App\Models\Myinvestment;
 use App\Models\InvestmentPlan;
 
+use Mail;
+use Illuminate\Support\Facades\URL;
 class DepositController extends Controller
 {
 
@@ -95,8 +97,10 @@ class DepositController extends Controller
          ]);
             auth()->user()->current_plan = $plan_id->name;
             auth()->user()->save();
+            $url = route('admin.investment', auth()->user()->id);
 
         }else{
+            $url = route('admin.deposit.log', auth()->user()->id);
             $deposit = Deposit::create([
                     'transaction_id' => $trx,
                     'user_id' => auth()->id(),
@@ -111,9 +115,28 @@ class DepositController extends Controller
 
 
         // To send Mail here
+        /*We send a notification to the admin that a transaction has been made*/
+        
+         
+         $data['url']  = $url;
+         
+         $data['name'] = auth()->user()->name;
+         $data['email'] = env('MAIL_FROM_ADDRESS');
+         // $data['email'] = "excell66@yahoo.com";
+         $data['amount'] = $request->amount;
+         $data['payment_method'] = $request->payment_method;
+         $data['title'] = 'User Deposit Alert';
+         try{
+             Mail::send('email.depositMail', ['data' => $data], function($message) use($data){
+            $message->to($data['email'])->subject($data['title']);
+         });
+         }
+         catch(Exception $e){
+
+         }
 
 
-        $notify[] = ['success', 'Your Payment is Successfully Recieved, Please give us sometime to confirm your payment'];
+        $notify[] = ['success', 'Your Payment is Successfully Recieved, Please give us some time to confirm your payment'];
        if (strtolower($request->type) == 'investment') {
             return redirect()->route('myinvestment')->withNotify($notify);
         }

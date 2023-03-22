@@ -1,3 +1,7 @@
+<?php
+use App\Models\GeneralSettings as GS;
+$general = GS::get()->first();
+?>
 @extends('backend.layout.master')
 
 
@@ -19,7 +23,7 @@
                                 @csrf
                                 <div class="form-row">
 
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-6">
                                         <label class="font-weight-bold">{{ __('Plan Name') }}
                                             <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="name"
@@ -32,17 +36,8 @@
                                     </div>
 
 
-                                    <div class="form-group col-md-3">
-                                        <label class="font-weight-bold">{{ __('Amount Type') }} <span
-                                                class="text-danger">*</span></label></label>
-                                        <select name="amount_type" class="form-control selectric" id="amount_type">
-                                            <option value="0" selected>{{ __('Range') }}</option>
-                                            <option value="1">{{ __('Fixed') }}</option>
-                                        </select>
-
-                                    </div>
-
-                                    <div class="form-group offman col-md-3" id="minimum">
+                                    
+                                    <div class="form-group offman col-md-6" id="minimum">
                                         <label class="font-weight-bold">{{ __('Minimum Amount') }}<span
                                                 class="text-danger">*</span></label></label>
                                         <div class="input-group">
@@ -54,7 +49,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group offman col-md-3" id="maximum">
+                                    <div class="form-group offman col-md-6" id="maximum">
                                         <label class="font-weight-bold">{{ __('Maximum Amount') }}</label>
                                         <div class="input-group">
                                             <input type="number" class="form-control" name="maximum"
@@ -65,83 +60,49 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group onman col-md-3 amount">
-                                        <label class="font-weight-bold"> {{ __('Amount') }}</label>
-                                        <div class="input-group">
-                                            <input type="number" class="form-control" name="amount"
-                                                value="{{ old('amount') }}" placeholder="Amount">
-                                            <div class="input-group-append">
-                                                <div class="input-group-text">{{ @$general->site_currency }}</div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                   
 
 
-                                    <div class="form-group col-md-3">
-                                        <label class="font-weight-bold">{{ __('Return / Interest (Every Time)') }}
+                                    <div class="form-group col-md-6">
+                                        <label class="font-weight-bold">{{ __('ROI') }}
                                             <span class="text-danger">*</span></label>
                                         </label>
                                         <div class="input-group">
-                                            <input type="number" class="form-control" name="interest"
+                                            <input type="number" value="{{old('Interest')}}" class="form-control" name="interest"
                                                 placeholder="Interest rate">
                                             <div class="input-group-append">
-                                                <div class="input-group">
-                                                    <select name="interest_status" class="form-control selectric">
-                                                        <option value="percentage">{{ __('Percentage') }}</option>
-                                                        <option value="fixed">{{ __('Fixed') }}</option>
-                                                    </select>
-                                                </div>
+                                                <div class="input-group-append">
+                                                <div class="input-group-text">%</div>
+                                            </div>
                                             </div>
                                         </div>
                                     </div>
 
 
-                                    <div class="form-group col-md-3">
-                                        <label class="font-weight-bold">{{ __('Every') }}</label>
-                                        <select class="form-control selectric" name="times">
-                                            @forelse ($time as $item)
-                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                            @empty
-                                                <p>{{ __('Time Not Found') }}</p>
-                                            @endforelse
-
-                                        </select>
+                                    <div class="form-group col-md-6">
+                                        <label class="font-weight-bold">{{ __('Duration') }}</label>
+                                        <input type="text" value="{{old('Duration')}}" class="form-control" name="Duration" placeholder="give space b/w the number and time type, e.g 24 hour or 1 Year">
                                     </div>
 
 
 
-                                    <div class="form-group col-md-3">
-                                        <label class="font-weight-bold">{{ __('Return For') }}</label>
-                                        <select name="return_for" class="form-control selectric" id="return_for">
-                                            <option value="0">{{ __('Lifetime') }}</option>
-                                            <option value="1">{{ __('Period') }}</option>
-                                        </select>
-                                    </div>
+                                    <div class="form-group col-md-6">
 
-                                    <div class="form-group return col-md-3 how_many_times">
-                                        <label class="font-weight-bold">{{ __('How Many Times') }}</label>
-                                        <input type="number" class="form-control" name="repeat_time"
-                                            vlaue="{{ old('repeat_time') }}" placeholder="How many times" />
-                                    </div>
-
-                                    <div class="form-group col-md-3 capital_back" id="capitalBack">
                                         <label class="font-weight-bold">{{ __('Capital Back') }}</label>
                                         <select name="capital_back" class="form-control selectric">
-                                            <option value="0">{{ __('No') }}</option>
-                                            <option value="1">{{ __('Yes') }}</option>
+                                            <option value="no">{{ __('No') }}</option>
+                                            <option value="yes">{{ __('Yes') }}</option>
                                         </select>
+                                    
                                     </div>
 
-                                    <div class="form-group col-md-3">
-                                        <label for="">User Subscription Limit</label>
-                                        <input type="text" class="form-control" name="limit">
-                                    </div>
+                                    
 
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-6">
                                         <label class="font-weight-bold">{{ __('Status') }}</label>
                                         <select name="status" class="form-control selectric">
-                                            <option value="0" selected>{{ __('Disable') }}</option>
-                                            <option value="1">{{ __('Active') }}</option>
+                                            <option value="active" selected>{{ __('Active') }}</option>
+                                            <option value="pending">{{ __('Pending') }}</option>
                                         </select>
                                     </div>
 
@@ -157,47 +118,4 @@
 @endsection
 
 
-@push('script')
-    <script>
-        'use strict'
-        $('.amount').hide();
-        $('.how_many_times').hide();
-        $('.capital_back').hide();
 
-        $(function() {
-
-            $('#return_for').on('change', function() {
-
-                var value = $('#return_for').val();
-
-                if (value == 1) {
-                    $('.how_many_times').show();
-                    $('.capital_back').show();
-                } else {
-                    $('.how_many_times').hide();
-                    $('.capital_back').hide();
-
-                }
-
-            })
-
-
-            $('#amount_type').on('change', function() {
-                var value = $('#amount_type').val();
-
-                if (value == 1) {
-                    $('.amount').show();
-                    $('#minimum').hide();
-                    $('#maximum').hide();
-
-                } else {
-                    $('.amount').hide();
-                    $('#minimum').show();
-                    $('#maximum').show();
-                }
-
-            })
-
-        })
-    </script>
-@endpush

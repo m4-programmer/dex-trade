@@ -1,3 +1,7 @@
+<?php
+use App\Models\GeneralSettings as GS;
+$general = GS::get()->first();
+?>
 @extends('backend.layout.master')
 
 @section('content')
@@ -13,7 +17,7 @@
 
                 <div class="col-md-12  col-lg-12 col-12 all-users-table">
                     <div class="card-header">
-                        <h5>{{ __('Investment Commission') }}</h5>
+                        <h5>{{ __('Refferal List') }}</h5>
                     </div>
                     <div class="card">
 
@@ -22,86 +26,30 @@
                                 <table class="table table-striped table-bordered">
                                     <thead>
                                         <tr class="">
-                                            <th scope="col">{{ __('Level') }}</th>
-                                            <th scope="col">{{ __('Commission') }}</th>
-                                            <th scope="col">{{ __('Change Status') }}</th>
-                                            <th scope="col">{{ __('Generate') }}</th>
+                                            <th scope="col">{{ __('S/N') }}</th>
+                                            <th scope="col">{{ __('User') }}</th>
+                                            <th scope="col">{{ __('Referred User') }}</th>
+                                            <th scope="col">{{ __('Amount Earned') }}</th>
 
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @forelse($Network as $data)
                                         <tr>
-                                            @if ($invest_referral)
-                                                <td>
-
-                                                    @forelse ($invest_referral->level as $level)
-                                                        <li class="list-group-item list-group-item-primary">
-                                                            {{ $level }}
-                                                        </li>
-                                                    @empty
-                                                    @endforelse
-
-                                                </td>
-                                                <td>
-
-                                                    @forelse ($invest_referral->commision as $commision)
-                                                        <li class="list-group-item list-group-item-primary">
-                                                            {{ $commision }} %
-                                                        </li>
-                                                    @empty
-                                                    @endforelse
-
-                                                </td>
-
-                                                <td class="text-capitalize">
-
-                                                    <div class="custom-switch custom-switch-label-onoff">
-                                                        <input class="custom-switch-input" id="investstatus"
-                                                            data-status="{{ $invest_referral->status }}"
-                                                            data-url="{{ route('admin.refferalstatus', $invest_referral->id) }}"
-                                                            type="checkbox" name="status"
-                                                            {{ $invest_referral->status ? 'checked' : '' }}>
-                                                        <label class="custom-switch-btn" for="investstatus"></label>
-                                                    </div>
-
-                                                </td>
-                                            @else
+                                            
+                                            <td>{{$loop->index}}</td>
+                                            <td>{{$data->user->name}}</td>
+                                            <td>{{$data->reffered->name}}</td>
+                                            <td>{{$data->amount_earned}} {{$general->site_currency}}</td>
+                                        </tr>
+                                            @empty
                                         <tr>
 
                                             <td class="text-center" colspan="100%">{{ __('No Data Found') }}</td>
 
                                         </tr>
-                                        @endif
-                                        <td>
-                                            <div class="append_table">
-                                                <div class="input-group mb-3 mt-3 ml-auto ">
-                                                    <input type="number" class="form-control invest_commision"
-                                                        placeholder="How Many Field You Want" required>
-
-                                                    <div class="input-group-append">
-                                                        <button class="btn btn-primary" type="button"
-                                                            id="invest">{{ __('Generate') }}</button>
-                                                    </div>
-                                                </div>
-                                                <form method="POST" action="{{ route('admin.invest.store') }}">
-                                                    @csrf
-                                                    <div class="append_invest  ml-auto">
-
-                                                    </div>
-                                                    <input type="text" name="type" value="invest" hidden>
-                                                    <div class="col-md-12">
-                                                        <button class="btn btn-primary btn-block ml-auto create-invest"
-                                                            type="submit">{{ __('Create') }}</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-
-
-
-                                        </td>
-
-                                        </tr>
-
+                                        
+                                        @endforelse
                                     </tbody>
                                 </table>
 
@@ -111,114 +59,7 @@
                         </div>
 
                     </div>
-                    <div class="col-md-12  col-lg-12 col-12 all-users-table">
-                        <div class="card-header">
-                            <h5>{{ __('Interest Commission') }}</h5>
-                        </div>
-                        <div class="card">
-
-                            <div class="card-body p-0">
-                                <div class="table-responsive">
-                                    <table class="table table-striped table-bordered">
-                                        <thead>
-                                            <tr class="">
-                                                <th scope="col">{{ __('Level') }}</th>
-                                                <th scope="col">{{ __('Commission') }}</th>
-                                                <th scope="col">{{ __('Change Status') }}</th>
-                                                <th scope="col">{{ __('Generate') }}</th>
-
-
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                            <tr>
-                                                @if ($interest_referral)
-                                                    <td>
-
-                                                        @forelse ($interest_referral->level as $level)
-                                                            <li class="list-group-item list-group-item-success">
-                                                                {{ $level }}
-                                                            </li>
-                                                        @empty
-                                                        @endforelse
-
-
-
-                                                    </td>
-                                                    <td>
-
-                                                        @forelse ($interest_referral->commision as $commision)
-                                                            <li class="list-group-item list-group-item-success">
-                                                                {{ $commision }} %
-                                                            </li>
-                                                        @empty
-                                                        @endforelse
-
-                                                    </td>
-
-
-
-
-                                                    <td class="text-capitalize">
-                                                        <div class="custom-switch custom-switch-label-onoff">
-                                                            <input class="custom-switch-input" id="intereststatus"
-                                                                data-status="{{ $interest_referral->status }}"
-                                                                data-url="{{ route('admin.refferalstatus', $interest_referral->id) }}"
-                                                                type="checkbox" name="status"
-                                                                {{ $interest_referral->status ? 'checked' : '' }}>
-                                                            <label class="custom-switch-btn" for="intereststatus"></label>
-                                                        </div>
-                                                    </td>
-                                                @else
-                                            <tr>
-
-                                                <td class="text-center" colspan="100%">{{ __('No Data Found') }}</td>
-
-                                            </tr>
-                                            @endif
-
-                                            <td class="">
-                                                <div class="append_table">
-                                                    <div class="input-group mb-3 mt-3  ml-auto ">
-                                                        <input type="number" class="form-control interest_commision"
-                                                            placeholder="How Many Field You Want" required>
-
-                                                        <div class="input-group-append">
-                                                            <button class="btn btn-success" type="button"
-                                                                id="interest">{{ __('Generate') }}</button>
-                                                        </div>
-                                                    </div>
-                                                    <form method="POST" action="{{ route('admin.interest.store') }}">
-                                                        @csrf
-                                                        <div class="append_interest  ml-auto">
-
-                                                        </div>
-
-                                                        <div class="col-md-12">
-                                                            <input type="text" name="type" value="interest" hidden>
-
-                                                            <button
-                                                                class="btn btn-success  btn-block ml-auto create-interest"
-                                                                type="submit">{{ __('Create') }}</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-
-
-
-                                            </td>
-
-                                            </tr>
-
-                                        </tbody>
-                                    </table>
-
-
-                                </div>
-
-                            </div>
-                        </div>
+                    
 
         </section>
     </div>

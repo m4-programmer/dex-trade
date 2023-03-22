@@ -22,7 +22,7 @@ return new class extends Migration
             $table->enum('payment_type',['deposits', 'investment'])->default('deposits');
             $table->string('gateway');
             $table->string('proof')->nullable();
-            $table->enum('status', ['success', 'pending'] );
+            $table->enum('status', ['success', 'pending','rejected'] );
             $table->timestamps();
         });
     }

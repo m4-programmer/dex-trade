@@ -1,4 +1,4 @@
-<?php function template() {return 'theme2.';} ?>
+
 @extends(template() . 'layout.master2')
 
 @section('content2')
@@ -19,9 +19,9 @@
                                 <span class="w-100">
                                     <p><b>{{ ($gateway->wallet_address) }}</b><br></p>
                                     <p><br></p>
-                                    <p>COPY and make PAYMENT to the wallet address above or scan the barcode below ⬆</p>
+                                    <p>COPY and make PAYMENT to the wallet address above ⬆ or scan the barcode below </p>
                                     <p>WARNING: Make the payment before you click on "Deposit Now"<br></p>
-                                    <p>Your deposit will take 30 minutes or more kindly excise some patience<br></p>
+                                    <p>Your deposit will take 3 minutes or more kindly exercise some patience<br></p>
                                 </span>
 
 

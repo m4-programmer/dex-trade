@@ -29,4 +29,5 @@ class Myinvestment extends Model
     {
         return $this->belongsTo(InvestmentPlan::class);
     }
+   
 }

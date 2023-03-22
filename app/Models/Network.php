@@ -18,5 +18,10 @@ class Network extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    } 
+    public function reffered()
+    {
+        return $this->belongsTo(User::class,'ref_id');
     }
+
 }

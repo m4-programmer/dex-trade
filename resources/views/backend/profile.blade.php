@@ -56,7 +56,7 @@
                                         <label class="col-form-label">{{ __('Profile Image') }}</label>
 
                                         <div id="image-preview" class="image-preview"
-                                            style="background-image:url({{ getFile('admin',auth()->guard('admin')->user()->image,
+                                            style="background-image:url({{ asset(auth()->user()->image
                                             ) }});">
                                             <label for="image-upload"
                                                 id="image-label">{{ __('Choose File') }}</label>
@@ -68,13 +68,13 @@
                                     <div class="form-group col-md-12 col-12">
                                         <label>{{ __('Email') }}</label>
                                         <input type="email" class="form-control" name="email"
-                                            value="{{ auth()->guard('admin')->user()->email }}" required>
+                                            value="{{ auth()->user()->email }}" required>
 
                                     </div>
                                     <div class="form-group col-md-12 col-12">
                                         <label>{{ __('Username') }}</label>
                                         <input type="text" class="form-control" name="username"
-                                            value="{{ auth()->guard('admin')->user()->username }}">
+                                            value="{{ auth()->user()->username }}">
                                     </div>
                                 </div>
                             </div>

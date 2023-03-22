@@ -1,6 +1,4 @@
-<?php 
-function template(){return 'theme2.';}
- ?>
+
 @extends(template().'layout.master2')
 
 @section('content2')

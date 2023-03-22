@@ -1,3 +1,7 @@
+<?php
+use App\Models\GeneralSettings as GS;
+$general = GS::get()->first();
+?>
 @extends('backend.layout.master')
 
 
@@ -20,11 +24,11 @@
                                 @method('PUT')
                                 <div class="form-row">
 
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-6">
                                         <label class="font-weight-bold">{{ __('Plan Name') }}
                                             <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="name"
-                                            value="{{ $plan->plan_name }}">
+                                            value="{{ $plan->name }}">
                                         @error('name')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -32,21 +36,7 @@
                                             @enderror
                                     </div>
 
-
-                                    <div class="form-group col-md-3">
-                                        <label class="font-weight-bold">{{ __('Amount Type') }} <span
-                                                class="text-danger">*</span></label></label>
-                                        <select name="amount_type" class="form-control selectric" id="amount_type">
-                                            <option {{ $plan->amount_type == 0 ? 'selected' : '' }} value="0">
-                                                {{ __('Range') }}</option>
-                                            <option {{ $plan->amount_type == 1 ? 'selected' : '' }} value="1">
-                                                {{ __('Fixed') }}</option>
-                                        </select>
-
-                                    </div>
-
-
-                                    <div class="form-group offman col-md-3" id="minimum">
+                                    <div class="form-group offman col-md-6" id="minimum">
                                         <label class="font-weight-bold">{{ __('Minimum Amount') }}<span
                                                 class="text-danger">*</span></label></label>
                                         <div class="input-group">
@@ -58,7 +48,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group offman col-md-3" id="maximum">
+                                    <div class="form-group offman col-md-6" id="maximum">
                                         <label class="font-weight-bold">{{ __('Maximum Amount') }}</label>
                                         <div class="input-group">
                                             <input type="text" class="form-control maximum_a" name="maximum"
@@ -70,100 +60,55 @@
                                         </div>
                                     </div>
 
-
-
-                                    <div class="form-group onman col-md-3 amount">
-                                        <label class="font-weight-bold"> {{ __('Amount') }}</label>
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" name="amount" id="amount"
-                                                value="{{ $plan->amount ? $plan->amount : 0 }}">
-                                            <div class="input-group-append">
-                                                <div class="input-group-text">{{ @$general->site_currency }}</div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="form-group col-md-3">
-                                        <label class="font-weight-bold">{{ __('Return / Interest (Every Time)') }}
+                                    <div class="form-group col-md-6">
+                                        <label class="font-weight-bold">{{ __('ROI') }}
                                             <span class="text-danger">*</span></label>
                                         </label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" name="interest"
-                                                value="{{ $plan->return_interest ? $plan->return_interest : 0 }}">
+                                            <input type="number" class="form-control" name="interest"
+                                                value="{{ $plan->roi ? $plan->roi : 0 }}">
                                             <div class="input-group-append">
                                                 <div class="input-group">
-                                                    <select name="interest_status" class="form-control selectric">
-                                                        <option
-                                                            {{ $plan->interest_status == 'percentage' ? 'selected' : 'Percentage' }}
-                                                            value="percentage">{{ __('Percentage') }}</option>
-                                                        <option
-                                                            {{ $plan->interest_status == 'fixed' ? 'selected' : 'Fixed' }}
-                                                            value="fixed">{{ __('Fixed') }}</option>
-                                                    </select>
+                                                   <div class="input-group-append">
+                                                        <div class="input-group-text">%</div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                                    
+                                   
 
-
-
-                                    <div class="form-group col-md-3">
-                                        <label class="font-weight-bold">{{ __('Every') }}</label>
-                                        <select class="form-control selectric" name="times">
-                                            @forelse ($time as $item)
-                                                <option {{ $plan->every_time == $item->id ? 'selected' : '' }}
-                                                    value="{{ $item->id }}">{{ $item->name }}</option>
-                                            @empty
-                                            @endforelse
-
-
-                                        </select>
+                                    <div class="form-group col-md-6">
+                                        <label class="font-weight-bold">{{ __('Duration') }}</label>
+                                        <input type="text" value="{{$plan->duration}}" class="form-control" name="Duration" placeholder="give space b/w the number and time type, e.g 24 hour or 1 Year">
                                     </div>
 
-                                    <div class="form-group col-md-3">
-                                        <label class="font-weight-bold">{{ __('Return For') }}</label>
-                                        <select name="return_for" class="form-control selectric" id="return_for">
-                                            <option {{ $plan->return_for == '0' ? 'selected' : '' }} value="0">
-                                                {{ __('Lifetime') }}</option>
-
-                                            <option {{ $plan->return_for == '1' ? 'selected' : '' }} value="1">
-                                                {{ __('Period') }}</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group return col-md-3 how_many_times">
-                                        <label class="font-weight-bold">{{ __('How Many Times') }}</label>
-                                        <input type="text" class="form-control" name="repeat_time"
-                                            value="{{ $plan->how_many_time ? $plan->how_many_time : 0 }}">
-                                    </div>
-
-
-                                    <div class="form-group col-md-3" id="capitalBack">
-                                        <label class="font-weight-bold">{{ __('Capital Back') }}</label>
+                                    <div class="form-group col-md-6">
+                                      <label class="font-weight-bold">{{ __('Capital Back') }}</label>
                                         <select name="capital_back" class="form-control selectric">
 
-                                            <option {{ $plan->capital_back == '0' ? 'selected' : '' }} value="0">
+                                            <option {{ $plan->capital_back == 'no' ? 'selected' : '' }} value="no">
                                                 {{ __('No') }}</option>
 
-                                            <option {{ $plan->capital_back == '1' ? 'selected' : '' }} value="1">
+                                            <option {{ $plan->capital_back == 'yes' ? 'selected' : '' }} value="yes">
                                                 {{ __('Yes') }}</option>
                                         </select>
                                     </div>
 
-                                    <div class="form-group col-md-3">
-                                        <label for="">User Subscription Limit</label>
-                                        <input type="text" class="form-control" name="limit" value="{{$plan->invest_limit}}">
-                                    </div>
+                                  
+
+                                    
 
 
-                                    <div class="form-group col-md-3">
+                                    
+                                    <div class="form-group col-md-6">
                                         <label class="font-weight-bold">{{ __('Status') }}</label>
                                         <select name="status" class="form-control selectric">
-                                            <option {{ $plan->status == '0' ? 'selected' : '' }} value="0">
+                                            <option {{ $plan->status == 'pending' ? 'selected' : '' }} value="pending">
                                                 {{ __('Disable') }}</option>
 
-                                            <option {{ $plan->status == '1' ? 'selected' : '' }} value="1">
+                                            <option {{ $plan->status == 'active' ? 'selected' : '' }} value="active">
                                                 {{ __('Active') }}</option>
                                         </select>
                                     </div>

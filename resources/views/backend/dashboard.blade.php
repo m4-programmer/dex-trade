@@ -1,3 +1,4 @@
+
 @extends('backend.layout.master')
 
 
@@ -9,21 +10,21 @@
                 <h1 class="pl-0">{{ __($pageTitle) }}</h1>
             </div>
 
-            <div class="mb-4">
-                <code class="mb-2 d-inline-block text-dark">
-                    {{ __('Please Set Cron Url To Your Server to dispatched Return') }}
-                </code>
-                <div class="input-group">
-                    <input type="text" name="" class="form-control copy-text" value="curl -s {{ route('returninterest') }}">
-                    <div class="input-group-append">
-                        <button class="input-group-text gr-bg-1 text-white copy" type="button"
-                        id="button-addon2">{{ __('Set Cron Url') }}</button>
-                    </div>
-                </div>
-            </div>
+          
 
-            <div class="row"> 
-                <div class="custom-xxxl-3 custom-xxl-4 col-md-6 col-sm-6 col-12 mb-4">
+            <div class="row">
+            <div class="custom-xxxl-3 custom-xxl-4 col-md-4 col-sm-6 col-12 mb-4">
+                    <div class="card-stat gr-bg-5">
+                        <div class="icon">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <div class="content">
+                            <p class="caption">{{ __('Total Deposit') }}</p>
+                            <h4 class="card-stat-amount">{{ $totalDeposit }}</h4>
+                        </div>
+                    </div>
+                </div> 
+                <div class="custom-xxxl-3 custom-xxl-4 col-md-4 col-sm-6 col-12 mb-4">
                     <div class="card-stat gr-bg-1">
                         <div class="icon">
                             <i class="fas fa-money-bill-wave-alt"></i>
@@ -34,7 +35,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="custom-xxxl-3 custom-xxl-4 col-md-6 col-sm-6 col-12 mb-4">
+                <div class="custom-xxxl-3 custom-xxl-4 col-md-4 col-sm-6 col-12 mb-4">
                     <div class="card-stat gr-bg-2">
                         <div class="icon">
                             <i class="fas fa-spinner"></i>
@@ -46,19 +47,9 @@
                     </div>
                 </div>
 
-                <div class="custom-xxxl-3 custom-xxl-4 col-md-6 col-sm-6 col-12 mb-4">
-                    <div class="card-stat gr-bg-3">
-                        <div class="icon">
-                            <i class="fas fa-spinner"></i>
-                        </div>
-                        <div class="content">
-                            <p class="caption">{{ __('Total Interest Amount') }}</p>
-                            <h4 class="card-stat-amount">{{ number_format($totalInterest, 2) . ' ' . @$general->site_currency }}</h4>
-                        </div>
-                    </div>
-                </div>
+                
 
-                <div class="custom-xxxl-3 custom-xxl-4 col-md-6 col-sm-6 col-12 mb-4">
+                <div class="custom-xxxl-3 custom-xxl-4 col-md-4 col-sm-6 col-12 mb-4">
                     <div class="card-stat gr-bg-4">
                         <div class="icon">
                             <i class="far fa-user"></i>
@@ -70,18 +61,8 @@
                     </div>
                 </div>
 
-                <div class="custom-xxxl-3 custom-xxl-4 col-md-6 col-sm-6 col-12 mb-4">
-                    <div class="card-stat gr-bg-5">
-                        <div class="icon">
-                            <i class="fas fa-user-tie"></i>
-                        </div>
-                        <div class="content">
-                            <p class="caption">{{ __('Total Active User') }}</p>
-                            <h4 class="card-stat-amount">{{ $activeUser }}</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="custom-xxxl-3 custom-xxl-4 col-md-6 col-sm-6 col-12 mb-4">
+                
+               <!--  <div class="custom-xxxl-3 custom-xxl-4 col-md-4 col-sm-6 col-12 mb-4">
                     <div class="card-stat gr-bg-6">
                         <div class="icon">
                             <i class="fas fa-user-times"></i>
@@ -91,8 +72,8 @@
                             <h4 class="card-stat-amount">{{ $deActiveUser }}</h4>
                         </div>
                     </div>
-                </div>
-                <div class="custom-xxxl-3 custom-xxl-4 col-md-6 col-sm-6 col-12 mb-4">
+                </div> -->
+                <div class="custom-xxxl-3 custom-xxl-4 col-md-4 col-sm-6 col-12 mb-4">
                     <div class="card-stat gr-bg-7">
                         <div class="icon">
                             <i class="fas fa-hand-holding-usd"></i>
@@ -104,7 +85,7 @@
                     </div>
                 </div>
                 
-                <div class="custom-xxxl-3 custom-xxl-4 col-md-6 col-sm-6 col-12 mb-4">
+                <div class="custom-xxxl-3 custom-xxl-4 col-md-4 col-sm-6 col-12 mb-4">
                     <div class="card-stat gr-bg-8">
                         <div class="icon">
                             <i class="fas fa-hand-holding-usd"></i>
@@ -118,14 +99,14 @@
             </div>
 
             <div class="row">
-                <div class="custom-xxxl-3 custom-xxl-4 col-md-6 col-sm-6 col-12">
+                <div class="custom-xxxl-3 custom-xxl-4 col-md-3 col-sm-6 col-12">
                     <div class="card card-statistic-1">
                         <div class="card-icon gr-bg-1 rounded-circle">
                             <i class="fas fa-dungeon"></i>
                         </div>
                         <div class="card-wrap">
                             <div class="card-header">
-                                <h4>{{ __('Autometic Gateways') }}</h4>
+                                <h4>{{ __('Automatic Gateways') }}</h4>
                             </div>
                             <div class="card-body">
                                 {{ $totalGateways }}
@@ -133,7 +114,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="custom-xxxl-3 custom-xxl-4 col-md-6 col-sm-6 col-12">
+                <div class="custom-xxxl-3 custom-xxl-4 col-md-3 col-sm-6 col-12">
                     <div class="card card-statistic-1">
                         <div class="card-icon gr-bg-1 rounded-circle">
                             <i class="fas fa-dungeon"></i>
@@ -148,7 +129,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="custom-xxxl-3 custom-xxl-4 col-md-6 col-sm-6 col-12">
+                <div class="custom-xxxl-3 custom-xxl-4 col-md-3 col-sm-6 col-12">
                     <div class="card card-statistic-1">
                         <div class="card-icon gr-bg-1 rounded-circle">
                             <i class="fas fa-hand-holding-usd"></i>
@@ -163,7 +144,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="custom-xxxl-3 custom-xxl-4 col-md-6 col-sm-6 col-12">
+                <div class="custom-xxxl-3 custom-xxl-4 col-md-3 col-sm-6 col-12">
                     <div class="card card-statistic-1">
                         <div class="card-icon gr-bg-1 rounded-circle">
                             <i class="fas fa-hand-holding-usd"></i>
@@ -179,6 +160,7 @@
                     </div>
                 </div>
             </div>
+           
 
             <div class="row"> 
                 <div class="col-md-6 col-12 col-lg-6">
@@ -227,17 +209,15 @@
                                         @forelse($users as $key => $user)
                                             <tr>
                                                 <td>{{ $key + $users->firstItem() }}</td>
-                                                <td>{{ $user->fullname }}</td>
+                                                <td>{{ $user->name }}</td>
 
                                                 <td>{{ $user->phone }}</td>
                                                 <td>{{ $user->email }}</td>
-                                                <td>{{ @$user->address->country }}</td>
+                                                <td>{{ @$user->country }}</td>
                                                 <td>
-                                                    @if ($user->status)
+                                                    
                                                         <span class='badge badge-success'>{{ __('Active') }}</span>
-                                                    @else
-                                                        <span class='badge badge-danger'>{{ __('Inactive') }}</span>
-                                                    @endif
+                                                   
                                                 </td>
                                                 <td>
                                                     <a href="{{ route('admin.user.details', $user) }}"
@@ -267,16 +247,16 @@
 
     <script>
         'use strict'
-        // var copyButton = document.querySelector('.copy');
-        // var copyInput = document.querySelector('.copy-text');
-        // copyButton.addEventListener('click', function(e) {
-        //     e.preventDefault();
-        //     var text = copyInput.select();
-        //     document.execCommand('copy');
-        // });
-        // copyInput.addEventListener('click', function() {
-        //     this.select();
-        // });
+        var copyButton = document.querySelector('.copy');
+        var copyInput = document.querySelector('.copy-text');
+        copyButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            var text = copyInput.select();
+            document.execCommand('copy');
+        });
+        copyInput.addEventListener('click', function() {
+            this.select();
+        });
 
         var ctx2 = document.getElementById('myChart2').getContext('2d');
         var myChart2 = new Chart(ctx2, {

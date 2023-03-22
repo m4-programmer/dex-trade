@@ -1,8 +1,5 @@
 <!-- Dextrade Db pword: AdLVSXJKzRn5xZy! -->
-<?php
-function template(){return 'theme2.';}
 
-?>
 <?php
 //function template(){return 'theme2.';}
 use App\Models\GeneralSettings as GS;
@@ -55,72 +52,74 @@ $gs = GS::get()->first();
 
     @endsection
 
+<!-- To work on this and update changes to the server -->
+    @push('script')
+        <script>
+            'use strict';
+            $(document).ready(function() {
+                $(document).on('click', '#calculate-btn', function() {
 
-{{--    @push('script')--}}
-{{--        <script>--}}
-{{--            'use strict';--}}
-{{--            $(document).ready(function() {--}}
-{{--                $(document).on('click', '#calculate-btn', function() {--}}
+                    let modal = $('#calculationModal');
 
-{{--                    let modal = $('#calculationModal');--}}
+                    $('.selectplan').text('');
+                    $('.amount').text('');
+                    let id = $('#plan').val();
+                    let amount = $('#amount').val();
+                    var url = "{{ route('investmentcalculate', ':id') }}";
+                    url = url.replace(':id', id);
+                    $.ajax({
+                        type: 'GET',
+                        url: url,
+                        data: {
+                            amount: amount,
+                            selectplan: id
+                        },
+                        success: (data) => {
 
-{{--                    $('.selectplan').text('');--}}
-{{--                    $('.amount').text('');--}}
-{{--                    let id = $('#plan').val();--}}
-{{--                    let amount = $('#amount').val();--}}
-{{--                    --}}{{--var url = "{{ route('user.investmentcalculate', ':id') }}";--}}
-{{--                    url = url.replace(':id', id);--}}
-{{--                    $.ajax({--}}
-{{--                        type: 'GET',--}}
-{{--                        url: url,--}}
-{{--                        data: {--}}
-{{--                            amount: amount,--}}
-{{--                            selectplan: id--}}
-{{--                        },--}}
-{{--                        success: (data) => {--}}
-{{--                            if (data.message) {--}}
-{{--                                iziToast.error({--}}
-{{--                                    message: data.message + ' ' + Number(data.amount).toFixed(2),--}}
-{{--                                    position: 'topRight',--}}
-{{--                                });--}}
+                            if (data.message) {
+                                iziToast.error({
+                                    message: data.message + ' ' + Number(data.amount).toFixed(2),
+                                    position: 'topRight',
+                                });
 
-{{--                            } else {--}}
-{{--                                $('#profit').html(data);--}}
-{{--                                modal.modal('show');--}}
-{{--                            }--}}
-
-
-{{--                        },--}}
-{{--                        error: (error) => {--}}
-{{--                            if (typeof(error.responseJSON.errors.amount) !== "undefined") {--}}
-{{--                                iziToast.error({--}}
-{{--                                    message: error.responseJSON.errors.amount,--}}
-{{--                                    position: 'topRight',--}}
-{{--                                });--}}
-{{--                            }--}}
-{{--                            if (typeof(error.responseJSON.errors.selectplan) !== "undefined") {--}}
-{{--                                iziToast.error({--}}
-{{--                                    message: error.responseJSON.errors.selectplan,--}}
-{{--                                    position: 'topRight',--}}
-{{--                                });--}}
-{{--                            }--}}
-{{--                        }--}}
-{{--                    })--}}
-{{--                });--}}
+                            } else {
+                                $('#profit').html(data);
+                                modal.modal('show');
+                            }
 
 
 
-{{--            });--}}
-{{--        </script>--}}
-{{--    @endpush--}}
+                        },
+                        error: (error) => {
+                            if (typeof(error.responseJSON.errors.amount) !== "undefined") {
+                                iziToast.error({
+                                    message: error.responseJSON.errors.amount,
+                                    position: 'topRight',
+                                });
+                            }
+                            if (typeof(error.responseJSON.errors.selectplan) !== "undefined") {
+                                iziToast.error({
+                                    message: error.responseJSON.errors.selectplan,
+                                    position: 'topRight',
+                                });
+                            }
+                        }
+                    })
+                });
 
 
-{{--    @push('style')--}}
 
-{{--    <style>--}}
-{{--        #profit-table tr td{--}}
-{{--            color: #fff;--}}
-{{--        }--}}
-{{--    </style>--}}
+            });
+        </script>
+    @endpush
 
-{{--    @endpush--}}
+
+  @push('style')
+
+  <style>
+      #profit-table tr td{
+          color: #fff;
+      }
+  </style>
+
+  @endpush

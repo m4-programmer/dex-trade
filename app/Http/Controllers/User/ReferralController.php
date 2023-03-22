@@ -9,7 +9,7 @@ class ReferralController extends Controller
 {
      public function index()
     {
-        $transactions = Network::where('ref_id', auth()->user()->id)->get();
+        $transactions = Network::where('user_id', auth()->user()->id)->get();
 
         $pageTitle = "Referral Log";
 

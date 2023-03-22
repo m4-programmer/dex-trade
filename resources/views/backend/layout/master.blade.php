@@ -1,3 +1,7 @@
+<?php
+use App\Models\GeneralSettings as GS;
+$general = GS::get()->first();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,7 +54,9 @@
             </div>
             @include('backend.layout.navbar')
             @include('backend.layout.sidebar')
+            <div class="pt-2">
             @yield('content')
+            </div>
             @include('backend.layout.footer')
         </div>
     </div>
@@ -91,7 +97,7 @@
                 let val = $(this).val();
                 let model = $('#model').val();
 
-                let url = "{{ route('admin.table.filter')}}";
+                let url = "{{ url('admin.table.filter')}}";
 
                 $.ajax({
                     method:"GET",
@@ -113,7 +119,7 @@
                 let val = $(this).val();
                 let model = $('#model').val();
 
-                let url = "{{ route('admin.table.filter')}}";
+                let url = "{{ url('admin.table.filter')}}";
 
                 $.ajax({
                     method:"GET",
@@ -135,7 +141,7 @@
                 let val = $(this).val();
                 let model = $('#model').val();
 
-                let url = "{{ route('admin.table.filter')}}";
+                let url = "{{ url('admin.table.filter')}}";
 
                 $.ajax({
                     method:"GET",
@@ -199,7 +205,7 @@
 
     <script>
         'use strict'
-        var url = "{{ route('admin.changeLang') }}";
+        var url = "{{ url('admin.changeLang') }}";
 
         $(".changeLang").change(function() {
             if ($(this).val() == '') {

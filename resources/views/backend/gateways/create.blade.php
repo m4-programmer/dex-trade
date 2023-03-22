@@ -47,8 +47,8 @@
 
                                     <div class="form-group col-md-6">
 
-                                        <label for="">{{__('Name')}}</label>
-                                        <input type="text" name="name"  class="form-control">
+                                        <label for="">{{__('Crypto Currency Name')}}</label> 
+                                        <input type="text" name="name"  class="form-control" value="{{old('name')}}">
 
                                     </div>
 
@@ -56,39 +56,35 @@
 
                                     <div class="form-group col-md-6">
 
-                                        <label for="">{{__('Gateway Currency')}}</label>
-                                        <input type="text" name="gateway_currency" class="form-control site-currency"
+                                        <label for="">{{__('Wallet Address')}}</label>
+                                        <input type="text" name="wallet_address" class="form-control site-currency"
                                             
-                                            value="{{ @$gateway->gateway_parameters->gateway_currency ?? '' }}">
+                                            value="{{old('wallet_address')}}">
                                     </div>
 
+                                
                                     <div class="form-group col-md-4">
-                                        <label>{{__('Conversion Rate')}}</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                    {{"1 ".@$general->site_currency.' = '}}
-                                                </div>
-                                            </div>
-                                            <input type="text" class="form-control currency" name="rate" >
-
-                                            <div class="input-group-append">
-                                                <div class="input-group-text append_currency">
-                                                    
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> 
-                                    
-                                    <div class="form-group col-md-4">
-                                        <label>{{__('Charge')}}</label>
+                                        <label>{{__('Short Name')}}</label>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">
                                                     {{@$general->site_currency}}
                                                 </div>
                                             </div>
-                                            <input type="text" class="form-control currency" name="charge">
+                                            <input type="text" class="form-control currency" name="short_name" value="{{old('short_name')}}" placeholder="E.g Btc">
+
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>{{__('Network')}}</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    {{@$general->site_currency}}
+                                                </div>
+                                            </div>
+                                            <input type="text" class="form-control currency" value="{{old('network')}}" name="network">
 
                                             
                                         </div>
@@ -100,9 +96,9 @@
 
                                         <select name="status" id="" class="form-control selectric">
 
-                                            <option value="1" {{ @$gateway->status ? 'selected' : '' }}>{{__('Yes')}}
+                                            <option value="active" >{{__('Yes')}}
                                             </option>
-                                            <option value="0" {{ @$gateway->status ? '' : 'selected' }}>{{__('No')}}
+                                            <option value="pending" >{{__('No')}}
                                             </option>
 
 
@@ -110,15 +106,15 @@
 
                                     </div>
 
-                                    <div class="form-group col-md-12">
+                                   <!--  <div class="form-group col-md-12">
                                         <label for="">{{__('Payment Instruction')}}</label>
                                         <textarea name="instruction" id="" cols="30" rows="10" class="form-control summernote"></textarea>
-                                    </div>
+                                    </div> -->
                                 </div>
 
                             </div>
 
-                            <div class="col-md-12">
+                           <!--  <div class="col-md-12">
                                 <div class="card">
 
                                     <div class="card-header bg-primary">
@@ -217,7 +213,7 @@
                                     </div>
 
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="col-md-12">
                                 <button type="submit" class="btn btn-primary w-100">
                                 {{__('Create Gateway')}}</button>

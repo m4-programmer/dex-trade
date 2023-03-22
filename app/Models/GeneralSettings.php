@@ -11,14 +11,19 @@ class GeneralSettings extends Model
     protected $fillable = [
     'sitename',
     'site_currency',
+    'minimum_withdrawable',
+    'maximum_withdrawable',
+    'copyright',
+
+
     'site_email',
     'site_phone',
     'site_address',
-    'copyright',
-    'minimum_withdrawable',
-    'maximum_withdrawable',
+    
+    
     'logo',
     'favicon',
+    /*Not important*/
     'login_image',
     'preloader_status',
     'is_email_verification_on',

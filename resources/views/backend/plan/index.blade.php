@@ -1,3 +1,7 @@
+<?php
+use App\Models\GeneralSettings as GS;
+$general = GS::get()->first();
+?>
 @extends('backend.layout.master')
 
 
@@ -24,6 +28,8 @@
                                             <th>{{ __('SL') }}.</th>
                                             <th>{{ __('Plan Name') }}</th>
                                             <th>{{ __('Invest Limit') }}</th>
+                                            <th>ROI</th>
+                                            <th>Duration</th>
                                             <th>{{ __('Status') }}</th>
                                             <th>{{ __('Action') }}</th>
                                         </tr>
@@ -32,18 +38,21 @@
                                         @forelse ($plans as $plan)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $plan->plan_name }}</td>
+                                                <td>{{ $plan->name }}</td>
                                                 <td>
-                                                    @if ($plan->amount_type == 0)
-                                                        {{ number_format($plan->minimum_amount, 0) . ' ' . @$general->site_currency }}
+                                                    
+                                                        {{ $plan->minimum_amount . ' ' . @$general->site_currency }}
                                                         -
-                                                        {{ number_format($plan->maximum_amount, 0) . ' ' . @$general->site_currency }}
-                                                    @else
-                                                        {{ number_format($plan->amount, 0) . ' ' . @$general->site_currency }}
-                                                    @endif
+                                                        {{ $plan->maximum_amount . ' ' . @$general->site_currency }}
+                                                    
 
                                                 </td>
-
+                                                <td>
+                                                    {{$plan->roi}} % 
+                                                </td>
+                                                <td>
+                                                    {{$plan->duration}}
+                                                </td>
                                                 <td>
                                                     <div class="custom-switch custom-switch-label-onoff">
                                                         <input class="custom-switch-input status"
@@ -51,7 +60,7 @@
                                                             data-status="{{ $plan->status }}"
                                                             data-url="{{ route('admin.plan.changestatus', $plan->id) }}"
                                                             type="checkbox" name="status"
-                                                            {{ $plan->status ? 'checked' : '' }}>
+                                                            {{ $plan->status == 'active' ? 'checked' : '' }}>
                                                         <label class="custom-switch-btn"
                                                             for="test-{{ $plan->id }}"></label>
                                                     </div>
@@ -61,6 +70,7 @@
                                                     <a href="{{ route('admin.plan.edit', $plan->id) }}"
                                                         class="btn btn-md btn-primary"><i class="fa fa-pen mr-2"></i
                                                             class="fa fa-pen mr-2"></i>{{ __('Edit') }}</a>
+                                                    <a href="{{route('admin.plan.delete',$plan->id)}}" class="btn btn-md btn-danger">Delete</a>
                                                 </td>
                                             </tr>
                                         @empty

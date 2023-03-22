@@ -5,23 +5,34 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>{{ __($pageTitle) }}</h1>
+                <h1>{{ __($pageTitle)  }}</h1>
             </div>
 
             <div class="row">
 
                 <div class="col-12 col-md-12 col-lg-12">
-                    <div class="card">
+                    <div class="card" >
 
-                        <div class="card-body p-2">
+                        <div class="card-body p-2" >
 
-                            <table class="table table-striped" id="myTable">
+                            <table class="table table-striped table-responsive" style="width:100%"  id="myTable">
                                 <thead>
                                     <tr>
                                         <th>{{ __('Sl') }}</th>
                                         <th>{{ __('User') }}</th>
-                                        <th>{{ __('Amount') }}</th>
-                                        <th>{{ __('Charge') }}</th>
+                                        <?php if (isset($payment_type)): ?>
+                                        <th>Plan</th>
+                                        <th>Payment Method</th>
+                                        
+                                        <th>Date Paid</th>
+                                        <?php endif ?>
+                                        <th>{{ __('Amount') }} <?php if (isset($payment_type)): ?>
+                                            Paid
+                                        <?php endif ?></th>
+                                        <?php if (!isset($payment_type)): ?>
+                                            
+                                        <th>{{ __('Type') }}</th>
+                                        <?php endif ?>
                                         <th>{{ __('status') }}</th>
                                         <th>{{ __('Action') }}</th>
                                     </tr>
@@ -29,33 +40,74 @@
                                 <tbody>
                                     @forelse ($manuals as $key => $manual)
                                         <tr>
+                                            
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $manual->user->fullname }}</td>
+                                            <td>{{ $manual->user->name }}</td>
+                                            
+                                             <?php if (isset($payment_type)): ?>
+                                               <td>{{$manual->plan_name}}</td>
+                                               <td>{{$manual->gateway}}</td>
+                                               
+                                               <td>{{$manual->created_at}}</td>
+                                            <?php endif ?>
                                             <td>{{ number_format($manual->amount, 2) . ' ' . @$general->site_currency }}
                                             </td>
+
+                                            <?php if (!isset($payment_type)): ?>
+                                            
                                             <td>
-                                                {{ number_format($manual->charge, 2) . ' ' . @$general->site_currency }}
+                                                {{ ucwords($manual->payment_type ?? $payment_type)}}
+
                                             </td>
+                                            <?php endif ?>
+                                            <?php if (!isset($payment_type)): ?>
                                             <td>
-                                                @if ($manual->payment_status == 2)
+                                                @if ($manual->status == 'pending')
                                                     <span class="badge badge-warning">{{ __('Pending') }}</span>
-                                                @elseif($manual->payment_status == 1)
-                                                    <span class="badge badge-success">{{ __('Approved') }}</span>
-                                                @elseif($manual->payment_status == 3)
+                                                @elseif($manual->status == "success")
+                                                    <span class="badge badge-success">{{ __('Success') }}</span>
+                                                @elseif($manual->status == "rejected")
                                                     <span class="badge badge-danger">{{ __('Rejected') }}</span>
                                                 @endif
                                             </td>
+                                            <?php else: ?>
+                                             <td>
+                                                @if ($manual->status == 'pending')
+                                                    <span class="badge badge-warning">{{ __('Pending') }}</span>
+                                                @elseif($manual->status == "active")
+                                                    <span class="badge badge-success">{{ __('Active') }}</span>
+                                                @elseif($manual->status == "ended")
+                                                    <span class="badge badge-danger">{{ __('Ended') }}</span>
+                                                @endif
+                                            </td>
+                                            <?php endif ?>
+                                            <?php if (!isset($payment_type)): ?>
+                                                <!-- This action data belongs to deposit -->
                                             <td>
                                                 <a class="btn btn-md btn-info details"
                                                     href="{{ route('admin.deposit.trx', $manual->transaction_id) }}">{{ __('Details') }}</a>
 
-                                                @if ($manual->payment_status == 2)
+                                                @if ($manual->status == "pending")
                                                     <a class="btn text-white btn-md btn-primary accept"
-                                                        data-url="{{ route('admin.deposit.accept', $manual->transaction_id) }}">{{ __('Accept') }}</a>
+                                                        data-url="{{ route('admin.deposit.accept', $manual->transaction_id) }}" title="Accept">{{ __('Accept') }}</a>
                                                     <a class="btn text-white btn-md btn-danger reject"
-                                                        data-url="{{ route('admin.deposit.reject', $manual->transaction_id) }}">{{ __('Reject') }}</a>
+                                                        data-url="{{ route('admin.deposit.reject', $manual->transaction_id) }}" title="Reject">{{ __('Reject') }}</a>
                                                 @endif
                                             </td>
+
+                                            <?php else: ?>
+                                            <td>
+                                                <a class="btn btn-md btn-info details"
+                                                    href="{{ route('admin.investment.details', $manual->transaction_id) }}">{{ __('Details') }}</a>
+                                                
+                                                @if ( !isset($payment_type) and $manual->status == "pending")
+                                                    <a class="btn text-white btn-md btn-primary accept"
+                                                        data-url="{{ route('admin.deposit.accept', $manual->transaction_id) }}" title="Accept">{{ __('Accept') }}</a>
+                                                    <a class="btn text-white btn-md btn-danger reject"
+                                                        data-url="{{ route('admin.deposit.reject', $manual->transaction_id) }}" title="Reject">{{ __('Reject') }}</a>
+                                                @endif
+                                            </td>
+                                             <?php endif ?>
                                         </tr>
                                     @empty
                                         <tr>

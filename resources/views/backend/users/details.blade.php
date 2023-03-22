@@ -1,3 +1,7 @@
+<?php
+use App\Models\GeneralSettings as GS;
+$general = GS::get()->first();
+?>
 @extends('backend.layout.master')
 
 
@@ -9,7 +13,7 @@
             </div>
 
             <div class="row">
-                <div class="custom-xxxl-3 custom-xxl-4 col-md-6 col-sm-6 col-12 mb-4">
+                <div class="custom-xxxl-3 custom-xxl-4 col-md-4 col-sm-6 col-12 mb-4">
                     <div class="card card-statistic-1 style-two mb-0">
                         <div class="card-icon bg-1">
                             <i class="fas fa-wallet"></i>
@@ -25,7 +29,7 @@
                     </div>
                 </div>
 
-                <div class="custom-xxxl-3 custom-xxl-4 col-md-6 col-sm-6 col-12 mb-4">
+                <div class="custom-xxxl-3 custom-xxl-4 col-md-4 col-sm-6 col-12 mb-4">
                     <div class="card card-statistic-1 style-two mb-0">
                         <div class="card-icon bg-2">
                             <i class="fas fa-link"></i>
@@ -41,7 +45,7 @@
                     </div>
                 </div>
 
-                <div class="custom-xxxl-3 custom-xxl-4 col-md-6 col-sm-6 col-12 mb-4">
+               <!--  <div class="custom-xxxl-3 custom-xxl-4 col-md-4 col-sm-6 col-12 mb-4">
                     <div class="card card-statistic-1 style-two mb-0">
                         <div class="card-icon bg-3">
                             <i class="fas fa-undo-alt"></i>
@@ -55,9 +59,9 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
-                <div class="custom-xxxl-3 custom-xxl-4 col-md-6 col-sm-6 col-12 mb-4">
+                <div class="custom-xxxl-3 custom-xxl-4 col-md-4 col-sm-6 col-12 mb-4">
                     <div class="card card-statistic-1 style-two mb-0">
                         <div class="card-icon bg-4">
                             <i class="fas fa-funnel-dollar"></i>
@@ -73,7 +77,7 @@
                     </div>
                 </div>
 
-                <div class="custom-xxxl-3 custom-xxl-4 col-md-6 col-sm-6 col-12 mb-4">
+                <div class="custom-xxxl-3 custom-xxl-4 col-md-4 col-sm-6 col-12 mb-4">
                     <div class="card card-statistic-1 style-two mb-0">
                         <div class="card-icon bg-5">
                             <i class="fas fa-hand-holding-usd"></i>
@@ -89,7 +93,7 @@
                     </div>
                 </div>
 
-                <div class="custom-xxxl-3 custom-xxl-4 col-md-6 col-sm-6 col-12 mb-4">
+                <div class="custom-xxxl-3 custom-xxl-4 col-md-4 col-sm-6 col-12 mb-4">
                     <div class="card card-statistic-1 style-two mb-0">
                         <div class="card-icon bg-6">
                             <i class="far fa-credit-card"></i>
@@ -105,7 +109,7 @@
                     </div>
                 </div>
 
-                <div class="custom-xxxl-3 custom-xxl-4 col-md-6 col-sm-6 col-12 mb-4">
+                <div class="custom-xxxl-3 custom-xxl-4 col-md-4 col-sm-6 col-12 mb-4">
                     <div class="card card-statistic-1 style-two mb-0">
                         <div class="card-icon bg-7">
                             <i class="fas fa-coins"></i>
@@ -121,7 +125,7 @@
                     </div>
                 </div>
 
-                <div class="custom-xxxl-3 custom-xxl-4 col-md-6 col-sm-6 col-12 mb-4">
+                <div class="custom-xxxl-3 custom-xxl-4 col-md-4 col-sm-6 col-12 mb-4">
                     <div class="card card-statistic-1 style-two mb-0">
                         <div class="card-icon bg-8">
                             <i class="fas fa-ticket-alt"></i>
@@ -142,9 +146,9 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="custom-xxl-3 col-xl-4 col-lg-5">
-                            <img src="{{ getFile('user', $user->image) }}" class="w-100">
+                            <img src="{{ asset($user->image) }}" class="w-100">
                             <div class="d-flex flex-wrap justify-content-between mt-3 p-1">
-                                <h5>{{ $user->full_name }}</h5>
+                                <h5>{{ $user->name }}</h5>
                                 <p>{{ $user->email }}</p>
                             </div>
                             <form action="{{ route('admin.user.balance.update', $user->id) }}" method="post">
@@ -170,40 +174,36 @@
                         </div>
                         <div class="custom-xxl-9 col-xl-8 col-lg-7">
                             <ul class="user-action-list">
-                                <li>
+                                <!-- <li>
                                     <a href="#" class="btn btn-sm btn-outline-primary sendMail"><i class="fas fa-link mr-1"></i> {{ 'Send Email' }} </a>
-                                </li>
+                                </li> -->
                                 <li>
                                     <a href="{{ route('admin.login.user', $user->id) }}" target="_blank" class="btn btn-sm btn-outline-primary"><i class="fas fa-link mr-1"></i> {{ 'Login As User' }}</a>
                                 </li>
 
                                 <li>
-                                    <a href="{{ route('admin.commision', $user) }}" class="btn btn-sm btn-outline-primary"><i class="fas fa-link mr-1"></i> {{ 'Commission Log' }}</a>
+                                    <a href="{{ route('admin.referral.index') }}" class="btn btn-sm btn-outline-primary"><i class="fas fa-link mr-1"></i> {{ 'Commission Log' }}</a>
+                                </li>
+
+                               
+
+                                <li>
+                                    <a href="{{ route('admin.deposit.log', $user) }}" target="_blank" class="btn btn-sm btn-outline-primary"><i class="fas fa-link mr-1"></i> {{ 'Deposit Log' }}</a>
                                 </li>
 
                                 <li>
-                                    <a href="{{ route('admin.user.interestlog', $user) }}" class="btn btn-sm btn-outline-primary"><i class="fas fa-link mr-1"></i> {{ 'Interest Log' }}</a>
+                                    <a href="{{ route('admin.payment.report', $user) }}" target="_blank" class="btn btn-sm btn-outline-primary"><i class="fas fa-link mr-1"></i> {{ 'Investment Log' }}</a>
                                 </li>
 
                                 <li>
-                                    <a href="{{ route('admin.deposit.log', $user) }}" class="btn btn-sm btn-outline-primary"><i class="fas fa-link mr-1"></i> {{ 'Deposit Log' }}</a>
+                                    <a href="{{ route('admin.withdraw.report', $user) }}" target="_blank" class="btn btn-sm btn-outline-primary"><i class="fas fa-link mr-1"></i> {{ 'Withdraw Log' }}</a>
                                 </li>
 
-                                <li>
-                                    <a href="{{ route('admin.payment.report', $user) }}" class="btn btn-sm btn-outline-primary"><i class="fas fa-link mr-1"></i> {{ 'Investment Log' }}</a>
-                                </li>
+                              
 
-                                <li>
-                                    <a href="{{ route('admin.withdraw.report', $user) }}" class="btn btn-sm btn-outline-primary"><i class="fas fa-link mr-1"></i> {{ 'Withdraw Log' }}</a>
-                                </li>
-
-                                <li>
-                                    <a href="{{ route('admin.ticket.index', ['user' => $user->id]) }}" class="btn btn-sm btn-outline-primary"><i class="fas fa-link mr-1"></i> {{ 'User Ticket' }}</a>
-                                </li>
-
-                                <li>
-                                    <a href="{{ route('admin.transaction', $user) }}" class="btn btn-sm btn-outline-primary"><i class="fas fa-link mr-1"></i> {{ 'User Transactions' }}</a>
-                                </li>
+                               {{--  <li>
+                                    <a href="{{ route('admin.transaction', $user) }}" target="_blank" class="btn btn-sm btn-outline-primary"><i class="fas fa-link mr-1"></i> {{ 'User Transactions' }}</a>
+                                </li> --}}
                             </ul>
 
                             <hr>
@@ -211,18 +211,12 @@
                             <form action="{{ route('admin.user.update', $user->id) }}" method="post">
                                 @csrf
                                 <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <label>{{ __('First Name') }}</label>
+                                    <div class="col-md-12 mb-3">
+                                        <label>{{ __('Full Name') }}</label>
                                         <input type="text" name="fname" class="form-control"
-                                            value="{{ $user->fname }}">
+                                            value="{{ $user->name }}">
                                     </div>
-                                    <div class="col-md-6 mb-3">
-
-                                        <label>{{ __('Last Name') }}</label>
-                                        <input type="text" name="lname" class="form-control"
-                                            value="{{ $user->lname }}">
-                                    </div>
-
+                                    
                                     <div class="form-group col-md-6 mb-3 ">
                                         <label>{{ __('Phone') }}</label>
                                         <input type="text" name="phone" class="form-control"
@@ -231,30 +225,30 @@
                                     <div class="form-group col-md-6 mb-3 ">
                                         <label>{{ __('Country') }}</label>
                                         <input type="text" name="country" class="form-control"
-                                            value="{{ @$user->address->country }}">
+                                            value="{{ @$user->country }}">
                                     </div>
 
                                     <div class="col-md-4 mb-3">
 
                                         <label>{{ __('city') }}</label>
                                         <input type="text" name="city" class="form-control form_control"
-                                            value="{{ @$user->address->city }}">
+                                            value="{{ @$user->city }}">
                                     </div>
 
                                     <div class="col-md-4 mb-3">
 
                                         <label>{{ __('zip') }}</label>
                                         <input type="text" name="zip" class="form-control form_control"
-                                            value="{{ @$user->address->zip }}">
+                                            value="{{ @$user->zip }}">
                                     </div>
 
                                     <div class="col-md-4 mb-3">
                                         <label>{{ __('state') }}</label>
                                         <input type="text" name="state" class="form-control form_control"
-                                            value="{{ @$user->address->state }}">
+                                            value="{{ @$user->state }}">
                                     </div>
 
-                                    <div class="col-md-12 mb-4">
+                                    <!-- <div class="col-md-12 mb-4">
                                         <div class="row">
                                             <div class="col-md-3">
                                                 <p for="">{{ __('Email Verified') }}</p>
@@ -284,7 +278,7 @@
                                                     data-offstyle="danger" data-width="100%">
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="col-md-12">
                                         <button type="submit" class="btn btn-primary w-100">{{ 'Update User' }}</button>
                                     </div>
@@ -296,74 +290,10 @@
                 </div>
             </div>
             @php
-                $reference = $user->refferals;
+                $reference = $user->network;
             @endphp
 
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="mb-0">{{ __('Reference Tree') }}</h5>
-                        </div>
-                        <div class="card-body">
-                            @if ($reference->count() > 0)
-                                <ul class="sp-referral">
-                                    <li class="single-child root-child">
-                                        <p>
-                                            <img src="{{ getFile('user', $user->image) }}">
-                                            <span class="mb-0">{{ $user->full_name }}</span>
-                                        </p>
-                                        <ul class="sub-child-list step-2">
-                                            @foreach ($reference as $user)
-                                                <li class="single-child">
-                                                    <p>
-                                                        <img src="{{ getFile('user', $user->image) }}">
-                                                        <span class="mb-0">{{ $user->full_name }}</span>
-                                                    </p>
-
-                                                    <ul class="sub-child-list step-3">
-                                                        @foreach ($user->refferals as $ref)
-                                                            <li class="single-child">
-                                                                <p>
-                                                                    <img src="{{ getFile('user', $ref->image) }}">
-                                                                    <span class="mb-0">{{ $ref->full_name }}</span>
-                                                                </p>
-
-                                                                <ul class="sub-child-list step-4">
-                                                                    @foreach ($ref->refferals as $ref2)
-                                                                        <li class="single-child">
-                                                                            <p>
-                                                                                <img
-                                                                                    src="{{ getFile('user', $ref2->image) }}">
-                                                                                <span
-                                                                                    class="mb-0">{{ $ref2->full_name }}</span>
-                                                                            </p>
-                                                                        </li>
-                                                                    @endforeach
-                                                                </ul>
-
-                                                            </li>
-                                                        @endforeach
-                                                    </ul>
-                                                </li>
-                                            @endforeach
-
-                                        </ul>
-                                    </li>
-                                </ul>
-                            @else
-                                <div class="col-md-12 text-center mt-5">
-                                    <i class="far fa-sad-tear display-1"></i>
-                                    <p class="mt-2">
-                                        {{ __('No Reference User Found') }}
-                                    </p>
-
-                                </div>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
         </section>
     </div>
 

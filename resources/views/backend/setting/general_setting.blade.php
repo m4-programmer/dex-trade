@@ -22,19 +22,81 @@
                                 <div class="row">
 
 
-                                    <div class="form-group col-md-2">
+                                    <div class="form-group col-md-4">
                                         <label for="sitename">{{ __('Site Name') }}</label>
                                         <input type="text" name="sitename" placeholder="@lang('site name')"
                                             class="form-control form_control" value="{{ @$general->sitename }}">
                                     </div>
 
-                                    <div class="form-group col-md-2">
+                                    <div class="form-group col-md-4">
                                         <label for="site_currency">{{ __('Site Currency') }}</label>
                                         <input type="text" name="site_currency" class="form-control"
                                             placeholder="Enter Site Currency" value="{{ @$general->site_currency ?? '' }}">
                                     </div>
 
-                                    <div class="form-group col-md-2">
+
+                                    
+
+
+                                    <div class="form-group col-md-4">
+                                        <label for="sitename">{{ __('Copyright Text') }}</label>
+                                        <input type="text" name="copyright" placeholder="@lang('Copyright Text')"
+                                            class="form-control form_control" value="{{ @$general->copyright }}">
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label for="">{{ __('Min Withdrawable  ') }}</label>
+                                        <input type="number" name="min_amount" class="form-control" value="{{ $general->minimum_withdrawable}}">
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label for="">{{ __('Max Withdrawable  ') }}</label>
+                                        <input type="number" name="max_amount" class="form-control" value="{{ $general->maximum_withdrawable }}">
+                                    </div>
+                                   
+                                    <!-- Last Set -->
+
+                                     <div class="form-group col-md-6">
+                                        <label for="sitename">{{ __('Site Email') }}</label>
+                                        <input type="text" name="site_email" placeholder="@lang('Site Email')"
+                                            class="form-control form_control" value="{{ @$general->site_email }}">
+                                    </div>
+                                     <div class="form-group col-md-6">
+                                        <label for="sitename">{{ __('Site Phone') }}</label>
+                                        <input type="text" name="site_phone" placeholder="@lang('Site Phone')"
+                                            class="form-control form_control" value="{{ @$general->site_phone }}">
+                                    </div>
+                                     <div class="form-group col-12">
+                                        <label for="sitename">{{ __('Site Adress') }}</label>
+                                        <textarea name="site_address" cols="30" rows="10" class="form-control summernote" >
+                                            {{ @$general->site_address }}
+                                        </textarea>
+                                        
+                                    </div>
+                                    
+
+
+                                
+
+                                    <div class="form-group col-md-12 text-center">
+
+                                        <button type="submit"
+                                            class="btn btn-primary ">{{ __('Update General Setting') }}</button>
+
+                                    </div>
+
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+@endsection
+
+{{-- <div class="form-group col-md-2">
                                         <label for="primary_color">{{ __('Primary Color') }}</label>
                                         <div id="cp1" class="input-group" title="Using input value">
                                             <span class="input-group-append">
@@ -51,6 +113,7 @@
                                             class="form-control form_control"
                                             value="{{ number_format(@$general->signup_bonus, 2) }}">
                                     </div>
+
 
 
                                     <div class="form-group col-md-3">
@@ -100,27 +163,7 @@
                                             </select>
                                         </div>
                                     </div>
-
-
-                                    <div class="form-group col-md-3">
-                                        <label for="">{{ __('Transfer Min Amount') }}</label>
-                                        <input type="number" name="min_amount" class="form-control" value="{{ $general->min_amount }}">
-                                    </div>
-
-                                    <div class="form-group col-md-3">
-                                        <label for="">{{ __('Transfer Max Amount') }}</label>
-                                        <input type="number" name="max_amount" class="form-control" value="{{ $general->max_amount }}">
-                                    </div>
-
-
-
-                                    <div class="form-group col-md-4">
-                                        <label for="sitename">{{ __('Copyright Text') }}</label>
-                                        <input type="text" name="copyright" placeholder="@lang('Copyright Text')"
-                                            class="form-control form_control" value="{{ @$general->copyright }}">
-                                    </div>
-
-                                    <div class="col-md-4">
+                                     <div class="col-md-4">
                                         <label>{{ __('Withdraw Limit') }}</label>
                                         <div class="input-group">
                                             <input type="text" name="withdraw_limit" placeholder="@lang('Withdraw Limit')"
@@ -181,8 +224,8 @@
 
 
 
-
-                                    <div class="form-group col-md-4 mb-3">
+                                --}}
+                                    {{-- <div class="form-group col-md-4 mb-3">
                                         <label class="col-form-label">{{ __('logo') }}</label>
 
                                         <div id="image-preview" class="image-preview"
@@ -257,26 +300,7 @@
                                         </div>
                                     </div>
 
-
-
-
-                                    <div class="form-group col-md-12">
-
-                                        <button type="submit"
-                                            class="btn btn-primary float-right">{{ __('Update General Setting') }}</button>
-
-                                    </div>
-
-                                </div>
-
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-@endsection
+ --}}
 
 
 

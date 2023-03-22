@@ -1,7 +1,4 @@
-<?php
-function template(){return 'theme2.';}
 
-?>
 <?php
 use App\Models\GeneralSettings as GS;
 $gs = GS::get()->first();
@@ -35,7 +32,7 @@ $gs = GS::get()->first();
 
         <div class="row justify-content-center">
             <div class="col-lg-12">
-                <form action="{{ url('contact') }}" method="post" role="form" class="php ">
+                <form action="{{ route('contact') }}" method="post" role="form" class="php ">
                     @csrf
                     <div class="row">
                         <div class="col-md-6 form-group">

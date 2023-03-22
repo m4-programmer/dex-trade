@@ -55,12 +55,12 @@
 
                                             @forelse(@$transactions as $transaction)
                                                 <tr>
-                                                    <td>{{ @$transaction->user->fullname }}</td>
-                                                    <td>{{ @$transaction->withdrawMethod->name }}</td>
+                                                    <td>{{ @$transaction->user->name }}</td>
+                                                    <td>{{ @$transaction->withdraw_method }}</td>
                                                     <td>{{ @$transaction->transaction_id }}</td>
                                                
                                                     <td>{{ @number_format($transaction->withdraw_charge,2) }}</td>
-                                                    <td>{{ @number_format($transaction->withdraw_amount,2) }}</td>
+                                                    <td>{{ @number_format($transaction->amount,2) }}</td>
                                                     
 
                                                 </tr>

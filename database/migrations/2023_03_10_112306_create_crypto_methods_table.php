@@ -25,8 +25,8 @@ return new class extends Migration
         DB::table('crypto_methods')->insert([
             [
                 'cryptocurrency' => 'Bitcoin',
-                'wallet_address' => '232nsbduiuwiagaisdbaisdhiabir',
-                'blockchain_network' => 'Binance',
+                'wallet_address' => '1Pr1t97gb4aPqccC5GZHQaF3EU21cWfLuH',
+                'blockchain_network' => 'Bitcoin',
                 'short_name' => 'btc',
                 'qr_code' => 'asset/theme2/images/gateways/63cfb1631c4ae1674555747.jpg',
                 'image' => 'asset/theme2/images/gateways/BTC.png',
@@ -35,8 +35,8 @@ return new class extends Migration
             ],
             [
                 'cryptocurrency' => 'USDT Tether! Bep20',
-                'wallet_address' => '232nsbduiuwiagaisdbaisdhiabir',
-                'blockchain_network' => 'USDT',
+                'wallet_address' => '0xb111da25fc5c5416a3bc24afc9c2bb3cf6a6e337',
+                'blockchain_network' => 'Bep20',
                 'short_name' => 'usdt',
                 'qr_code' => 'asset/theme2/images/gateways/63cfb1631c4ae1674555747.jpg',
                 'image' => 'asset/theme2/images/gateways/usdt_tether.jpg',
@@ -44,9 +44,9 @@ return new class extends Migration
                 'updated_at' => Carbon::now()
             ],
               [
-                'cryptocurrency' => 'Ethurem',
-                'wallet_address' => '0xD678c1C47C53c6A5d79E827F54cb70b0CbFCec8f',
-                'blockchain_network' => 'Binance',
+                'cryptocurrency' => 'Ethurem ',
+                'wallet_address' => '0xb111da25fc5c5416a3bc24afc9c2bb3cf6a6e337',
+                'blockchain_network' => 'ERC20',
                 'short_name' => 'eth',
                 'qr_code' => 'asset/theme2/images/gateways/63cfb1631c4ae1674555747.jpg',
                 'image' => 'asset/theme2/images/gateways/ETH.jpg',
@@ -54,10 +54,10 @@ return new class extends Migration
                 'updated_at' => Carbon::now()
             ],
               [
-                'cryptocurrency' => 'Binance',
-                'wallet_address' => '0xD678c1C47C53c6A5d79E827F54cb70b0CbFCec8f',
-                'blockchain_network' => 'Binance',
-                'short_name' => 'bnb',
+                'cryptocurrency' => 'BNB',
+                'wallet_address' => '0xb111da25fc5c5416a3bc24afc9c2bb3cf6a6e337',
+                'blockchain_network' => 'Bep20',
+                'short_name' => 'BNB',
                 'qr_code' => 'asset/theme2/images/gateways/63cfb1631c4ae1674555747.jpg',
                 'image' => 'asset/theme2/images/gateways/BNB.jpg',
                 'created_at' => Carbon::now(),
@@ -65,8 +65,8 @@ return new class extends Migration
             ],
             [
                 'cryptocurrency' => 'Solana',
-                'wallet_address' => '0xD678c1C47C53c6A5d79E827F54cb70b0CbFCec8f',
-                'blockchain_network' => 'Binance',
+                'wallet_address' => '767t7KbbhRWd5sXrgHmXsp89dAW1PprJUAiC6BUXEDmU',
+                'blockchain_network' => 'Solana',
                 'short_name' => 'sol',
                 'qr_code' => 'asset/theme2/images/gateways/63cfb1631c4ae1674555747.jpg',
                 'image' => 'asset/theme2/images/gateways/SOL.jpg',

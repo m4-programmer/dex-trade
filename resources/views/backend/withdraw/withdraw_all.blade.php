@@ -1,3 +1,7 @@
+<?php
+use App\Models\GeneralSettings as GS;
+$general = GS::get()->first();
+?>
 @extends('backend.layout.master')
 
 @section('content')
@@ -13,9 +17,9 @@
                                     <tr>
                                         <th>{{ __('User') }}</th>
                                         <th>{{ __('Withdraw Amount') }}</th>
-                                        <th>{{ __('User Will Get') }}</th>
-                                        <th>{{ __('Charge Type') }}</th>
-                                        <th>{{ __('Charge') }}</th>
+                                        
+                                        <th>Wallet Address</th>
+                                        
                                         <th>{{ __('status') }}</th>
                                         <th>{{ __('Action') }}</th>
                                     </tr>
@@ -26,7 +30,7 @@
                                             <td>
                                                 
                                                 <a href="{{route('admin.user.details', $withdrawlog->user->id)}}" >
-                                                    <img src="{{ getFile('user', $withdrawlog->user->image) }}" class="image-rounded">
+                                                    <img src="{{ asset($withdrawlog->user->image) }}" class="image-rounded">
                                                     <span class="ml-2">
                                                         {{$withdrawlog->user->username}}
                                                     </span>
@@ -34,29 +38,18 @@
 
                                             </td>
                                            
-                                            <td>{{ $general->currency_icon .
-                                                '  ' .
-                                                $withdrawlog->withdraw_amount +
-                                                ($withdrawlog->withdrawMethod->charge_type === 'percent'
-                                                    ? ($withdrawlog->withdraw_amount * $withdrawlog->withdraw_charge) / 100
-                                                    : $withdrawlog->withdraw_amount) }}
+                                            <td>{{  $withdrawlog->amount.'  ' . $general->site_currency }}
+                                                
+                                               
                                             </td>
+                                          
+                                            <td>{{$withdrawlog->wallet_address}}</td>
+                                            
+                                            
                                             <td>
-
-
-                                                {{ $withdrawlog->withdraw_amount }}
-
-                                            </td>
-                                            <td>
-                                                {{ ucwords($withdrawlog->withdrawMethod->charge_type) }}
-                                            </td>
-                                            <td>
-                                                {{ number_format($withdrawlog->withdraw_charge, 2) }}
-                                            </td>
-                                            <td>
-                                                @if ($withdrawlog->status == 1)
+                                                @if ($withdrawlog->status == 'success')
                                                     <span class="badge badge-success">{{ __('Success') }}</span>
-                                                @elseif($withdrawlog->status == 2)
+                                                @elseif($withdrawlog->status == 'cancel')
                                                     <span class="badge badge-danger">{{ __('Rejected') }}</span>
                                                 @else
                                                     <span class="badge badge-warning">{{ __('Pending') }}</span>
@@ -64,13 +57,13 @@
                                             </td>
                                             <td>
                                                 <button class="btn btn-md btn-info details"
-                                                    data-user_data="{{ json_encode($withdrawlog->user_withdraw_prof) }}"
+                                                    data-user_data="{{ json_encode($withdrawlog) }}"
                                                     data-transaction="{{ $withdrawlog->transaction_id }}"
-                                                    data-provider="{{ $withdrawlog->user->fullname }}"
+                                                    data-provider="{{ $withdrawlog->user->name }}"
                                                     data-email="{{ $withdrawlog->user->email }}"
-                                                    data-method_name="{{ $withdrawlog->withdrawMethod->name }}"
+                                                    data-method_name="{{ $withdrawlog->withdraw_method }}"
                                                     data-date="{{ __($withdrawlog->created_at->format('d F Y')) }}">{{ __('Details') }}</button>
-                                                @if ($withdrawlog->status == 0)
+                                                @if ($withdrawlog->status == 'pending')
                                                     <button class="btn btn-md btn-primary accept"
                                                         data-url="{{ route('admin.withdraw.accept', $withdrawlog) }}">{{ __('Accept') }}</button>
                                                     <button class="btn btn-md btn-danger reject"
@@ -208,40 +201,43 @@
                 
                     <ul class="list-group">
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                               {{ __('Withdraw Method Email') }}
-                                <span>${$(this).data('user_data').email}</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                {{ __('Withdraw Account Information') }}
-                                <span>${$(this).data('user_data').account_information}</span>
-                            </li> 
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                {{ __('Transaction Id') }}
+                                {{ __('Transaction Id: ') }}
                                 <span>${$(this).data('transaction')}</span>
                             </li>  
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                {{ __('Withdraw Method') }}
+                                <span>${$(this).data('user_data').withdraw_method}</span>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                               {{ __('Withdraw Method Email') }}
+                                <span>${$(this).data('user_data').wallet_address}</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                {{ __('Withdraw Account Information: ') }}
+                                <span>${$(this).data('user_data').account_info}</span>
+                            </li> 
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                {{ __('Note For Withdraw: ') }}
+                                <span>${$(this).data('user_data').additional_info}</span>
+                            </li>
+                            
                             
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                {{ __('User Name') }}
+                                {{ __('User Name: ') }}
                                 <span>${$(this).data('provider')}</span>
                             </li> 
 
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                {{ __('User Email') }}
+                                {{ __('User Email: ') }}
                                 <span>${$(this).data('email')}</span>
                             </li> 
                             
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                {{ __('Withdraw Method') }}
-                                <span>${$(this).data('method_name')}</span>
+                            
                             </li> 
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                {{ __('Withdraw Date') }}
+                                {{ __('Withdraw Date: ') }}
                                 <span>${$(this).data('date')}</span>
                             </li> 
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                {{ __('Note For Withdraw') }}
-                                <span>${$(this).data('user_data').note}</span>
-                            </li>
+                            
                             
                         </ul>
                 

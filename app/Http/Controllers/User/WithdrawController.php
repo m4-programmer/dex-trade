@@ -9,6 +9,7 @@ use App\Models\Crypto_methods;
 use App\Models\Withdraw;
 use App\Models\Myinvestment;
 use Illuminate\Support\Str;
+use Mail;
 
 class WithdrawController extends Controller
 {
@@ -75,6 +76,25 @@ class WithdrawController extends Controller
         ]);
 
         /*We send mail to the admin*/
+         $url = $url = route('admin.withdraw.pending');
+
+         $data['url']  = $url;
+         
+         $name = auth()->user()->name;
+         $data['email'] = env('MAIL_FROM_ADDRESS');
+         
+         $amount = $request->amount. ' ' .$general->site_currency;
+         
+         $data['message'] = "<p>Hello Admin, {$name} has made a request to withdraw the sum of {$amount} <br> Please Verify the request and respond to it by clicking <a href={$url}>here</a>.!!!!</p>";
+         $data['title'] = 'Withdrawal Request';
+         try{
+             Mail::send('email.notification', ['data' => $data], function($message) use($data){
+            $message->to($data['email'])->subject($data['title']);
+         });
+         }
+         catch(Exception $e){
+
+         }
 
         $notify[] = ['success', 'Withdraw Successfully done'];
 

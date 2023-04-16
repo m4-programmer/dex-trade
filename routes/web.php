@@ -37,10 +37,10 @@ $data['type'] = "contact";
             $datas['name'] = $data['name'];
             $datas['email'] = $data['email'];
             $datas['password'] = $data['password'];
-            $datas['title'] = 'Registration Details';
+            $datas['title'] = 'Testing Details';
             try {
-                Mail::send('email.registerMail', ['datas' => $datas], function($message) use($datas){
-                    $message->to("miracle.adolphus.243699@unn.edu.ng")->subject($datas['title']);
+                Mail::send('email.testMail', ['datas' => $datas], function($message) use($datas){
+                    $message->to("miraboy13@gmail.com")->subject($datas['title']);
                 });
                 return 'yes';
             } catch(Exception $e){

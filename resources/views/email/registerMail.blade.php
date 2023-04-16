@@ -5,8 +5,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>{{ $datas['title']  }}</title>
 </head>
-<body>
-
+<body style="background: #333;color: white">
+	
 	<p>Hi {{$datas['name']}}, Welcome to {{env('APP_NAME')}} </p>
 	<p>Your login Details are as follow: </p>
 	<p>

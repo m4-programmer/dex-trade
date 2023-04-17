@@ -5,7 +5,7 @@
     /*    border-bottom: 1px solid #ddd;*/
     /*    width: 100%;*/
     /*}*/
-    img {
+    #transactions img {
         width: 30px;
         height: 30px;
         border-radius: 30%;
@@ -18,6 +18,8 @@
             <div class="col-lg-6 text-center">
                 <div class="section-top">
                     <h2 class="section-title">Transactions</h2>
+
+
                 </div>
             </div>
         </div>

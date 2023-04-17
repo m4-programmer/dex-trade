@@ -44,10 +44,10 @@
 <section class="breadcrumbs" style="background-image: url({{ getFile('breadcrumbs', @$general->breadcrumbs) }});">
     <div class="container">
             <div class="d-flex justify-content-between align-items-center text-capitalize">
-                <h2>{{ __($pageTitle) }}</h2>
+                <h2>{{ translate($pageTitle) }}</h2>
                 <ol>
-                    <li><a href="{{ route('home') }}">{{ __('Dashboard') }}</a></li>
-                    <li>{{ __($pageTitle) }}</li>
+                    <li><a href="{{ route('home') }}">{{ translate('Dashboard') }}</a></li>
+                    <li>{{ translate($pageTitle) }}</li>
                 </ol>
             </div>
 
@@ -62,7 +62,7 @@
                             <div class="project-status-top d-flex justify-content-end">
                                 <h4 class="project-status-heading">
                                     <a href="{{ route('ticket.index') }}"><button class="btn btn-main mt-2">
-                                            <i class="fas fa-arrow-left"> {{ __('Back to List') }}</i>
+                                            <i class="fas fa-arrow-left"> {{ translate('Back to List') }}</i>
                                         </button>
                                     </a>
                                 </h4>
@@ -74,19 +74,19 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="mb-2">{{ __('Subject') }}</label>
+                                                <label class="mb-2">{{ translate('Subject') }}</label>
                                                 <input type="text" name="subject" class="form-control bg-dark" required=""
-                                                    placeholder="{{ __('subject here') }}"
+                                                    placeholder="{{ translate('subject here') }}"
                                                     value="{{ old('subject') }}">
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label class="mb-2">{{ __('Priority') }}</label>
+                                                <label class="mb-2">{{ translate('Priority') }}</label>
                                                     <select class="form-select selectric bg-dark"  name="priority" aria-label="Default select example">
-                                                    <option value="1">{{ __('High') }}</option>
-                                                    <option value="2">{{ __('Medium') }}</option>
-                                                    <option value="3">{{ __('Low') }}</option>
+                                                    <option value="1">{{ translate('High') }}</option>
+                                                    <option value="2">{{ translate('Medium') }}</option>
+                                                    <option value="3">{{ translate('Low') }}</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -94,14 +94,14 @@
                                     <div class="row align-items-center">
                                         <div class="col-lg-6 mt-3">
                                             <div class="form-group ticket-comment-box">
-                                                <label class="mb-2" for="exampleFormControlTextarea1">{{ __('Message') }}</label>
+                                                <label class="mb-2" for="exampleFormControlTextarea1">{{ translate('Message') }}</label>
                                                 <textarea class="form-control bg-dark" id="exampleFormControlTextarea1" rows="6"
                                                     name="message" placeholder="Massage">{{ old('message') }}</textarea>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 mt-3">
                                             <div id="image-preview" class="image-preview">
-                                                <label class="mb-2" for="image-upload" id="image-label">{{ __('Choose File') }}</label>
+                                                <label class="mb-2" for="image-upload" id="image-label">{{ translate('Choose File') }}</label>
                                                 <input type="file" class="form-control bg-dark" name="file" id="image-upload" />
                                             </div>
                                         </div>
@@ -110,7 +110,7 @@
 
                             <div class="col-lg-12 text-center">
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-main mt-3">{{ __('Send') }}</button>
+                                    <button type="submit" class="btn btn-main mt-3">{{ translate('Send') }}</button>
                                 </div>
                             </div>
                             </form>
@@ -130,8 +130,8 @@
             $.uploadPreview({
                 input_field: "#image-upload",
                 preview_box: "#image-preview",
-                label_default: "{{__('Choose File')}}",
-                label_selected: "{{__('Update Image')}}",
+                label_default: "{{translate('Choose File')}}",
+                label_selected: "{{translate('Update Image')}}",
                 no_label: false,
                 success_callback: null
             });

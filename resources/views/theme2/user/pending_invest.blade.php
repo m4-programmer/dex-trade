@@ -7,13 +7,13 @@
             <table class="table cmn-table">
                 <thead>
                     <tr>
-                        <th scope="col">{{ __('Plan Name') }}</th>
-                        <th scope="col">{{ __('Get Paid') }}</th>
-                        <th scope="col">{{ __('Interest') }}</th>
-                        <th scope="col">{{ __('Invest Amount') }}</th>
-                        <th scope="col">{{ __('Invest Date') }}</th>
-                        <th scope="col">{{ __('Next Payment Date') }}</th>
-                        <th scope="col">{{ __('Payment Status') }}</th>
+                        <th scope="col">{{ translate('Plan Name') }}</th>
+                        <th scope="col">{{ translate('Get Paid') }}</th>
+                        <th scope="col">{{ translate('Interest') }}</th>
+                        <th scope="col">{{ translate('Invest Amount') }}</th>
+                        <th scope="col">{{ translate('Invest Date') }}</th>
+                        <th scope="col">{{ translate('Next Payment Date') }}</th>
+                        <th scope="col">{{ translate('Payment Status') }}</th>
 
                     </tr>
                 </thead>
@@ -24,10 +24,10 @@
                             <td data-caption="Get Paid">
                                 @if ($plan->plan->return_for == 1)
                                     {{ isset($plan->pay_count) ? $plan->pay_count : $plan->plan->how_many_time }}
-                                    {{ __(' Out of ') }}
-                                    {{ $plan->plan->how_many_time }} {{ __('Times') }}
+                                    {{ translate(' Out of ') }}
+                                    {{ $plan->plan->how_many_time }} {{ translate('Times') }}
                                 @else
-                                    {{ __('Lifetime') }}
+                                    {{ translate('Lifetime') }}
                                 @endif
                             </td>
                             <td data-caption="Interest">{{ number_format($plan->interest_amount, 2) }}
@@ -44,18 +44,18 @@
                             <td data-caption="Payment Status">
 
                                 @if ($plan->payment_status == 1)
-                                    <span class="badge badge-success">{{ __('Success') }}</span>
+                                    <span class="badge badge-success">{{ translate('Success') }}</span>
                                 @elseif($plan->payment_status == 2)
-                                    <span class="badge badge-warning">{{ __('Pending') }}</span>
+                                    <span class="badge badge-warning">{{ translate('Pending') }}</span>
                                 @elseif($plan->payment_status == 3)
-                                    <span class="badge badge-danger">{{ __('Rejected') }}</span>
+                                    <span class="badge badge-danger">{{ translate('Rejected') }}</span>
                                 @endif
 
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td data-caption="Not Found" class="text-center" colspan="100%">{{ __('No Data Found') }}</td>
+                            <td data-caption="Not Found" class="text-center" colspan="100%">{{ translate('No Data Found') }}</td>
 
                         </tr>
                     @endforelse

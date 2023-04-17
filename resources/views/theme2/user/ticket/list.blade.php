@@ -9,20 +9,20 @@
                     <a href="{{ route('ticket.index') }}"
                         class="tab-btn {{ request()->status == '' ? 'active' : '' }}"><i class="fa fa-inbox fa-lg"
                             aria-hidden="true"></i>
-                        {{ __('All Ticket') }} <span class="num">{{ $tickets_all }}</span>
+                        {{ translate('All Ticket') }} <span class="num">{{ $tickets_all }}</span>
                     </a>
                     <a href="{{ route('ticket.status', 'answered') }}"
-                        class="tab-btn {{ request()->status == 'answered' ? 'active' : '' }}">{{ __('Answered') }}
+                        class="tab-btn {{ request()->status == 'answered' ? 'active' : '' }}">{{ translate('Answered') }}
                         <span class="num">{{ $tickets_answered }}</span>
                     </a>
                     <a href="{{ route('ticket.status', 'pending') }}"
                         class="tab-btn {{ request()->status == 'pending' ? 'active' : '' }}">
-                        {{ __('Pending') }} <span class="num">{{ $tickets_pending }}</span>
+                        {{ translate('Pending') }} <span class="num">{{ $tickets_pending }}</span>
                     </a>
                 </div>
             </div>
             <div class="col-md-4  text-md-end text-center">
-                <button id="new-ticket" class="cmn-btn btn-sm">{{ __('Create Ticket') }} <i class="fa fa-envelope"
+                <button id="new-ticket" class="cmn-btn btn-sm">{{ translate('Create Ticket') }} <i class="fa fa-envelope"
                         aria-hidden="true"></i></button>
             </div>
         </div>
@@ -31,11 +31,11 @@
             <table class="table cmn-table">
                 <thead>
                     <tr>
-                        <th>{{ __('Ticket ID') }}</th>
-                        <th>{{ __('Subject') }}</th>
+                        <th>{{ translate('Ticket ID') }}</th>
+                        <th>{{ translate('Subject') }}</th>
 
-                        <th>{{ __('Total Reply') }}</th>
-                        <th>{{ __('Action') }}</th>
+                        <th>{{ translate('Total Reply') }}</th>
+                        <th>{{ translate('Action') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -43,16 +43,16 @@
 
 
                         <tr>
-                            <td data-caption="{{ __('Ticket ID') }}">{{ $ticket->support_id }}</td>
-                            <td data-caption="{{ __('Subject') }}">{{ $ticket->subject }}</td>
+                            <td data-caption="{{ translate('Ticket ID') }}">{{ $ticket->support_id }}</td>
+                            <td data-caption="{{ translate('Subject') }}">{{ $ticket->subject }}</td>
                             <?php $count = $ticket->ticketReplies->count() ?>
-                            <td data-caption="{{ __('Total Reply') }}"> <?php if ($count < 2): ?>
+                            <td data-caption="{{ translate('Total Reply') }}"> <?php if ($count < 2): ?>
                                 {{$count - 1}}
                             <?php else: ?>
                                 {{$count - 1}}
                             <?php endif ?>
                             </td>
-                            <td data-caption="{{ __('Action') }}">
+                            <td data-caption="{{ translate('Action') }}">
                                 <button data-route="{{ route('ticket.update', $ticket->id) }}"
                                     data-ticket="{{ $ticket }}" data-message="{{$ticket->ticketReplies()->where('ticket_id',$ticket->id)->first()}}" class="view-btn view-btn-primary edit-modal"><i
                                         class="fas fa-pen"></i></button>
@@ -66,8 +66,8 @@
                         </tr>
                     @empty
                         <tr>
-                            <td data-caption="{{ __('Status') }}" class="text-center" colspan="100%">
-                                {{ __('No Data Found') }}
+                            <td data-caption="{{ translate('Status') }}" class="text-center" colspan="100%">
+                                {{ translate('No Data Found') }}
                             </td>
                         </tr>
                     @endforelse
@@ -82,7 +82,7 @@
                 @csrf
                 <div class="modal-content bg-body">
                     <div class="modal-header">
-                        <h5 class="modal-title text-white">{{ __('Create Ticket') }}</h5>
+                        <h5 class="modal-title text-white">{{ translate('Create Ticket') }}</h5>
                         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true" class="text-light">&times;</span>
                         </button>
@@ -91,16 +91,16 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label>{{ __('Subject') }}</label>
+                                    <label>{{ translate('Subject') }}</label>
                                     <input type="text" name="subject" class="form-control" required=""
-                                        placeholder="{{ __('subject here') }}" value="{{ old('subject') }}">
+                                        placeholder="{{ translate('subject here') }}" value="{{ old('subject') }}">
                                 </div>
 
                             </div>
                             <div class="row align-items-center mt-2">
                                 <div class="col-lg-12">
                                     <div class="form-group ticket-comment-box">
-                                        <label for="exampleFormControlTextarea1">{{ __('Message') }}</label>
+                                        <label for="exampleFormControlTextarea1">{{ translate('Message') }}</label>
                                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" cols="30" name="message"
                                             placeholder="Massage">{{ old('message') }}</textarea>
                                     </div>
@@ -108,7 +108,7 @@
                                 <div class="col-lg-12 mt-3">
                                     <div id="image-preview" class="image-preview">
                                         <label for="image-upload" id="image-label"
-                                            class="text-white">{{ __('Choose File') }}</label>
+                                            class="text-white">{{ translate('Choose File') }}</label>
                                         <input type="file" name="file" id="image-upload" class="form-control" />
                                     </div>
                                 </div>
@@ -117,7 +117,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger"
-                                data-bs-dismiss="modal">{{ __('Close') }}</button>
+                                data-bs-dismiss="modal">{{ translate('Close') }}</button>
                             <button type="submit" class="cmn-btn">{{ 'Create Ticket' }}</button>
                         </div>
                     </div>
@@ -133,7 +133,7 @@
                     @method('PUT')
                     <div class="modal-content bg-body">
                         <div class="modal-header">
-                            <h5 class="modal-title text-white">{{ __('Create Ticket') }}</h5>
+                            <h5 class="modal-title text-white">{{ translate('Create Ticket') }}</h5>
                             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true" class="text-light">&times;</span>
                             </button>
@@ -142,16 +142,16 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label>{{ __('Subject') }}</label>
+                                        <label>{{ translate('Subject') }}</label>
                                         <input type="text" name="subject" class="form-control" required=""
-                                            placeholder="{{ __('subject here') }}" value="{{ old('subject') }}">
+                                            placeholder="{{ translate('subject here') }}" value="{{ old('subject') }}">
                                     </div>
 
                                 </div>
                                 <div class="row align-items-center mt-2">
                                     <div class="col-lg-12">
                                         <div class="form-group ticket-comment-box">
-                                            <label for="exampleFormControlTextarea1">{{ __('Message') }}</label>
+                                            <label for="exampleFormControlTextarea1">{{ translate('Message') }}</label>
                                             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" cols="30" name="message"
                                                 placeholder="Massage">{{ old('message') }}</textarea>
                                         </div>
@@ -159,7 +159,7 @@
                                     <div class="col-lg-12 mt-3">
                                         <div id="image-preview" class="image-preview">
                                             <label for="image-upload" id="image-label"
-                                                class="text-white">{{ __('Choose File') }}</label>
+                                                class="text-white">{{ translate('Choose File') }}</label>
                                             <input type="file" name="file" id="image-upload" class="form-control" />
                                         </div>
                                     </div>
@@ -168,7 +168,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger"
-                                    data-bs-dismiss="modal">{{ __('Close') }}</button>
+                                    data-bs-dismiss="modal">{{ translate('Close') }}</button>
                                 <button type="submit" class="btn cmn-btn">{{ 'Update Ticket' }}</button>
                             </div>
                         </div>
@@ -188,18 +188,18 @@
 
                     <div class="modal-content bg1">
                         <div class="modal-header text-white">
-                            <h5 class="modal-title">{{ __('Delete Support Ticket') }}</h5>
+                            <h5 class="modal-title">{{ translate('Delete Support Ticket') }}</h5>
                             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true" class="text-light">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body text-white">
-                            <p>{{ __('Are you sure to delete this ticket') }}</p>
+                            <p>{{ translate('Are you sure to delete this ticket') }}</p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger"
-                                data-bs-dismiss="modal">{{ __('Close') }}</button>
-                            <button type="submit" class="btn cmn-btn">{{ __('Delete') }}</button>
+                                data-bs-dismiss="modal">{{ translate('Close') }}</button>
+                            <button type="submit" class="btn cmn-btn">{{ translate('Delete') }}</button>
                         </div>
                     </div>
                 </form>

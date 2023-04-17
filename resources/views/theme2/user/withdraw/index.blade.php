@@ -11,14 +11,14 @@
                         @csrf
                         <div class="card-header">
                             <h4 class="mb-0">
-                                {{ __('Current Balance: ') }} <span class="color-change">{{ number_format(auth()->user()->balance, 2) . ' ' . $general->site_currency }}</span>
+                                {{ translate('Current Balance: ') }} <span class="color-change">{{ number_format(auth()->user()->balance, 2) . ' ' . $general->site_currency }}</span>
                             </h4>
                         </div>
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="">{{ __('Withdraw Method') }}</label>
+                                <label for="">{{ translate('Withdraw Method') }}</label>
                                 <select name="withdraw_method" id="" class="form-select">
-                                    <option value="" selected>{{ __('Select Method') }}</option>
+                                    <option value="" selected>{{ translate('Select Method') }}</option>
                                     @foreach ($withdraws as $withdraw)
                                         <option value="{{ $withdraw->cryptocurrency }}"
                                             data-url="{{ route('fetch_withdraw', $withdraw->id) }}">
@@ -35,7 +35,7 @@
             <div class="col-xxl-4 col-lg-6 withdraw-ins">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="mb-0">{{ __('Withdraw Instruction') }}</h4>
+                        <h4 class="mb-0">{{ translate('Withdraw Instruction') }}</h4>
                     </div>
                     <div class="card-body">
                         <p class="instruction"></p>
@@ -100,30 +100,30 @@
                         let html = `
 
                                 <div class="col-md-12 mb-3 mt-3">
-                                    <label for="">{{ __('Withdraw Amount') }} <span class="text-danger">*</span></label>
+                                    <label for="">{{ translate('Withdraw Amount') }} <span class="text-danger">*</span></label>
                                     <input type="text" name="amount" class="form-control amount" required>
-                                    <p class="text-small color-change mb-0 mt-1"><span>{{ __('Min Amount $ ') }}  ${Number.parseFloat(response.min_amount).toFixed(2)}</span> <span>{{ __('Max Amount $') }} ${Number.parseFloat(response.max_amount).toFixed(2)}</span></p>
+                                    <p class="text-small color-change mb-0 mt-1"><span>{{ translate('Min Amount $ ') }}  ${Number.parseFloat(response.min_amount).toFixed(2)}</span> <span>{{ translate('Max Amount $') }} ${Number.parseFloat(response.max_amount).toFixed(2)}</span></p>
                                 </div>
 
-                               
+
 
                                 <div class="col-md-12 mb-3">
-                                    <label for="">{{ __('Wallet Address') }} <span class="text-danger">*</span></label>
+                                    <label for="">{{ translate('Wallet Address') }} <span class="text-danger">*</span></label>
                                     <input type="text" name="wallet_address" class="form-control" required>
                                 </div>
 
                                 <div class="col-md-12 mb-3">
-                                    <label for="">{{ __('Account Information') }}</label>
+                                    <label for="">{{ translate('Account Information') }}</label>
                                    <textarea class="form-control" name="account_info" row="5"></textarea>
                                 </div>
 
                                 <div class="col-md-12 mb-3">
-                                    <label for="">{{ __('Additional Note') }}</label>
+                                    <label for="">{{ translate('Additional Note') }}</label>
                                    <textarea class="form-control" name="note" row="5"></textarea>
                                 </div>
 
                                 <div class="col-md-12">
-                                   <button class="cmn-btn w-100" type="submit">{{ __('Withdraw Now') }}</button>
+                                   <button class="cmn-btn w-100" type="submit">{{ translate('Withdraw Now') }}</button>
                                 </div>
                    `;
 

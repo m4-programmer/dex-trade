@@ -6,7 +6,7 @@
             <div class="col-lg-6 text-center">
                 <div class="section-top">
                     <!-- <h2 class="section-title">Our Plans</h2> -->
-                    
+
                 </div>
             </div>
         </div>
@@ -21,57 +21,56 @@
                                 <i class="las la-gem"></i>
                             </div>
                             <div class="plan-name">
-                                <span>{{ $plan->name }}</span>
+                                <span>{{ translate($plan->name) }}</span>
                             </div>
-                           
+
                                 <h4 class="plan-price">
-                                    {{ __('Min') }}
                                     {{ number_format($plan->minimum_amount, 2)}} <sub>/ {{ @$gs->site_currency }}</sub>
                                 </h4>
                                 <h4 class="plan-price">
-                                    {{ __('Max') }}
-                                    @if($plan->maximum_amount != 'Unlimited')
+                                    {{ translate("Max") }}
+                                    @if($plan->maximum_amount != "Unlimited")
                                         {{ number_format($plan->maximum_amount, 2) }} <sub>/ {{ @$gs->site_currency }}</sub>
                                     @else
-                                        {{$plan->maximum_amount}}
+                                        {{translate($plan->maximum_amount)}}
                                     @endif
                                 </h4>
-                            
-                            
+
+
                             <ul class="check-list">
-                                
-                                <li>{{ __('Return Amount ') }}{{ number_format($plan->roi, 2) }}
-                                    
-                                        {{ '%' }}
-                                   
+
+                                <li>{{ translate("Return Amount ") }}{{ number_format($plan->roi, 2) }}
+
+                                        {{ "%" }}
+
                                 </li>
                                 <li>
-                                  {{$plan->duration}}
+                                  {{translate($plan->duration)}}
                                 </li>
-                               
-                                <li>{{ __('Capital Back') }} {{$plan->capital_back}}</li>
-                               
+
+                                <li>{{ translate("Capital Back") }} {{$plan->capital_back}}</li>
+
 
 
                             </ul>
                         </div>
                         <div class="bottom-part">
-                            
-                            
+
+
                                 <a class="cmn-btn w-100 "
-                                    href="{{ route('investment.create','id='. $plan->id) }}">{{ __('Choose Plan') }}</a>
-                                    
+                                    href="{{ route("investment.create","id=". $plan->id) }}">{{ translate("Choose Plan") }}</a>
+
                                   @auth
-                                        
+
                                     <button class="cmn-btn w-100 balance mt-3" data-plan="{{ $plan }}"
-                                        data-url="">{{ __('Invest Using Balance') }}</button>
-                                    @endauth 
-                            
-                            
+                                        data-url="">{{ translate("Invest Using Balance") }}</button>
+                                    @endauth
+
+
                         </div>
                     </div><!-- pricing-item end -->
                 </div>
-            
+
             @endforeach
         </div>
     </div>
@@ -80,11 +79,11 @@
 <!-- Profit Calculator -->
 <div class="modal fade" id="invest" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form action="{{route('investmentUsingBalannce')}}" method="post">
+        <form action="{{route("investmentUsingBalannce")}}" method="post">
             @csrf
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">{{__('Invest Now')}}</h5>
+                    <h5 class="modal-title">{{translate("Invest Now")}}</h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -92,30 +91,30 @@
                 <div class="modal-body">
                     <div class="container-fluid">
                         <div class="form-group">
-                            <label for="">{{ __('Invest Amount') }}</label>
+                            <label for="">{{ translate("Invest Amount") }}</label>
                             <input type="text" name="amount" class="form-control">
                             <input type="hidden" name="plan_id" class="form-control">
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{__('Close')}}</button>
-                    <button type="submit" class="btn cmn-btn">{{__('Invest Now')}}</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{translate("Close")}}</button>
+                    <button type="submit" class="btn cmn-btn">{{translate("Invest Now")}}</button>
                 </div>
             </div>
         </form>
     </div>
 </div>
 
-@push('script')
+@push("script")
     <script>
         $(function() {
-            'use strict'
+            "use strict"
 
-            $('.balance').on('click', function() {
-                const modal = $('#invest');
-                modal.find('input[name=plan_id]').val($(this).data('plan').id);
-                modal.modal('show')
+            $(".balance").on("click", function() {
+                const modal = $("#invest");
+                modal.find("input[name=plan_id]").val($(this).data("plan").id);
+                modal.modal("show")
             })
         })
     </script>

@@ -33,7 +33,7 @@
             <form action="" method="get" class="d-inline-flex">
                 <input type="text" name="trx" class="form-control me-2" placeholder="transaction id">
                 <input type="date" class="form-control me-3" placeholder="Search User" name="date">
-                <button type="submit" class="cmn-btn">{{__('Search')}}</button>
+                <button type="submit" class="cmn-btn">{{translate('Search')}}</button>
             </form>
         </div> -->
 
@@ -41,16 +41,16 @@
             <table class="table cmn-table">
                 <thead>
                     <tr>
-                        <th>{{ __('S/N') }}</th>
-                        <th>{{ __('Trx') }}</th>
-                        <th>{{ __('Gateway') }}</th>
-                        <th>{{ __('Amount') }}</th>
-                        <th>{{ __('Plan') }}</th>
-                        <th>{{ __('Payment Date') }}</th>
-                        <th>{{ __('Investment Duration') }}</th>
-                        <th>{{__('Potential Cashout')}}</th>
-                        <th>{{ __('Payment Status') }}</th>
-                        <th>{{ __('Upcoming Payment') }}</th>
+                        <th>{{ translate('S/N') }}</th>
+                        <th>{{ translate('Trx') }}</th>
+                        <th>{{ translate('Gateway') }}</th>
+                        <th>{{ translate('Amount') }}</th>
+                        <th>{{ translate('Plan') }}</th>
+                        <th>{{ translate('Payment Date') }}</th>
+                        <th>{{ translate('Investment Duration') }}</th>
+                        <th>{{translate('Potential Cashout')}}</th>
+                        <th>{{ translate('Payment Status') }}</th>
+                        <th>{{ translate('Upcoming Payment') }}</th>
                     </tr>
                 </thead>
 
@@ -60,29 +60,29 @@
                      ?>
                     @forelse($transactions as $key => $transaction)
                         <tr>
-                            <td data-caption="{{ __('Trx') }}"><?php echo $id;$id++; ?></td>
-                            <td data-caption="{{ __('User') }}">{{ @$transaction->transaction_id }}</td>
-                            <td data-caption="{{ __('Gateway') }}">
-                               
-                                    {{ @$transaction->gateway }}
-                                
-                            </td>
-                            <td data-caption="{{ __('Amount') }}">{{ $transaction->amount }} {{ $gs->site_currency }}</td>
+                            <td data-caption="{{ translate('Trx') }}"><?php echo $id;$id++; ?></td>
+                            <td data-caption="{{ translate('User') }}">{{ @$transaction->transaction_id }}</td>
+                            <td data-caption="{{ translate('Gateway') }}">
 
-                            <td data-caption="{{ __('Plan') }}">{{ $transaction->plan->name }}</td>
-                            
+                                    {{ @$transaction->gateway }}
+
+                            </td>
+                            <td data-caption="{{ translate('Amount') }}">{{ $transaction->amount }} {{ $gs->site_currency }}</td>
+
+                            <td data-caption="{{ translate('Plan') }}">{{ $transaction->plan->name }}</td>
+
                             <!-- Date Paid -->
 
-                            <td data-caption="{{ __('Date Paid') }}">{{ $transaction->created_at }}</td>
+                            <td data-caption="{{ translate('Date Paid') }}">{{ $transaction->created_at }}</td>
 
-                            <td data-caption="{{ __('Investment Duration') }}">{{ $transaction->plan->duration }}</td>
+                            <td data-caption="{{ translate('Investment Duration') }}">{{ $transaction->plan->duration }}</td>
 
-                            <td data-caption="{{ __('Potential Cashout') }}">{{ $transaction->amount + ($transaction->plan->amount * ($transaction->roi/100))}}</td>
+                            <td data-caption="{{ translate('Potential Cashout') }}">{{ $transaction->amount + ($transaction->plan->amount * ($transaction->roi/100))}}</td>
 
-                            <td data-caption="{{ __('Payment Date') }}">
+                            <td data-caption="{{ translate('Payment Date') }}">
                                  @if($transaction->status == 'active')
                                     <button class="btn btn-sm btn-success" style="padding: 10px;">Active</button>
-                                    
+
                                 @elseif($transaction->status == 'ended')
                                     <button class="btn btn-sm btn-danger" style="padding: 10px;">Ended</button>
 
@@ -90,7 +90,7 @@
                                     <button class="btn btn-sm btn-info" style="padding: 10px;">Pending</button>
                                 @endif
                             </td>
-                            <td data-caption="{{ __('Upcoming Payment') }}">
+                            <td data-caption="{{ translate('Upcoming Payment') }}">
                                 @if($transaction->status == 'active')
                                 <p id="count_{{ $loop->iteration }}" class="mb-2"></p>
                                 <script>
@@ -104,7 +104,7 @@
                     @empty
                         <tr>
                             <td class="text-center" colspan="100%">
-                                {{ __('No users Found') }}
+                                {{ translate('No users Found') }}
                             </td>
                         </tr>
                     @endforelse

@@ -11,7 +11,7 @@
                 </div>
             </div>
             <div class="col-md-4  text-md-end text-center">
-                <a href="{{ route('ticket.index') }}" class="color-change"><i class="fas fa-arrow-left"></i> {{ __('Back to Ticket List') }}</a>
+                <a href="{{ route('ticket.index') }}" class="color-change"><i class="fas fa-arrow-left"></i> {{ translate('Back to Ticket List') }}</a>
             </div>
         </div>
 
@@ -23,14 +23,14 @@
                     <div class="col-md-12">
                         <div class="form-group ticket-comment-box">
                             <input type="hidden" name="ticket_id" value="{{ $ticket->id }}">
-                            <label for="exampleFormControlTextarea1">{{ __('Message') }}</label>
+                            <label for="exampleFormControlTextarea1">{{ translate('Message') }}</label>
                             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
                                 name="message"></textarea>
                         </div>
                     </div>
                     <div class="col-md-12 form-group mt-3">
                         <div id="image-preview" class="image-preview">
-                            <label for="image-upload" id="image-label">{{ __('Choose File') }}</label>
+                            <label for="image-upload" id="image-label">{{ translate('Choose File') }}</label>
                             <input type="file" name="file" id="image-upload" class="form-control" />
                         </div>
                     </div>
@@ -38,7 +38,7 @@
                     <div class="col-lg-12 mt-3 text-end">
                             <button type="submit" class="cmn-btn ticket-reply"><i
                                     class="fas fa-reply"></i>
-                                {{ __('Reply') }}
+                                {{ translate('Reply') }}
                             </button>
                     </div>
                 </div>
@@ -53,7 +53,7 @@
                         </p>
                         @if ($ticket->file)
                             <p class="mb-0 mt-2">
-                                <a class="color-change" href="{{ route('ticket.download', $ticket->id) }}"> <i class="fas fa-cloud-download-alt"></i> {{ __('View Attachement') }}</a>
+                                <a class="color-change" href="{{ route('ticket.download', $ticket->id) }}"> <i class="fas fa-cloud-download-alt"></i> {{ translate('View Attachement') }}</a>
                             </p>
                         @endif
                     </div>

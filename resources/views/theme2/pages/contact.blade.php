@@ -9,10 +9,10 @@ $gs = GS::get()->first();
     <section class="breadcrumbs" style="background-image: url({{ asset('asset/theme2/images/breadcrumbs/breadcrumbs.png') }});">
         <div class="container">
             <div class="d-flex justify-content-between align-items-center text-capitalize">
-                <h2>{{ "CONTACT US" }}</h2>
+                <h2>{{ translate("CONTACT US") }}</h2>
                 <ol>
-                    <li><a href="{{ route('home') }}">{{ __('Home') }}</a></li>
-                    <li>{{ __('Contact Us') }}</li>
+                    <li><a href="{{ route('home') }}">{{ translate('Home') }}</a></li>
+                    <li>{{ translate('Contact Us') }}</li>
                 </ol>
             </div>
 
@@ -25,7 +25,7 @@ $gs = GS::get()->first();
         <div class="row justify-content-center">
             <div class="col-lg-6 text-center">
                 <div class="section-top">
-                    <h2 class="section-title"> Contact Us</h2>
+                    <h2 class="section-title"> {{translate("Contact Us")}}</h2>
                 </div>
             </div>
         </div>
@@ -53,7 +53,7 @@ $gs = GS::get()->first();
                     </div>
 
                     <div class="mt-3">
-                        <button class="cmn-btn w-100" type="submit">{{ __('Send Message') }}</button>
+                        <button class="cmn-btn w-100" type="submit">{{ translate('Send Message') }}</button>
                     </div>
                 </form>
             </div>
@@ -67,8 +67,8 @@ $gs = GS::get()->first();
                             <i class="fas fa-map-marked-alt"></i>
                         </div>
                         <div class="contact-info-box-content">
-                            <h4 class="title">{{ __('Location') }}:</h4>
-                            <p>{{ __(@$gs->site_address) }}</p>
+                            <h4 class="title">{{ translate('Location') }}:</h4>
+                            <p>{{ translate(@$gs->site_address) }}</p>
                         </div>
                     </div>
                 </div>
@@ -78,8 +78,8 @@ $gs = GS::get()->first();
                             <i class="far fa-envelope"></i>
                         </div>
                         <div class="contact-info-box-content">
-                            <h4 class="title">{{ __('Email') }}:</h4>
-                            <p>{{ __(@$gs->site_email) }}</p>
+                            <h4 class="title">{{ translate('Email') }}:</h4>
+                            <p>{{ translate(@$gs->site_email) }}</p>
                         </div>
                     </div>
                 </div>
@@ -89,8 +89,8 @@ $gs = GS::get()->first();
                             <i class="fas fa-phone"></i>
                         </div>
                         <div class="contact-info-box-content">
-                            <h4 class="title">{{ __('Call') }}:</h4>
-                            <p>{{ __($gs->site_phone) }}</p>
+                            <h4 class="title">{{ translate('Call') }}:</h4>
+                            <p>{{ translate($gs->site_phone) }}</p>
                         </div>
                     </div>
                 </div>

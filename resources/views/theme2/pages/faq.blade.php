@@ -5,17 +5,17 @@
     <section class="breadcrumbs" style="background-image: url({{ asset('asset/theme2/images/breadcrumbs/breadcrumbs.png') }});">
         <div class="container">
             <div class="d-flex justify-content-between align-items-center text-capitalize">
-                <h2>{{ "FAQ" }}</h2>
+                <h2>{{ translate("FAQ") }}</h2>
                 <ol>
-                    <li><a href="{{ route('home') }}">{{ __('Home') }}</a></li>
-                    <li>{{ __('Faq') }}</li>
+                    <li><a href="{{ route('home') }}">{{ translate('Home') }}</a></li>
+                    <li>{{ translate('Faq') }}</li>
                 </ol>
             </div>
 
         </div>
     </section>
 
-   <?php 
+   <?php
 
 $items = [
   [
@@ -36,7 +36,7 @@ $elements = json_decode(json_encode($items));
         <div class="row justify-content-center">
           <div class="col-lg-6">
             <div class="section-top text-center">
-              <h2 class="section-title">FAQ</h2>
+              <h2 class="section-title">{{translate('FAQ')}}</h2>
             </div>
           </div>
         </div><!-- row end -->
@@ -46,10 +46,10 @@ $elements = json_decode(json_encode($items));
                 @foreach ($elements as $item)
                 <div class="faq-single">
                     <div class="faq-single-header">
-                    <h4 class="title">{{ @$item->question }}</h4>
+                    <h4 class="title">{{ translate(@$item->question) }}</h4>
                     </div>
                     <div class="faq-single-body">
-                    <p>{{ @$item->answer }}</p>
+                    <p>{{ translate(@$item->answer) }}</p>
                     </div>
                 </div><!-- faq-single end -->
               @endforeach

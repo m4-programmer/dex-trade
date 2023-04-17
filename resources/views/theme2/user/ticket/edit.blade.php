@@ -47,10 +47,10 @@
 <section class="breadcrumbs" style="background-image: url({{ getFile('breadcrumbs', @$general->breadcrumbs) }});">
     <div class="container">
             <div class="d-flex justify-content-between align-items-center text-capitalize">
-                <h2>{{ __($pageTitle) }}</h2>
+                <h2>{{ translate($pageTitle) }}</h2>
                 <ol>
-                    <li><a href="{{ route('home') }}">{{ __('Dashboard') }}</a></li>
-                    <li>{{ __($pageTitle) }}</li>
+                    <li><a href="{{ route('home') }}">{{ translate('Dashboard') }}</a></li>
+                    <li>{{ translate($pageTitle) }}</li>
                 </ol>
             </div>
 
@@ -61,7 +61,7 @@
             <div class="project-status-top d-flex justify-content-end">
                 <h4 class="project-status-heading">
                     <a href="{{ route('ticket.index') }}"><button class="btn btn-main mt-2">
-                            <i class="fas fa-arrow-left"> {{ __('Back to List') }}</i>
+                            <i class="fas fa-arrow-left"> {{ translate('Back to List') }}</i>
                         </button>
                     </a>
                 </h4>
@@ -75,23 +75,23 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="mb-2">{{ __('Subject') }}</label>
+                                    <label class="mb-2">{{ translate('Subject') }}</label>
                                     <input type="text"  name="subject" class="form-control bg-dark" required="" placeholder="" value="{{ $ticket->subject }}">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="mb-2">{{ __('Priority') }}</label>
+                                    <label class="mb-2">{{ translate('Priority') }}</label>
                                     <select class="form-select selectric bg-dark" name="priority">
-                                        <option value="1" @if($ticket->priority == 1) selected @endif>{{ __('High') }}</option>
-                                        <option value="2" @if($ticket->priority == 2) selected @endif>{{ __('Medium') }}</option>
-                                        <option value="3" @if($ticket->priority == 3) selected @endif>{{ __('Low') }}</option>
+                                        <option value="1" @if($ticket->priority == 1) selected @endif>{{ translate('High') }}</option>
+                                        <option value="2" @if($ticket->priority == 2) selected @endif>{{ translate('Medium') }}</option>
+                                        <option value="3" @if($ticket->priority == 3) selected @endif>{{ translate('Low') }}</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="exampleFormControlTextarea1" class="mb-2 mt-2">{{ __('Message') }}</label>
+                            <label for="exampleFormControlTextarea1" class="mb-2 mt-2">{{ translate('Message') }}</label>
                             <textarea class="form-control bg-dark" id="exampleFormControlTextarea1" rows="3" name="message">{{ $ticket_reply->message }}</textarea>
                         </div>
 
@@ -99,13 +99,13 @@
                             <div class="custom-file mt-3 col-md-6">
                                 <div id="image-preview" class="image-preview"
                                 style="background-image: url({{ getFile('Ticket', $ticket_reply->file) }});">
-                                    <label class="mb-2" for="image-upload" id="image-label">{{ __('Choose File') }}</label>
+                                    <label class="mb-2" for="image-upload" id="image-label">{{ translate('Choose File') }}</label>
                                     <input type="file" class="form-control bg-dark" name="file" id="image-upload" />
                                 </div>
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-main mt-2 cms-submit">{{ __('Update') }}</button>
+                        <button type="submit" class="btn btn-main mt-2 cms-submit">{{ translate('Update') }}</button>
                     </form>
                 </div>
             </div>
@@ -122,8 +122,8 @@
             $.uploadPreview({
                 input_field: "#image-upload",
                 preview_box: "#image-preview",
-                label_default: "{{__('Choose File')}}",
-                label_selected: "{{__('Update Image')}}",
+                label_default: "{{translate('Choose File')}}",
+                label_selected: "{{translate('Update Image')}}",
                 no_label: false,
                 success_callback: null
             });

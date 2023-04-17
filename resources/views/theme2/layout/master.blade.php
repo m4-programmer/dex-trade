@@ -95,7 +95,13 @@ $gs = GS::get()->first();
     <script src="{{ asset('asset/theme2/frontend/js/main.js') }}"></script>
     <script src="{{ asset('asset/theme2/frontend/js/iziToast.min.js') }}"></script>
     <script src="{{ asset('asset/theme2/frontend/js/jquery.uploadPreview.min.js') }}"></script>
+    <script>
+        var url = "{{ route('changeLang') }}";
 
+        $(".changeLang").change(function(){
+            window.location.href = url + "?lang="+ $(this).val();
+        });
+    </script>
     @stack('script')
     @if (@$general->twak_allow)
         <script type="text/javascript">
@@ -162,7 +168,51 @@ $gs = GS::get()->first();
 
 
 
+<script>
 
+
+    function updateTable() {
+        // Define an array of names and profile pictures
+        var names = ['Prediger', 'Tark01', 'Prediger', 'Fred40','Rodriguez','Clara80','Chloe','Viki12','mdfahim12','Maryann','josh12'];
+        var profilePictures = ['user.png'];
+        var types = ['Deposit','Withdrawal']
+        // Generate random data for each row
+        var data = [];
+        for (var i = 0; i < 20; i++) {
+            var name = names[Math.floor(Math.random() * names.length)];
+            var profilePicture = profilePictures[Math.floor(Math.random() * profilePictures.length)];
+            const type = types[Math.floor(Math.random() * types.length)];
+            var amount = Math.floor(Math.random() * 1000) + 1; // Generate a random amount between 1 and 1000
+            data.push({ name: name, profilePicture: profilePicture,type:type, amount: amount });
+        }
+        // http://localhost:6001/asset/theme2/frontend/img/user.png
+        console.log(data)
+        var table = $('#transactions');
+        table.find('tbody').empty();
+        $.each(data, function(index, value) {
+            var row = $('<tr>');
+
+            var profilePic = $('<img>').attr('src', '{{ asset('asset/theme2/frontend/img/') }}/' + value.profilePicture);
+            var name = $('<td>').text(value.name);
+            var type = $('<td>').text(value.type);
+            if (value.type == 'Deposit') {
+                type.addClass('text-danger');
+            } else {
+                type.addClass('text-success');
+            }
+            var amount = $('<td>').text('$' + value.amount);
+            row.append($('<td>').append(profilePic)).append(name).append(type).append(amount)
+            table.find('tbody').append(row);
+        });
+
+        // Schedule the next update
+        setTimeout(updateTable, 5000); // Update every 5 seconds
+    }
+
+    $(document).ready(function() {
+        updateTable();
+    });
+</script>
 {{--    <script>--}}
 {{--        'use strict'--}}
 

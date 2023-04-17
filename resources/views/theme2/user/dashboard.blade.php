@@ -23,7 +23,7 @@ function curren($value='')
                         <i class="fas fa-wallet"></i>
                     </div>
                     <div class="content">
-                        <span class="caption-title">{{ __('Account Balance') }}</span>
+                        <span class="caption-title">{{ translate('Account Balance') }}</span>
                         <h3 class="d-box-one-amount">
                             {{ number_format(auth()->user()->balance, 2) . ' ' . $gs->site_currency }}</h3>
                     </div>
@@ -38,7 +38,7 @@ function curren($value='')
                                 <i class="far fa-calendar-check"></i>
                             </div>
                             <div class="content">
-                                <span class="caption-title">{{ __('Pending Deposit') }}</span>
+                                <span class="caption-title">{{ translate('Pending Deposit') }}</span>
                                 <h3 class="d-box-three-amount">
                                     {{ auth()->user()->deposits()->where('payment_type','deposits')->where('status', 'pending')->sum('amount') }} {{ @$gs->site_currency }}
                                 </h3>
@@ -51,7 +51,7 @@ function curren($value='')
                                 <i class="fas fa-funnel-dollar"></i>
                             </div>
                             <div class="content">
-                                <span class="caption-title">{{ __('Pending Investment') }}</span>
+                                <span class="caption-title">{{ translate('Pending Investment') }}</span>
                                 <h3 class="d-box-three-amount">
                                     {{ auth()->user()->payments()->where('status', 'pending')->sum('amount') }} {{ @$gs->site_currency }}
                                 </h3>
@@ -64,21 +64,21 @@ function curren($value='')
                                 <i class="fas fa-hand-holding-usd"></i>
                             </div>
                             <div class="content">
-                                <span class="caption-title">{{ __('Pending Withdraw') }}</span>
+                                <span class="caption-title">{{ translate('Pending Withdraw') }}</span>
                                 <h3 class="d-box-three-amount">
                                     {{ auth()->user()->withdrawal()->where('status', 'pending')->sum('amount') }} {{ @$gs->site_currency }}
                                 </h3>
                             </div>
                         </div>
                     </div>
-                  
+
                     <div class="col-sm-6 col-md-4">
                         <div class="d-box-three">
                             <div class="icon">
                                 <i class="fas fa-bolt"></i>
                             </div>
                             <div class="content">
-                                <span class="caption-title">{{ __('Current Invest') }}</span>
+                                <span class="caption-title">{{ translate('Current Invest') }}</span>
                                 <h3 class="d-box-three-amount">
                                     {{ isset($currentInvest->amount) ? number_format($currentInvest->amount, 2) : 0 }}
                                     {{ @$gs->site_currency }}</h3>
@@ -91,14 +91,14 @@ function curren($value='')
                                 <i class="far fa-calendar-check"></i>
                             </div>
                             <div class="content">
-                                <span class="caption-title">{{ __('Current Plan') }}</span>
+                                <span class="caption-title">{{ translate('Current Plan') }}</span>
                                 <h3 class="d-box-three-amount">
                                     {{ isset(auth()->user()->current_plan) ? auth()->user()->current_plan : 'N/A' }}
                                 </h3>
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -111,7 +111,7 @@ function curren($value='')
                         <i class="fas fa-wallet"></i>
                     </div>
                     <div class="content">
-                        <span class="caption-title">{{ __('Total Deposit') }}</span>
+                        <span class="caption-title">{{ translate('Total Deposit') }}</span>
                         <h3 class="d-box-four-amount">
                             {{ number_format(auth()->user()->deposits()->where('status','success')->sum('amount'), 2) . ' ' . $gs->site_currency }}</h3>
                     </div>
@@ -124,7 +124,7 @@ function curren($value='')
                         <i class="fas fa-hourglass-start"></i>
                     </div>
                     <div class="content">
-                        <span class="caption-title">{{ __('Total Invest') }}</span>
+                        <span class="caption-title">{{ translate('Total Invest') }}</span>
                         <h3 class="d-box-four-amount">
                             {{ number_format($pendingInvest, 2) . ' ' . $gs->site_currency }}</h3>
                     </div>
@@ -138,7 +138,7 @@ function curren($value='')
                         <i class="fas fa-hourglass-end"></i>
                     </div>
                     <div class="content">
-                        <span class="caption-title">{{ __('Total Withdraw') }}</span>
+                        <span class="caption-title">{{ translate('Total Withdraw') }}</span>
                         <h3 class="d-box-four-amount">
                             {{ number_format(auth()->user()->withdrawal->where('status', 'success')->sum('amount'), 2) . ' ' . $gs->site_currency }}</h3>
                     </div>
@@ -151,7 +151,7 @@ function curren($value='')
                         <i class="fas fa-network-wired"></i>
                     </div>
                     <div class="content">
-                        <span class="caption-title">{{ __('Refferal Earn') }}</span>
+                        <span class="caption-title">{{ translate('Refferal Earn') }}</span>
                         <h3 class="d-box-four-amount">{{ number_format($commison, 2) }}
                             {{ @$gs->site_currency }}</h3>
                     </div>
@@ -160,22 +160,22 @@ function curren($value='')
         </div>
 
         <div class="mt-4">
-            <label>{{ __('Your refferal link') }}</label>
+            <label>{{ translate('Your refferal link') }}</label>
             <div class="input-group mb-3">
                 <input type="text" id="refer-link" class="form-control copy-text"
                     value="{{ route('register','ref='. @Auth::user()->referral_id) }}" placeholder="referallink.com/refer"
                     aria-label="Recipient's username" aria-describedby="basic-addon2" readonly>
-                <button type="button" class="input-group-text copy cmn-btn" id="basic-addon2">{{ __('Copy') }}</button>
+                <button type="button" class="input-group-text copy cmn-btn" id="basic-addon2">{{ translate('Copy') }}</button>
             </div>
         </div>
 
 
-        
+
 {{--        <div class="row">--}}
 {{--            <div class="col-md-12">--}}
 {{--                <div class="card">--}}
 {{--                    <div class="card-header">--}}
-{{--                        <h5 class="mb-0">{{ __('Reference Tree') }}</h5>--}}
+{{--                        <h5 class="mb-0">{{ translate('Reference Tree') }}</h5>--}}
 {{--                    </div>--}}
 {{--                    <div class="card-body">--}}
 {{--                        --}}{{-- @if ($reference->count() > 0) --}}
@@ -227,7 +227,7 @@ function curren($value='')
 {{--                            <div class="col-md-12 text-center mt-5">--}}
 {{--                                <i class="far fa-sad-tear display-1"></i>--}}
 {{--                                <p class="mt-2">--}}
-{{--                                    {{ __('No Reference User Found') }}--}}
+{{--                                    {{ translate('No Reference User Found') }}--}}
 {{--                                </p>--}}
 
 {{--                            </div>--}}

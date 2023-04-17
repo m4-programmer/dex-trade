@@ -7,7 +7,7 @@
             <div class="col-lg-6">
                 <div class="card">
                     <div class="card-header d-flex flex-wrap justify-content-between align-items-center">
-                        <h4 class="mb-0">{{ __('Transfer Money') }}</h4>
+                        <h4 class="mb-0">{{ translate('Transfer Money') }}</h4>
                         <p class="mb-0">Current Balance :
                             {{ number_format(auth()->user()->balance, 2) . ' ' . $general->site_currency }}</p>
                     </div>
@@ -28,13 +28,13 @@
                         <form action="" method="post">
                             @csrf
                             <div class="form-group mb-3">
-                                <label for="">{{ __('Receiver Email') }}</label>
+                                <label for="">{{ translate('Receiver Email') }}</label>
                                 <input type="text" name="email" id="refer-link" class="form-control"
                                     placeholder="Transfer account email" required>
                             </div>
 
                             <div class="form-group mb-3">
-                                <label for="">{{ __('Amount') }}</label>
+                                <label for="">{{ translate('Amount') }}</label>
                                 <input type="text" name="amount" id="amount" class="form-control"
                                     placeholder="Transfer Amount" data-type="{{ $general->trans_type }}"
                                     data-charge="{{ $general->trans_charge }}" required>
@@ -44,7 +44,7 @@
 
                             <div class="form-group">
                                 <button type="submit" class="cmn-btn w-100"
-                                    id="basic-addon2">{{ __('Transfer Money') }}</button>
+                                    id="basic-addon2">{{ translate('Transfer Money') }}</button>
                             </div>
                         </form>
 

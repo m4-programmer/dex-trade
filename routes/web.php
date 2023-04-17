@@ -1,5 +1,7 @@
 <?php
 /*I had to make use of the use App\Http\Controllers; only to resolve the error of Target class does not exist*/
+
+
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers;
@@ -49,6 +51,8 @@ $data['type'] = "contact";
             }
     // return view('email.admin', compact('data'));
 });
+//Route to Update Language
+Route::get('lang/change', [Controllers\LangController::class, 'change'])->name('changeLang');
 /*Routes For the Admin*/
 
 Route::prefix('admin')->name('admin.')->middleware(['auth','admin'])->group(function(){
@@ -93,7 +97,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth','admin'])->group(func
    Route::post('deposit/payments/reject/{trx}', [Controllers\Admin\ManageGatewayController::class, 'depositReject'])->name('deposit.reject');
 
    /*Withdraw Management*/
-   
+
       Route::get('viewgateway', [Controllers\Admin\ManageWithdrawController::class, 'index'])->name('withdraw');
       Route::get('withdraw/method/search', [Controllers\Admin\ManageWithdrawController::class, 'index'])->name('withdraw.search');
       Route::post('withdraw/method', [Controllers\Admin\ManageWithdrawController::class, 'withdrawMethodCreate']);
@@ -105,7 +109,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth','admin'])->group(func
       Route::post('withdraw/accept/{withdraw}', [Controllers\Admin\ManageWithdrawController::class, 'withdrawAccept'])->name('withdraw.accept');
       Route::post('withdraw/reject/{withdraw}', [Controllers\Admin\ManageWithdrawController::class, 'withdrawReject'])->name('withdraw.reject');
 
-   
+
    /*Manage Payment Method*/
    Route::get('manual/payments', [Controllers\Admin\ManageGatewayController::class, 'manualPayment'])->name('manual');
    Route::get('manual/payments/{trx}', [Controllers\Admin\ManageGatewayController::class, 'manualPaymentDetails'])->name('manual.trx');

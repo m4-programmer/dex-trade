@@ -12,35 +12,35 @@
         <div class="row gy-5 align-items-center justify-content-between">
             <div class="col-xxl-6 col-xl-7 wow fadeInUp" data-wow-delay="0.5s" data-wow-duration="0.5s">
                 <div class="banner-content text-lg-start text-center">
-                    <h2 class="banner-title"> Get To The Next Level Investing</h2>
+                    <h2 class="banner-title"> {{translate('Get To The Next Level Investing')}}</h2>
                     <div class="banner-btn-group justify-content-lg-start justify-content-center mt-4">
                         <a href="{{route('register') }}"
-                            class="cmn-btn">Get Started</a>
+                            class="cmn-btn">{{translate('Get Started')}}</a>
                         <a href="{{route('about') }}"
-                            class="border-btn">Know More</a>
+                            class="border-btn">{{translate('Know More')}}</a>
                     </div>
-                    <h5 class="mt-5">Trusted by more than 30,000+ users</h5>
+                    <h5 class="mt-5">{{translate('Trusted by more than 30,000+ users')}}</h5>
                     <div class="row mt-4 overview-wrapper">
-                        
+
                             <div class="col-lg-3 col-4">
                                 <div class="overview-box">
                                     <div class="overview-box-amount">20K</div>
-                                    <p>Total Investors</p>
+                                    <p>{{translate('Total Investors')}}</p>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-4">
                             <div class="overview-box">
                                     <div class="overview-box-amount">$100M</div>
-                                    <p>Total Deposit</p>
+                                    <p>{{translate('Total Deposit')}}</p>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-4">
                                 <div class="overview-box">
                                     <div class="overview-box-amount">$55M</div>
-                                    <p>Total Withdraw</p>
+                                    <p>{{translate('Total Withdraw')}}</p>
                                 </div>
                             </div>
-                        
+
                     </div>
                 </div>
             </div>

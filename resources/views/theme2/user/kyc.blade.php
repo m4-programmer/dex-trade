@@ -3,11 +3,11 @@
 @section('content2')
     <div class="dashboard-body-part">
         <div class="row gy-4">
-        
+
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="mb-0">{{ __('KYC Verification') }}</h4>
+                        <h4 class="mb-0">{{ translate('KYC Verification') }}</h4>
                     </div>
 
                     <div class="card-body">
@@ -18,7 +18,7 @@
                                     @if ($proof['type'] == 'text')
                                         <div class="form-group col-md-12">
                                             <label for=""
-                                                class="mb-2 mt-2">{{ __($proof['field_name']) }}</label>
+                                                class="mb-2 mt-2">{{ translate($proof['field_name']) }}</label>
                                             <input type="text"
                                                 name="{{ strtolower(str_replace(' ', '_', $proof['field_name'])) }}"
                                                 class="form-control bg-dark"
@@ -28,7 +28,7 @@
                                     @if ($proof['type'] == 'textarea')
                                         <div class="form-group col-md-12">
                                             <label for=""
-                                                class="mb-2 mt-2">{{ __($proof['field_name']) }}</label>
+                                                class="mb-2 mt-2">{{ translate($proof['field_name']) }}</label>
                                             <textarea name="{{ strtolower(str_replace(' ', '_', $proof['field_name'])) }}" class="form-control bg-dark"
                                                 {{ $proof['validation'] == 'required' ? 'required' : '' }}></textarea>
                                         </div>
@@ -37,7 +37,7 @@
                                     @if ($proof['type'] == 'file')
                                         <div class="form-group col-md-12">
                                             <label for=""
-                                                class="mb-2 mt-2">{{ __($proof['field_name']) }}</label>
+                                                class="mb-2 mt-2">{{ translate($proof['field_name']) }}</label>
                                             <input type="file"
                                                 name="{{ strtolower(str_replace(' ', '_', $proof['field_name'])) }}"
                                                 class="form-control bg-dark"
@@ -49,7 +49,7 @@
 
                                 <div class="form-group">
                                     <button class="cmn-btn mt-4"
-                                        type="submit">{{ __('KYC Verification') }}</button>
+                                        type="submit">{{ translate('KYC Verification') }}</button>
 
                                 </div>
 

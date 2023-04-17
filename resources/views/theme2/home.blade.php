@@ -24,9 +24,9 @@ $gs = GS::get()->first();
 
   @include(template().'sections.howitwork')
 
-  
+  @include(template(). 'sections.tables')
 
-  
+
 
   {{-- @include(template().'sections.faq') --}}
 

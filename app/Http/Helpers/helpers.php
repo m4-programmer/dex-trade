@@ -136,8 +136,16 @@ function displayNavItems():object{
 }
 function translate($text): string
 {
+    $lang = ["Afrikaans" => "af","English" => "en",];
+    //if there is no old language in storage then return the text pass and don't translate it
+    $oldLanguage = session()->get('old_locale');
+    $newLanguage = app()->getLocale();
+    if (!$oldLanguage) return $text;
+
+    if (in_array($oldLanguage, $lang) && in_array($newLanguage, $lang)) return $text;
+    //else we return the translated text
     $trans = new GoogleTranslate();
-    $translatedText = GoogleTranslate::trans($text, app()->getLocale());
+    $translatedText = GoogleTranslate::trans($text, $newLanguage);
 //    $translatedText = $text;
 //    $translatedText = $trans->translate($text);
     $strippedText = strip_tags($translatedText);

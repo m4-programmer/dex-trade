@@ -28,7 +28,7 @@
               <select class="changeLang" aria-label="Default select example">
                   @foreach (displayLanguages() as $country => $code)
                       <option value="{{ $code }}"
-                          {{ session()->get('locale') == $code ? 'selected' : '' }}>
+                          {{ app()->getLocale() == $code ? 'selected' : '' }}>
                           {{ translate(ucwords($country) )}}
                       </option>
 

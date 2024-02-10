@@ -10,6 +10,7 @@
 
 use App\Models\EmailTemplate;
 use App\Models\GeneralSettings;
+use Illuminate\Support\Facades\Cache;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use App\Models\User;
@@ -144,11 +145,16 @@ function translate($text): string
 
     if (in_array($oldLanguage, $lang) && in_array($newLanguage, $lang)) return $text;
     //else we return the translated text
-    $trans = new GoogleTranslate();
+    $key = $text.'-'.$newLanguage;
+    $data = Cache::get($key);
+    if ($data) return $data;
+//    $trans = new GoogleTranslate();
+
     $translatedText = GoogleTranslate::trans($text, $newLanguage);
 //    $translatedText = $text;
 //    $translatedText = $trans->translate($text);
     $strippedText = strip_tags($translatedText);
+    Cache::put($key,$strippedText, Carbon::now()->addHours(24));
     return $strippedText;
 }
 function makeDirectory($path)

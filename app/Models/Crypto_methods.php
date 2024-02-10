@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Crypto_methods extends Model
 {
     use HasFactory;
-     psrotected $fillable = [
+     protected $fillable = [
         'cryptocurrency',
         'wallet_address',
         'qr_code',

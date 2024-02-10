@@ -44,4 +44,16 @@ class LoginController extends Controller
         $pageTitle = 'Login Page';
         return view('theme2.user.auth.login', compact('pageTitle'));
     }
+
+    public function authenticated()
+    {
+        if (Auth::user()->role_as == 'admin') {
+            // 2 == admin
+            return redirect('admin/dashboard');
+        }
+        else{
+            return redirect('user/dashboard');
+            // u can also chain with('status', 'message')
+        }
+    }
 }

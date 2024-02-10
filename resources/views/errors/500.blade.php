@@ -1,4 +1,4 @@
-@extends('frontend.layout.auth')
+@extends('theme2.layout.auth')
 @section('content')
     <div class="error-pgae-wrapper">
       <div id="container">
@@ -50,7 +50,7 @@
       .error-pgae-wrapper {
         min-height: 100vh;
         display: flex;
-        flex-wrap: wrap; 
+        flex-wrap: wrap;
         align-content: center;
         justify-content: center;
       }

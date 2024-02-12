@@ -8,11 +8,16 @@ use App\Models\GeneralSettings;
 use App\Models\Crypto_methods;
 use App\Models\Withdraw;
 use App\Models\Myinvestment;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Mail;
 
 class WithdrawController extends Controller
 {
+    public string $adminEmail;
+    public function __construct(){
+        $this->adminEmail = config("helper.admin_email");
+    }
     public function index()
     {
         $withdraws = Crypto_methods::get();
@@ -26,7 +31,7 @@ class WithdrawController extends Controller
     }
     public function withdraw(Request $request)
     {
-        
+
         $general = GeneralSettings::first();
         $request->validate([
             'amount' => 'required|integer',
@@ -79,12 +84,12 @@ class WithdrawController extends Controller
          $url = $url = route('admin.withdraw.pending');
 
          $data['url']  = $url;
-         
+
          $name = auth()->user()->name;
-         $data['email'] = env('MAIL_FROM_ADDRESS');
-         
+         $data['email'] = $this->adminEmail;
+
          $amount = $request->amount. ' ' .$general->site_currency;
-         
+
          $data['message'] = "<p>Hello Admin, {$name} has made a request to withdraw the sum of {$amount} <br> Please Verify the request and respond to it by clicking <a href={$url}>here</a>.!!!!</p>";
          $data['title'] = 'Withdrawal Request';
          try{
@@ -100,12 +105,12 @@ class WithdrawController extends Controller
 
         return redirect()->route('withdraw_log')->withNotify($notify);
     }
- 
+
      public function all()
     {
         $pageTitle = 'All withdraw';
 
-        $withdrawlogs = Withdraw::where('user_id', auth()->user()->id)->get();
+        $withdrawlogs = Withdraw::where('user_id', auth()->user()->id)->orderBy('created_at','desc')->get();
         // dd($withdrawlogs);
         $general = GeneralSettings::first();
 

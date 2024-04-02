@@ -173,12 +173,20 @@ $gs = GS::get()->first();
 
     function updateTable() {
         // Define an array of names and profile pictures
-        var names = ['Prediger', 'Tark01', 'Prediger', 'Fred40','Rodriguez','Clara80','Chloe','Viki12','mdfahim12','Maryann','josh12'];
+        var names = [
+            'Prediger', 'Tark01', 'Prediger', 'Fred40', 'Rodriguez', 'Clara80', 'Chloe', 'Viki12', 'mdfahim12', 'Maryann', 'josh12',
+            'Alice', 'Bob', 'Charlie', 'David', 'Emma', 'Frank', 'Grace', 'Henry', 'Ivy', 'Jack', 'Karen', 'Luke', 'Megan', 'Nathan', 'Olivia', 'Peter', 'Quinn', 'Rachel', 'Samuel', 'Tina',
+            'Victor', 'Wendy', 'Xavier', 'Yvonne', 'Zack', 'Andrew', 'Bella', 'Caleb', 'Diana', 'Ethan', 'Fiona', 'George', 'Hannah', 'Isaac', 'Jessica', 'Kevin', 'Lily', 'Michael', 'Nora',
+            'Oscar', 'Paige', 'Robert', 'Samantha', 'Thomas', 'Vanessa', 'William', 'Xena', 'Yolanda', 'Zara', 'Adam', 'Becky', 'Cameron', 'Daisy', 'Eric', 'Felicity', 'Greg', 'Holly',
+            'Ian', 'Jasmine', 'Kyle', 'Linda', 'Matthew', 'Nancy', 'Olive', 'Patrick', 'Quincy', 'Ryan', 'Sarah', 'Toby', 'Ursula', 'Vincent', 'Winnie', 'Xander', 'Yasmine', 'Zoe',
+            'Miracle', 'Peter', 'Sikiru', 'Bolu', 'Finn', 'Dynamite', 'Favour', 'Dehli',
+
+        ];
         var profilePictures = ['user.png'];
         var types = ['Deposit','Withdrawal']
         // Generate random data for each row
         var data = [];
-        for (var i = 0; i < 20; i++) {
+        for (var i = 0; i < 10; i++) {
             var name = names[Math.floor(Math.random() * names.length)];
             var profilePicture = profilePictures[Math.floor(Math.random() * profilePictures.length)];
             const type = types[Math.floor(Math.random() * types.length)];

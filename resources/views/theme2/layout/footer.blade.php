@@ -14,7 +14,7 @@
                                {{$gs->sitename}}
                             </h1>
                         </a>
-                        <p>{{translate('Dextrade  is a real investment platform. Dextrade leading team has over 7 years of experience in trading, cryptocurrencies and software development for Networkers.')}}}</p>
+                        <p>{{translate($gs->sitename.'  is a real investment platform. '. $gs->sitename.' leading team has over 7 years of experience in trading, cryptocurrencies and software development for Networkers.')}}</p>
                         <div class="footer-payment">
                             <h5>{{ translate('Payment Methods') }}</h5>
                             <img src="{{ asset('asset/theme2/images/gateways/BTC.png')}}" style="height: 50px;border-radius: 50%" alt="Payment Image">

@@ -10,7 +10,8 @@ class SiteController extends Controller
 {
     public function about()
     {
-        return view('theme2.pages.about');
+        $gs = GeneralSettings::first();
+        return view('theme2.pages.about', compact('gs'));
     }
 
     public function allInvestmentPlan()
@@ -35,7 +36,7 @@ class SiteController extends Controller
     }
     public function sendMessage(Request $request)
     {
-        
+
         $data = $request->validate([
             'name' => 'required',
             'email' => 'required|email',
@@ -115,6 +116,6 @@ class SiteController extends Controller
         }
             $calculate = $amount * $plan->roi / 100;
             return view('theme2.pages.profittable', compact('plan', 'calculate', 'amount','general'));
-       
+
     }
 }

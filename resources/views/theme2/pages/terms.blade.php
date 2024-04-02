@@ -35,7 +35,7 @@ $gs = GS::get()->first();
                 <p>{{translate('You agree to be of legal age in your country to partake in this program, and in all the cases your minimal age must be 18 years.')}}
                 </p>
                 <p class="text-white text-justifys descripton-root">
-                   {{translate("$->sitename is not available to the general public and is opened only to the qualified members of $gs->sitename, the use of this site is restricted to our members and to individuals personally invited by them. Every deposit is considered to be a private transaction between the $gs->sitename and its Member.")}}
+                   {{translate("$gs->sitename is not available to the general public and is opened only to the qualified members of $gs->sitename, the use of this site is restricted to our members and to individuals personally invited by them. Every deposit is considered to be a private transaction between the $gs->sitename and its Member.")}}
                 </p>
                 <p>
                     {{translate("As a private transaction, this program is exempt from the US Securities Act of 1933, the US Securities Exchange Act of 1934 and the US Investment Company Act of 1940 and all other rules, regulations and amendments thereof. We are not FDIC insured. We are not a licensed bank or a security firm.")}}
